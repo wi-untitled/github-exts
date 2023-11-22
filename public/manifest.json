@@ -4,5 +4,21 @@
   "version": "1.0.1",
   "action": {
     "default_popup": "index.html"
-  }
+  },
+  "content_scripts": [{
+    "matches": ["https://github.com/"],
+    "js": ["contentScript.js"],
+    "run_at": "document_end",
+    "all_frames": true
+  }],
+  "host_permissions": ["<all_urls>"],
+  "permissions": [
+    "scripting"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
