@@ -3,7 +3,7 @@
   "name": "github-exts",
   "version": "1.0.1",
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "popup.html"
   },
   "content_scripts": [{
     "matches": ["https://github.com/"],

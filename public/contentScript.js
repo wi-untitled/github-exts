@@ -9,7 +9,7 @@ function init() {
     iframe.style.height = "100%";
     iframe.style.border = "none";
 
-    iframe.src = chrome.runtime.getURL("index.html");
+    iframe.src = chrome.runtime.getURL("contentScript.html");
 
     document.body.appendChild(iframe);
 }
