@@ -1,5 +1,11 @@
 # Setup
 
+# How to commit within repo (Before you should add files via comment `git add .`)
+```bash
+npm run commit
+```
+
+# How to build extention to upload in chrome  
 ```bash
 npm run build-extention
 ```
