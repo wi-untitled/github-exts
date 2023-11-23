@@ -5,9 +5,9 @@ import { StoreName, Stores } from "../stores/types";
 import { AppOptions } from "../types";
 
 export function useStore<T extends StoreName>(storeName: T): Stores[T] {
-  const appContext = useContext(
-    MobXProviderContext as unknown as Context<AppOptions>
-  );
+    const appContext = useContext(
+        MobXProviderContext as unknown as Context<AppOptions>,
+    );
 
-  return appContext.stores[storeName];
+    return appContext.stores[storeName];
 }

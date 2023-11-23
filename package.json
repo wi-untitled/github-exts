@@ -4,17 +4,27 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "prepare": "./node_modules/.bin/husky install",
     "dev": "vite",
     "build": "tsc && vite build",
     "build-extentions": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "format": "prettier --write src/**/*.{ts,tsx}"
+
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "npm run lint",
+      "npm run format",
+      "git add"
+    ]
   },
   "dependencies": {
     "mobx": "^6.7.0",
@@ -30,10 +40,15 @@
     "@vitejs/plugin-react": "^4.2.0",
     "autoprefixer": "^9.8.8",
     "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "postcss": "^7.0.39",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.2.0",
+    "prettier": "^3.1.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "c8": "^7.12.0",

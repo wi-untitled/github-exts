@@ -1,3 +1,3 @@
 export class AppStore {
-  public constructor() {}
+    public constructor() {}
 }
