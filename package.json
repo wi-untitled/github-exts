@@ -2,17 +2,16 @@
   "name": "github-exts",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "prepare": "./node_modules/.bin/husky install",
     "dev": "vite",
     "build": "tsc && vite build",
     "build-extentions": "tsc && vite build",
+    "build-extentions-dev": "./node_modules/.bin/vite build --watch --mode=development",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "commit": "git-cz",
     "format": "prettier --write src/**/*.{ts,tsx}"
-
   },
   "config": {
     "commitizen": {
@@ -30,7 +29,9 @@
     "mobx": "^6.7.0",
     "mobx-react": "^7.6.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "vite-plugin-crx-mv3": "^0.1.6",
+    "vite-plugin-svgr": "^4.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
@@ -39,20 +40,20 @@
     "@typescript-eslint/parser": "^6.10.0",
     "@vitejs/plugin-react": "^4.2.0",
     "autoprefixer": "^9.8.8",
+    "c8": "^7.12.0",
+    "commitizen": "^4.2.5",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.53.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
-    "postcss": "^7.0.39",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "husky": "^8.0.2",
     "lint-staged": "^13.2.0",
+    "postcss": "^7.0.39",
     "prettier": "^3.1.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "typescript": "^5.2.2",
-    "vite": "^5.0.0",
-    "c8": "^7.12.0",
-    "commitizen": "^4.2.5",
-    "cz-conventional-changelog": "^3.3.0"
+    "vite": "^3.0.9"
   }
 }

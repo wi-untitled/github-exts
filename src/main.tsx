@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import ReactDOM from "react-dom/client";
 import { Provider } from "mobx-react";
 import App from "./App.tsx";
 import createGlobalStores from "./stores/utils/createGlobalStores";
@@ -8,7 +7,6 @@ import "./index.css";
 
 export async function initialize(): Promise<any> {
     const transport = {};
-
     const stores = createGlobalStores(transport);
 
     const promise = new Promise((resolve) => {
@@ -51,4 +49,4 @@ export function RenderApp() {
     );
 }
 
-ReactDOM.createRoot(document.getElementById("root")!).render(<RenderApp />);
+// ReactDOM.createRoot(document.getElementById("root")!).render(<RenderApp />);

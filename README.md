@@ -7,8 +7,13 @@ npm run commit
 
 # How to build extention to upload in chrome  
 ```bash
-npm run build-extention
+# build
+npm run build-extentions
+
+# dev
+npm run build-extentions-dev
 ```
+
 
 Add into extention via extention tab in the Chrome
 

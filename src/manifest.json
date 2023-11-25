@@ -3,12 +3,12 @@
   "name": "github-exts",
   "version": "1.0.1",
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "../popup.html"
   },
   "content_scripts": [{
     "matches": ["https://github.com/"],
-    "js": ["contentScript.js"],
-    "run_at": "document_end",
+    "js": ["contentScript.tsx"],
+    "run_at": "document_start",
     "all_frames": true
   }],
   "host_permissions": ["<all_urls>"],
@@ -17,7 +17,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["*"],
+      "resources": ["*", "assets/*"],
       "matches": ["<all_urls>"]
     }
   ]
