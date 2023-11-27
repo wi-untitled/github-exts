@@ -39,7 +39,7 @@ app.get("/getUserData", async (req, res) => {
         });
 
         const json = await response.json();
-        console.log(json);
+
         return res.json(json);
     } catch (error) {
         return res.json({
@@ -50,17 +50,10 @@ app.get("/getUserData", async (req, res) => {
 
 app.get("/getAccessToken", async (req, res) => {
     try {
-        console.dir(req.query.code);
+        const params = `?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${req.query.code}`;
 
-        const params =
-            "?client_id=" +
-            CLIENT_ID +
-            "&client_secret=" +
-            CLIENT_SECRET +
-            "&code=" +
-            req.query.code;
         const response = await fetch(
-            "https://github.com/login/oauth/access_token" + params,
+            `https://github.com/login/oauth/access_token${params}`,
             {
                 method: "POST",
                 headers: {
@@ -83,21 +76,22 @@ app.get("/getAccessToken", async (req, res) => {
 
 app.get("/getUserFollower", async (req, res) => {
     try {
-        console.dir(req.query.login);
+        const { login, limit = 10, page = 1 } = req.query;
+
+        const params = `per_page=${limit}&page=${page}`;
 
         const response = await fetch(
-            `https://api.github.com/users/${req.query.login}/followers?per_page=10&page=1`,
+            `https://api.github.com/users/${login}/followers?${params}`,
             {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
+                    Authorization: req.headers["authorization"]!,
                 },
             },
         );
 
         const json = await response.json();
-
-        console.log(json);
 
         return res.send(json);
     } catch (error) {
