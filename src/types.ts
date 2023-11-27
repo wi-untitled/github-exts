@@ -39,3 +39,11 @@ export interface IResponseUserData {
 }
 
 export type IUserData = IResponseUserData & any;
+
+export interface IResponseFollower {
+    login: string;
+    avatar_url: string;
+    url: string;
+}
+
+export type IFollower = IResponseFollower & any;
