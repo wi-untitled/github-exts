@@ -12,6 +12,7 @@
   "content_scripts": [{
     "matches": ["https://github.com/*"],
     "js": ["contentScript.js"],
+    "css": ["contentStyle.css"],
     "run_at": "document_end",
     "all_frames": true
   }],

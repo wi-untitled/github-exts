@@ -1,0 +1,27 @@
+.github-exts-frame {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: transform 0.3s ease-in-out;
+  width: 320px;
+}
+
+.github-exts-frame--hidden {
+  transform: translateX(-100%);
+}
+
+.github-exts-toggler {
+  background: rgba(0, 0, 0, 0.5);
+  border: 0;
+  border-radius: 4px;
+  bottom: 12px;
+  color: #fff;
+  font-size: 12px;
+  left: 12px;
+  padding: 4px 8px;
+  position: fixed;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
