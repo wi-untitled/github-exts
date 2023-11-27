@@ -7,13 +7,13 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
     build: {
         rollupOptions: {
-          input: {
-            contentScript: resolve(__dirname, "contentScript.html"),
-            popup: resolve(__dirname, "popup.html"),
-            main: "src/main.tsx",
-            mainPopup: "src/popup/mainPopup.tsx",
-          },
+            input: {
+                contentScript: resolve(__dirname, "contentScript.html"),
+                popup: resolve(__dirname, "popup.html"),
+                main: "src/main.tsx",
+                mainPopup: "src/popup/mainPopup.tsx",
+            },
         },
-      },
+    },
     plugins: [react()],
 });

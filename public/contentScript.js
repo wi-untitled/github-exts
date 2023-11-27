@@ -6,6 +6,7 @@ function init() {
     iframe.style.position = "fixed";
     iframe.style.top = "0px";
     iframe.style.left = "0px";
+    iframe.style.width = "320px";
     iframe.style.height = "100%";
     iframe.style.border = "none";
 

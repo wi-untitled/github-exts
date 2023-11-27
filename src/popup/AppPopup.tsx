@@ -1,23 +1,20 @@
-import { useState } from "react";
+import { useCallback } from "react";
 import "./AppPopup.css";
 
 function App() {
-    const [count, setCount] = useState(0);
-
+    const handleClickCallback = useCallback(() => {
+        window.open(
+            "https://github.com/login/oauth/authorize?client_id=Iv1.1247dc257ee98cdd",
+            "_blank",
+        );
+    }, []);
     return (
         <>
-            <h1>Popup</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
+            <div>
+                <button onClick={handleClickCallback} id="loginBtn">
+                    Click
                 </button>
-                <p>
-                    Editjjj <code>src/App.tsx</code> and save to test HMR
-                </p>
             </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
         </>
     );
 }

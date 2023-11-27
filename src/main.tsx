@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "mobx-react";
 import App from "./App.tsx";
 import createGlobalStores from "./stores/utils/createGlobalStores";
+import createGlobalServices from "./services/utils/createGlobalServices";
 
 import "./index.css";
 
@@ -10,11 +11,13 @@ export async function initialize(): Promise<any> {
     const transport = {};
 
     const stores = createGlobalStores(transport);
+    const services = createGlobalServices();
 
     const promise = new Promise((resolve) => {
         setTimeout(() => {
             resolve({
                 stores: stores,
+                services: services,
             });
         }, 1000);
     });
@@ -28,10 +31,11 @@ export function RenderApp() {
 
     useEffect(() => {
         const initializeAsync = async () => {
-            const { stores } = await initialize();
+            const { stores, services } = await initialize();
 
             ref.current = {
                 stores: stores,
+                services: services,
             };
 
             setInitialized(true);
