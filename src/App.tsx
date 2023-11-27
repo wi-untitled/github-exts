@@ -24,6 +24,7 @@ function AppComponent() {
                 const userData = await appService.getUserData();
 
                 appStore.setLogin(userData.login);
+                appStore.setUserData(userData);
             };
 
             setUserData();
