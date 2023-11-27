@@ -2,19 +2,31 @@
   "manifest_version": 3,
   "name": "github-exts",
   "version": "1.0.1",
+  "key": "fieeefkagleofippeagmkffbbbjgokgo",
   "action": {
     "default_popup": "popup.html"
   },
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [{
-    "matches": ["https://github.com/"],
+    "matches": ["https://github.com/*"],
     "js": ["contentScript.js"],
     "run_at": "document_end",
     "all_frames": true
   }],
   "host_permissions": ["<all_urls>"],
   "permissions": [
-    "scripting"
+    "scripting",
+    "tabs",
+    "identity",
+    "webNavigation",
+    "storage"  
   ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'",
+    "frame-ancestors": ["'self'", "https://github.com/*"]
+  },
   "web_accessible_resources": [
     {
       "resources": ["*"],

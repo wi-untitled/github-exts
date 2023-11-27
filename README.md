@@ -5,9 +5,18 @@
 npm run commit
 ```
 
+# How to run server
+Having using OAuth there is needed a proxy server with render fake page(TDB updated design) and proxing request from iframe to https://api.github.com.
+
+Server is running on 3000 port. (!Important) DO NOT CHANGE because client id is assingned on that port.
+
+```bash 
+npm run build-server
+```
+
 # How to build extention to upload in chrome  
 ```bash
-npm run build-extention
+npm run build-extentions
 ```
 
 Add into extention via extention tab in the Chrome
