@@ -9,6 +9,7 @@
     "build-server": "node --loader ts-node/esm ./src/server.ts",
     "build": "tsc && vite build",
     "build-extentions": "tsc && vite build",
+    "build:watch": "vite build --watch --mode=development",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "commit": "git-cz",
