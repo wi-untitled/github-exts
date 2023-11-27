@@ -1,11 +1,13 @@
 import { observer } from "mobx-react";
-import { useGithubAuth, useStore } from "./hooks";
+import { useGithubAuth, useService, useStore } from "./hooks";
 
 import "./App.css";
 import { useEffect } from "react";
 import { UserProfileModule } from "./modules";
+import { UserFollowersModule } from "./modules/UserFollowers/UserFollowers";
 
 function AppComponent() {
+    const appService = useService("AppService");
     const appStore = useStore("AppStore");
 
     const { handleLoginGithubCallback, handleRequestAccessTokenCallback } =
@@ -15,10 +17,24 @@ function AppComponent() {
             onRequestAccessTokenError: appStore.handleRequestAccessTokenError,
         });
 
+    useEffect(() => {
+        if (appStore.isAuthorized) {
+            const setUserData = async () => {
+                // TODO: make in service
+                const userData = await appService.getUserData();
+
+                appStore.setLogin(userData.login);
+            };
+
+            setUserData();
+        }
+    }, [appStore.isAuthorized]);
+
     return (
         <>
             <div className="flex flex-col w-full">
                 {appStore.isAuthorized && <UserProfileModule />}
+                {appStore.isAuthorized && <UserFollowersModule />}
                 {appStore.isAuthorized && (
                     <button onClick={appStore.handleLogout}>Logout</button>
                 )}
