@@ -3,13 +3,12 @@ import { UserFollowersStore } from "./UserFollowersStore";
 import { useService, useStore } from "../../hooks";
 import { useMemo } from "react";
 import { chunk } from "lodash";
-import clsx from "clsx";
-
-export function makeGithubProfileUrl(login: string) {
-    return `https:/github.com/${login}`;
-}
-
-export const CHUNK_LIMIT = 9;
+import {
+    UserFollowersButtonMore,
+    UserFollowersList,
+    UserFollowersTitle,
+} from "./components";
+import { CHUNK_LIMIT } from "./constants";
 
 function UserFollowers() {
     const appStore = useStore("AppStore");
@@ -29,9 +28,9 @@ function UserFollowers() {
             ) : (
                 <>
                     <div className="flex flex-row justify-between">
-                        <div className="text-md mb-2">
-                            Followers({appStore.userData.followers})
-                        </div>
+                        <UserFollowersTitle
+                            count={appStore.userData.followers}
+                        />
                         <a
                             className="text-md"
                             target="_blank"
@@ -40,62 +39,12 @@ function UserFollowers() {
                             Open all
                         </a>
                     </div>
-                    <div className="flex flex-col w-full">
-                        {followers.map((chunkFollowers) => {
-                            let chunk = [];
-
-                            if (chunkFollowers.length < CHUNK_LIMIT) {
-                                const fakeArray = new Array(
-                                    CHUNK_LIMIT - chunkFollowers.length,
-                                ).fill(undefined);
-
-                                chunk = [...chunkFollowers, ...fakeArray];
-                            } else {
-                                chunk = chunkFollowers;
-                            }
-
-                            return (
-                                <div className="flex flex-row w-full space-x-1 w-full">
-                                    {chunk.map((follower) => {
-                                        if (follower === undefined) {
-                                            return (
-                                                <div className="w-8 h-8"></div>
-                                            );
-                                        }
-
-                                        const { login, avatar_url } = follower;
-
-                                        return (
-                                            <a
-                                                href={makeGithubProfileUrl(
-                                                    login,
-                                                )}
-                                                className="w-8 h-8"
-                                                target="_blank"
-                                            >
-                                                <img
-                                                    className="rounded-full"
-                                                    src={avatar_url}
-                                                />
-                                            </a>
-                                        );
-                                    })}
-                                </div>
-                            );
-                        })}
-                    </div>
+                    <UserFollowersList followers={followers} />
                     <div className="mt-2">
-                        <button
-                            className={clsx({
-                                ["text-gray-100"]: !userFollowersStore.showMore,
-                                ["text-opacity-25"]:
-                                    !userFollowersStore.showMore,
-                            })}
+                        <UserFollowersButtonMore
+                            disabled={userFollowersStore.showMore}
                             onClick={userFollowersStore.getMoreUserFollowers}
-                            disabled={!userFollowersStore.showMore}
-                        >
-                            More
-                        </button>
+                        />
                     </div>
                 </>
             )}

@@ -101,6 +101,34 @@ app.get("/getUserFollower", async (req, res) => {
     }
 });
 
+app.get("/getUserFollowing", async (req, res) => {
+    try {
+        console.log(42);
+        const { login, limit = 10, page = 1 } = req.query;
+
+        const params = `per_page=${limit}&page=${page}`;
+
+        const response = await fetch(
+            `https://api.github.com/users/${login}/following?${params}`,
+            {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    Authorization: req.headers["authorization"]!,
+                },
+            },
+        );
+
+        const json = await response.json();
+
+        return res.send(json);
+    } catch (error) {
+        return res.json({
+            error: (error as Error).message,
+        });
+    }
+});
+
 app.listen(3000, () => {
     console.log("server is starting on", 3000);
 });

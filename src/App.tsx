@@ -3,8 +3,11 @@ import { useGithubAuth, useService, useStore } from "./hooks";
 
 import "./App.css";
 import { useEffect } from "react";
-import { UserProfileModule } from "./modules";
-import { UserFollowersModule } from "./modules/UserFollowers/UserFollowers";
+import {
+    UserProfileModule,
+    UserFollowersModule,
+    UserFollowingsModule,
+} from "./modules";
 
 function AppComponent() {
     const appService = useService("AppService");
@@ -36,6 +39,7 @@ function AppComponent() {
             <div className="flex flex-col w-full">
                 {appStore.isAuthorized && <UserProfileModule />}
                 {appStore.isAuthorized && <UserFollowersModule />}
+                {appStore.isAuthorized && <UserFollowingsModule />}
                 {appStore.isAuthorized && (
                     <button onClick={appStore.handleLogout}>Logout</button>
                 )}
