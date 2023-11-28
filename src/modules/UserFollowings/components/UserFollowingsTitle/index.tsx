@@ -3,5 +3,5 @@ export interface IUserFollowingsTitleProps {
 }
 
 export function UserFollowingsTitle({ count }: IUserFollowingsTitleProps) {
-    return <div className="text-md mb-2">Followers({count})</div>;
+    return <div className="text-md mb-2">Followings({count})</div>;
 }
