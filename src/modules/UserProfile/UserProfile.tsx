@@ -1,7 +1,11 @@
 import { observer, useLocalStore } from "mobx-react";
 import { useService, useStore } from "../../hooks";
 import { UserDataStore } from "./UserProfileStore";
-import { UserProfileAvatar, UserProfileName } from "./components";
+import {
+    UserProfileAvatar,
+    UserProfileName,
+    UserProfileLogin,
+} from "./components";
 
 function UserProfile() {
     const appStore = useStore("AppStore");
@@ -11,16 +15,19 @@ function UserProfile() {
     );
 
     return (
-        <div className="w-full flex flex-col items-center space-y-2">
+        <div className="w-full flex flex-row space-x-3">
             {userDataStore.isLoading ? (
                 <div>loading</div>
             ) : (
                 <>
-                    <div>
-                        <UserProfileAvatar
-                            url={userDataStore.user.avatar_url}
-                        />
-                        <UserProfileName name={userDataStore.user.name} />
+                    <UserProfileAvatar url={userDataStore.user.avatar_url} />
+                    <div className="flex flex-col justify-center text-left ">
+                        <div className="flex flex-col space-y-0.5">
+                            <UserProfileName name={userDataStore.user.name} />
+                            <UserProfileLogin
+                                login={userDataStore.user.login}
+                            />
+                        </div>
                     </div>
                 </>
             )}

@@ -1,0 +1,1 @@
+export { makeGithubProfileUrl } from "./makeGithubProfileUrl";
