@@ -1,38 +1,18 @@
+import React from "react";
 import { observer } from "mobx-react";
-import { useGithubAuth, useService, useStore } from "./hooks";
+import { useStore } from "./hooks";
 
 import "./App.css";
-import { useEffect } from "react";
+
 import {
     UserProfileModule,
     UserFollowersModule,
     UserFollowingsModule,
+    LoginModule,
 } from "./modules";
 
 function AppComponent() {
-    const appService = useService("AppService");
     const appStore = useStore("AppStore");
-
-    const { handleLoginGithubCallback, handleRequestAccessTokenCallback } =
-        useGithubAuth({
-            onRequestAccessTokenSuccess:
-                appStore.handleRequestAccessTokenSuccess,
-            onRequestAccessTokenError: appStore.handleRequestAccessTokenError,
-        });
-
-    useEffect(() => {
-        if (appStore.isAuthorized) {
-            const setUserData = async () => {
-                // TODO: make in service
-                const userData = await appService.getUserData();
-
-                appStore.setLogin(userData.login);
-                appStore.setUserData(userData);
-            };
-
-            setUserData();
-        }
-    }, [appStore.isAuthorized]);
 
     return (
         <>
@@ -43,16 +23,7 @@ function AppComponent() {
                 {appStore.isAuthorized && (
                     <button onClick={appStore.handleLogout}>Logout</button>
                 )}
-                {!appStore.isAuthorized && (
-                    <>
-                        <button onClick={handleLoginGithubCallback}>
-                            Login GitHub
-                        </button>
-                        <button onClick={handleRequestAccessTokenCallback}>
-                            Click to request access token
-                        </button>
-                    </>
-                )}
+                {!appStore.isAuthorized && <LoginModule />}
             </div>
         </>
     );

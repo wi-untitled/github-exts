@@ -1,6 +1,6 @@
 import { observer, useLocalStore } from "mobx-react";
 import { UserFollowersStore } from "./UserFollowersStore";
-import { useService, useStore } from "../../hooks";
+import { useService, useStore } from "src/hooks";
 import { useMemo } from "react";
 import { chunk } from "lodash";
 import {
@@ -17,6 +17,7 @@ function UserFollowers() {
         () => new UserFollowersStore(appStore, userFollowersService),
     );
 
+    // TODO: make custom use with Generic
     const followers = useMemo(() => {
         return chunk(userFollowersStore.followers, CHUNK_LIMIT);
     }, [userFollowersStore.followers]);

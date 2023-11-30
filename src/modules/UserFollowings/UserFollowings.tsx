@@ -1,6 +1,6 @@
 import { observer, useLocalStore } from "mobx-react";
 import { UserFollowingsStore } from "./UserFollowingsStore";
-import { useService, useStore } from "../../hooks";
+import { useService, useStore } from "src/hooks";
 import { useMemo } from "react";
 import { chunk } from "lodash";
 import {

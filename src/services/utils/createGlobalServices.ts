@@ -1,5 +1,5 @@
 import { ModuleServices, ServiceName, Services } from "../types";
-import * as modules from "../index";
+import * as modules from "../";
 
 export function createGlobalServices(services: ModuleServices) {
     return Object.keys(services).reduce((acc: Services, name: string) => {

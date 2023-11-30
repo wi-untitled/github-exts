@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "mobx-react";
-import App from "./App.tsx";
-import createGlobalStores from "./stores/utils/createGlobalStores";
-import createGlobalServices from "./services/utils/createGlobalServices";
+import App from "src/App.tsx";
+import createGlobalStores from "src/stores/utils/createGlobalStores";
+import createGlobalServices from "src/services/utils/createGlobalServices";
 
 import "./index.css";
 
