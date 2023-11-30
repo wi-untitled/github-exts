@@ -1,4 +1,5 @@
 import { STORAGE_KEYS } from "src/constants";
+import { urls } from "src/services/constants";
 
 export class UserFollowingsService {
     public constructor() {}
@@ -18,7 +19,7 @@ export class UserFollowingsService {
             headers.set("X-GitHub-Api-Version", "2022-11-28");
 
             const response = await fetch(
-                `https://api.github.com/user/following?per_page=${limit}&page=${page}`,
+                `${urls.following.url}?per_page=${limit}&page=${page}`,
                 {
                     method: "GET",
                     headers: headers,
