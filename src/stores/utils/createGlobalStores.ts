@@ -1,4 +1,4 @@
-import * as stores from "../";
+import * as stores from "src/stores";
 import { ModuleStores, StoreName, Stores } from "src/stores/types";
 
 export function createGlobalStores(globalStores: ModuleStores, transport: any) {

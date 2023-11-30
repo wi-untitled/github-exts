@@ -1,5 +1,5 @@
 import { observer, useLocalStore } from "mobx-react";
-import { UserFollowingsStore } from "./UserFollowingsStore";
+import { UserFollowingsStore } from "src/modules/UserFollowings/UserFollowingsStore";
 import { useService, useStore } from "src/hooks";
 import { useMemo } from "react";
 import { chunk } from "lodash";
@@ -7,8 +7,8 @@ import {
     UserFollowingsButtonMore,
     UserFollowingsList,
     UserFollowingsTitle,
-} from "./components";
-import { CHUNK_LIMIT } from "./constants";
+} from "src/modules/UserFollowings/components";
+import { CHUNK_LIMIT } from "src/modules/UserFollowings/constants";
 
 function UserFollowings() {
     const appStore = useStore("AppStore");

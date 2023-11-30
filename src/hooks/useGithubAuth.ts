@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { STORAGE_KEYS, HOST } from "../constants";
+import { STORAGE_KEYS, HOST } from "src/constants";
 
 export interface IUseGithubAuth {
     onRequestAccessTokenSuccess: () => void;

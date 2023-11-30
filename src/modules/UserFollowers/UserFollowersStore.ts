@@ -2,8 +2,8 @@ import { observable, makeObservable, action } from "mobx";
 import { AppStore } from "src/stores";
 import { IFollower } from "src/types";
 import { BaseStore } from "src/stores/BaseStore";
-import { UserFollowersService } from "src/services/UserFollowersService";
-import { CHUNK_LIMIT } from "./constants";
+import { UserFollowersService } from "src/services";
+import { CHUNK_LIMIT } from "src/modules/UserFollowers/constants";
 
 export class UserFollowersStore extends BaseStore {
     private appStore: AppStore;

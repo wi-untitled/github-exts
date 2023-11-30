@@ -1,11 +1,11 @@
 import { observer, useLocalStore } from "mobx-react";
 import { useService, useStore } from "src/hooks";
-import { UserDataStore } from "./UserProfileStore";
+import { UserDataStore } from "src/modules/UserProfile/UserProfileStore";
 import {
     UserProfileAvatar,
     UserProfileName,
     UserProfileLogin,
-} from "./components";
+} from "src/modules/UserProfile/components";
 
 function UserProfile() {
     const appStore = useStore("AppStore");

@@ -1,4 +1,4 @@
-export { AppService } from "./AppService";
-export { UserFollowersService } from "./UserFollowersService";
-export { UserFollowingsService } from "./UserFollowingsService";
-export { LoginService } from "./LoginService";
+export { AppService } from "src/services/AppService";
+export { UserFollowersService } from "src/services/UserFollowersService";
+export { UserFollowingsService } from "src/services/UserFollowingsService";
+export { LoginService } from "src/services/LoginService";

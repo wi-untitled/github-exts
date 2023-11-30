@@ -1,4 +1,4 @@
-import * as services from "./";
+import * as services from "src/services";
 
 export type ServiceClass<T> = new () => T;
 

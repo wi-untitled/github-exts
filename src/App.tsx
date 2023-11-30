@@ -1,6 +1,5 @@
-import React from "react";
 import { observer } from "mobx-react";
-import { useStore } from "./hooks";
+import { useStore } from "src/hooks";
 
 import "./App.css";
 

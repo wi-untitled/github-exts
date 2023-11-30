@@ -1,4 +1,4 @@
-import * as stores from "./";
+import * as stores from "src/stores";
 
 export interface StoreClass<T> {
     new (transport: any): T;
