@@ -1,5 +1,5 @@
 import { IFollower } from "../../../../types";
-import { makeGithubProfileUrl } from "../../../../utils.ts";
+import { makeGithubProfileUrl } from "../../../../utils";
 import { CHUNK_LIMIT } from "../../constants";
 
 export interface IUserFollowingsListProps {

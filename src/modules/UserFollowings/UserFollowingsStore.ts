@@ -1,8 +1,9 @@
-import { observable, when, makeObservable, action } from "mobx";
-import { AppStore } from "../../stores";
-import { IFollower } from "../../types";
-import { BaseStore } from "../../stores/BaseStore";
-import { UserFollowingsService } from "../../services/UserFollowingsService";
+import { observable, makeObservable, action } from "mobx";
+import { AppStore } from "src/stores";
+import { IFollower } from "src/types";
+import { BaseStore } from "src/stores/BaseStore";
+import { UserFollowingsService } from "src/services";
+import { CHUNK_LIMIT } from "./constants";
 
 export class UserFollowingsStore extends BaseStore {
     private appStore: AppStore;
@@ -27,58 +28,51 @@ export class UserFollowingsStore extends BaseStore {
         this.appStore = appStore;
         this.userFollowingsService = userFollowingsService;
         this.followings = [];
-        this.limit = 9;
+        this.limit = CHUNK_LIMIT;
         this.page = 1;
         this.totalPage = 0;
 
-        when(
-            () => this.appStore.login !== "",
-            async () => {
-                await this.getUserFollowings();
-                this.updateTotalPage();
-            },
-        );
+        if (this.appStore.isAuthorized) {
+            this.initAsyncAuth();
+        }
     }
 
-    public initAsync = async () => {
-        await this.getMoreUserFollowings();
+    public initAsyncAuth = async (): Promise<void> => {
+        await this.getUserFollowings();
     };
 
-    public getUserFollowings = async () => {
+    public getUserFollowings = async (): Promise<void> => {
         try {
-            if (this.appStore.login) {
-                const userFollowings =
-                    await this.userFollowingsService.getUserFollowings(
-                        this.appStore.login,
-                        this.limit,
-                        this.page,
-                    );
+            const userFollowings =
+                await this.userFollowingsService.getUserFollowings(
+                    this.limit,
+                    this.page,
+                );
 
-                this.updateFollowings(userFollowings);
-                this.updateLoading(false);
-            }
+            this.updateFollowings(userFollowings);
+            this.updateTotalPage();
+            this.updateLoading(false);
         } catch (error) {
             console.error(error);
             this.updateLoading(false);
         }
     };
 
-    public updateTotalPage = async () => {
-        this.totalPage = this.appStore.userData.following / 10;
+    public updateTotalPage = async (): Promise<void> => {
+        this.totalPage = this.appStore.userData.following / this.limit;
     };
 
-    public updateFollowings = (followings: IFollower[]) => {
+    public updateFollowings = (followings: IFollower[]): void => {
         this.followings = [...this.followings, ...followings];
     };
 
-    public getMoreUserFollowings = async () => {
-        console.log(55);
+    public getMoreUserFollowings = async (): Promise<void> => {
         try {
-            if (this.page < this.totalPage && this.appStore.login) {
+            if (this.page < this.totalPage) {
                 this.page = this.page + 1;
+
                 const userFollowings =
                     await this.userFollowingsService.getUserFollowings(
-                        this.appStore.login,
                         this.limit,
                         this.page,
                     );
@@ -90,7 +84,7 @@ export class UserFollowingsStore extends BaseStore {
         }
     };
 
-    public get showMore() {
+    public get showMore(): boolean {
         return this.followings.length !== this.appStore.userData.followings;
     }
 }

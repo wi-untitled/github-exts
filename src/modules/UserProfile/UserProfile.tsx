@@ -1,5 +1,5 @@
 import { observer, useLocalStore } from "mobx-react";
-import { useService, useStore } from "../../hooks";
+import { useService, useStore } from "src/hooks";
 import { UserDataStore } from "./UserProfileStore";
 import {
     UserProfileAvatar,

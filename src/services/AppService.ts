@@ -14,8 +14,10 @@ export class AppService {
             const headers = new Headers();
 
             headers.set("Authorization", `Bearer ${result}`);
+            headers.set("Accept", "application/vnd.github+json");
+            headers.set("X-GitHub-Api-Version", "2022-11-28");
 
-            const response = await fetch(`${HOST}/getUserData`, {
+            const response = await fetch(`https://api.github.com/user`, {
                 method: "GET",
                 headers: headers,
             });

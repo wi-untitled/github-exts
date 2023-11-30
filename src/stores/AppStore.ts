@@ -1,54 +1,82 @@
-import { action, makeAutoObservable, observable } from "mobx";
-import { STORAGE_KEYS } from "../constants";
-import { AppService } from "../services";
-import { IUserData } from "../types";
+import { action, makeAutoObservable, observable, reaction } from "mobx";
+import { STORAGE_KEYS } from "src/constants";
+import { AppService } from "src/services";
+import { IUserData } from "src/types";
 
 export class AppStore {
-    private appService: AppService;
-    public isAuthorized: boolean;
-    public login: string;
     public userData: IUserData;
+    public accessToken: string | null;
+    public appService: AppService;
 
-    public constructor(appService: AppService) {
+    public constructor() {
         makeAutoObservable(this, {
-            login: observable,
+            accessToken: observable,
             userData: observable,
-            handleRequestAccessTokenError: action,
-            handleRequestAccessTokenSuccess: action,
-            setLogin: action,
             setUserData: action,
+            setAccessToken: action,
         });
 
-        this.appService = appService;
+        this.accessToken = "";
 
-        this.login = "";
+        this.appService = new AppService();
 
-        this.isAuthorized = Boolean(
-            localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN),
+        this.init();
+        this.initAsync();
+
+        reaction(
+            () => this.accessToken,
+            (accessToken: string | null) => {
+                if (accessToken) {
+                    localStorage.setItem(
+                        STORAGE_KEYS.ACCESS_TOKEN,
+                        accessToken,
+                    );
+                }
+            },
         );
     }
 
-    public initAsync = async () => {};
+    public init = () => {
+        this.initializeAccessToken();
+    };
 
-    public setLogin = (login: string) => {
-        this.login = login;
+    public initializeAccessToken = (): void => {
+        try {
+            const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
+
+            if (token) {
+                this.setAccessToken(token);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    public initAsync = async (): Promise<void> => {
+        await this.initUserData();
+    };
+
+    public initUserData = async (): Promise<void> => {
+        if (this.isAuthorized) {
+            const userData = await this.appService.getUserData();
+
+            this.setUserData(userData);
+        }
     };
 
     public setUserData = (userData: IUserData) => {
         this.userData = userData;
     };
 
-    public handleRequestAccessTokenSuccess = () => {
-        this.isAuthorized = true;
-
-        this.initAsync();
+    public handleLogout = (): void => {
+        this.setAccessToken(null);
     };
 
-    public handleRequestAccessTokenError = () => {
-        this.isAuthorized = false;
+    public setAccessToken = (accessToken: string | null): void => {
+        this.accessToken = accessToken;
     };
 
-    public handleLogout = () => {
-        this.isAuthorized = false;
-    };
+    public get isAuthorized(): boolean {
+        return Boolean(this.accessToken);
+    }
 }

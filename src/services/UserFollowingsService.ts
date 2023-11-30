@@ -1,13 +1,9 @@
-import { HOST, STORAGE_KEYS } from "../constants";
+import { STORAGE_KEYS } from "../constants";
 
 export class UserFollowingsService {
     public constructor() {}
 
-    public getUserFollowings = async (
-        login: string,
-        limit: number,
-        page: number = 1,
-    ) => {
+    public getUserFollowings = async (limit: number, page: number = 1) => {
         const result = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
         if (!result) {
@@ -18,9 +14,11 @@ export class UserFollowingsService {
             const headers = new Headers();
 
             headers.set("Authorization", `Bearer ${result}`);
+            headers.set("Accept", "application/vnd.github+json");
+            headers.set("X-GitHub-Api-Version", "2022-11-28");
 
             const response = await fetch(
-                `${HOST}/getUserFollowing?login=${login}&limit=${limit}&page=${page}`,
+                `https://api.github.com/user/following?per_page=${limit}&page=${page}`,
                 {
                     method: "GET",
                     headers: headers,
