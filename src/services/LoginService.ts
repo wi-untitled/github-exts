@@ -1,3 +1,5 @@
+import { urls } from "src/services/constants";
+
 export class LoginService {
     public constructor() {}
 
@@ -13,7 +15,7 @@ export class LoginService {
             headers.set("Accept", "application/vnd.github+json");
             headers.set("X-GitHub-Api-Version", "2022-11-28");
 
-            const response = await fetch(`https://api.github.com/user`, {
+            const response = await fetch(urls.user.url, {
                 method: "GET",
                 headers: headers,
             });

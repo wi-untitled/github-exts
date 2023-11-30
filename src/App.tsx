@@ -8,6 +8,7 @@ import {
     UserFollowersModule,
     UserFollowingsModule,
     LoginModule,
+    NotificationsModule,
 } from "./modules";
 
 function AppComponent() {
@@ -19,9 +20,7 @@ function AppComponent() {
                 {appStore.isAuthorized && <UserProfileModule />}
                 {appStore.isAuthorized && <UserFollowersModule />}
                 {appStore.isAuthorized && <UserFollowingsModule />}
-                {appStore.isAuthorized && (
-                    <button onClick={appStore.handleLogout}>Logout</button>
-                )}
+                {appStore.isAuthorized && <NotificationsModule />}
                 {!appStore.isAuthorized && <LoginModule />}
             </div>
         </>
