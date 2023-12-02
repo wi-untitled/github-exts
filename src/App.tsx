@@ -13,7 +13,7 @@ import {
 
 function AppComponent() {
     const appStore = useStore("AppStore");
-
+    console.log(appStore.isLoading);
     return (
         <>
             <div className="flex flex-col w-full">

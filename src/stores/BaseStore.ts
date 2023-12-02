@@ -4,7 +4,7 @@ export class BaseStore {
     public isLoading: boolean;
 
     public constructor() {
-        makeObservable(this, {
+        makeObservable<BaseStore, "updateLoading">(this, {
             isLoading: observable,
             updateLoading: action,
         });
@@ -12,7 +12,7 @@ export class BaseStore {
         this.isLoading = true;
     }
 
-    public updateLoading = (isLoading: boolean) => {
+    protected updateLoading = (isLoading: boolean) => {
         this.isLoading = isLoading;
     };
 }

@@ -4,8 +4,8 @@ import { UserProfileService } from "src/services";
 import { IUserData } from "src/types";
 import { BaseStore } from "src/stores/BaseStore";
 
-export class UserDataStore extends BaseStore {
-    private appStore: AppStore;
+export class UserProfileStore extends BaseStore {
+    public appStore: AppStore;
     public userProfileService: UserProfileService;
     public user: IUserData;
 
@@ -15,7 +15,7 @@ export class UserDataStore extends BaseStore {
     ) {
         super();
 
-        makeObservable(this, {
+        makeObservable<UserProfileStore, "updateUser">(this, {
             user: observable,
             updateUser: action,
         });
@@ -31,7 +31,7 @@ export class UserDataStore extends BaseStore {
         );
     }
 
-    public initAsync = async (): Promise<void> => {
+    protected initAsync = async (): Promise<void> => {
         try {
             if (!this.appStore.isAuthorized) {
                 throw Error("User is not authed.");
@@ -49,7 +49,7 @@ export class UserDataStore extends BaseStore {
         }
     };
 
-    public updateUser = (user: IUserData): void => {
+    protected updateUser = (user: IUserData): void => {
         this.user = user;
     };
 

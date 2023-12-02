@@ -16,9 +16,11 @@ export function Notifications() {
             <div>Requested Pull Request for last week</div>
             <div className="h-px w-full bg-gray-400 my-2" />
             <div className="max-h-32 overflow-y-scroll no-scrollbar">
-                {notificationsStore.isEmpty ? (
+                {notificationsStore.isLoading && <div>loading</div>}
+                {notificationsStore.isEmpty && !notificationsStore.isLoading ? (
                     <NoResult />
                 ) : (
+                    !notificationsStore.isLoading &&
                     notificationsStore.notifications.map(
                         ({ created_at, title, pull_request: { html_url } }) => {
                             return (

@@ -35,9 +35,10 @@ export function PullRequest({
                 </div>
             </div>
             <div className="flex flex-col ml-1">
-                <div className="text-xs">
+                <span className="text-1/5xs">created</span>
+                <span className="text-xs">
                     {dayjs(created_at.split("T")).fromNow()}
-                </div>
+                </span>
             </div>
         </div>
     );

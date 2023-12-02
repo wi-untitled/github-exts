@@ -15,20 +15,24 @@ export class AppStore extends BaseStore {
     public userData: IUserData;
     public accessToken: string | null;
     public appService: AppService;
+    public isOpen: boolean;
 
     public constructor() {
         super();
 
-        makeAutoObservable(this, {
+        makeAutoObservable<AppStore, "updateIsOpen" | "updateLoading">(this, {
             isLoading: override,
+            isOpen: observable,
             accessToken: observable,
             userData: observable,
             setUserData: action,
             setAccessToken: action,
+            updateIsOpen: action,
             updateLoading: override,
         });
 
         this.accessToken = "";
+        this.isOpen = false;
         this.appService = new AppService();
 
         this.init();
@@ -53,11 +57,24 @@ export class AppStore extends BaseStore {
         );
     }
 
-    public init = () => {
-        this.initializeAccessToken();
+    private handleStateIframe = ({
+        action,
+        data: { isOpen },
+    }: {
+        action: string;
+        data: { isOpen: boolean };
+    }): void => {
+        if (action === "IFRAME_TOGGLE") {
+            this.updateIsOpen(isOpen);
+        }
     };
 
-    public initializeAccessToken = (): void => {
+    protected init = (): void => {
+        this.initializeAccessToken();
+        this.registerRuntimeMessageHandler();
+    };
+
+    protected initializeAccessToken = (): void => {
         try {
             const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
@@ -69,11 +86,15 @@ export class AppStore extends BaseStore {
         }
     };
 
-    public initAsync = async (): Promise<void> => {
+    protected registerRuntimeMessageHandler = (): void => {
+        chrome.runtime.onMessage.addListener(this.handleStateIframe);
+    };
+
+    protected initAsync = async (): Promise<void> => {
         await this.initUserData();
     };
 
-    public initUserData = async (): Promise<void> => {
+    protected initUserData = async (): Promise<void> => {
         try {
             this.updateLoading(true);
 
@@ -86,7 +107,11 @@ export class AppStore extends BaseStore {
         }
     };
 
-    public setUserData = (userData: IUserData) => {
+    protected updateIsOpen = (isOpen: boolean): void => {
+        this.isOpen = isOpen;
+    };
+
+    public setUserData = (userData: IUserData): void => {
         this.userData = userData;
     };
 

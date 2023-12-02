@@ -40,7 +40,7 @@ export class UserFollowersStore extends BaseStore {
         );
     }
 
-    public initAsyncAuth = async (): Promise<void> => {
+    protected initAsyncAuth = async (): Promise<void> => {
         await this.getUserFollowers();
     };
 

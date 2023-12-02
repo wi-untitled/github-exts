@@ -1,4 +1,4 @@
-import { action, makeObservable, observable, when } from "mobx";
+import { action, autorun, makeObservable, observable } from "mobx";
 import { NotificationsService } from "src/services";
 import { AppStore } from "src/stores";
 import { BaseStore } from "src/stores/BaseStore";
@@ -25,15 +25,14 @@ export class NotificationsStore extends BaseStore {
 
         this.notifications = [];
 
-        when(
-            () => this.appStore.isAuthorized && !this.appStore.isLoading,
-            async () => {
+        autorun(async () => {
+            if (this.appStore.isAuthorized && this.appStore.isOpen) {
                 await this.initAsync();
-            },
-        );
+            }
+        });
     }
 
-    public initAsync = async (): Promise<void> => {
+    protected initAsync = async (): Promise<void> => {
         try {
             this.updateLoading(true);
 

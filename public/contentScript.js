@@ -1,4 +1,6 @@
 function init() {
+    let isOpen = false;
+
     const iframe = document.createElement("iframe");
 
     // Styles
@@ -24,6 +26,10 @@ function init() {
     function handleToggle() {
         iframe.classList.toggle("github-exts-frame--hidden");
         
+        isOpen = !isOpen;
+
+        sendMessage(isOpen);
+        
         document.body.addEventListener("click", handleClickOutside);
     }
 
@@ -33,12 +39,27 @@ function init() {
 
         if (!isClickInside) {
             iframe.classList.toggle("github-exts-frame--hidden");
-
             document.body.removeEventListener("click", handleClickOutside);
+            
+            isOpen = false;
+
+            sendMessage(isOpen);
         }
     }
 
     button.addEventListener("click", handleToggle);
+
+    /**
+     * 
+     */
+    function sendMessage(isOpen) {
+        chrome.runtime.sendMessage({
+            action: "IFRAME_TOGGLE",
+            data: {
+                isOpen: isOpen,
+            },
+        });
+    }
 
     /** 
      * Appending elements into body
