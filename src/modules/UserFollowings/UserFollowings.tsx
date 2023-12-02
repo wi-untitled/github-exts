@@ -9,6 +9,7 @@ import {
     UserFollowingsTitle,
 } from "src/modules/UserFollowings/components";
 import { CHUNK_LIMIT } from "src/modules/UserFollowings/constants";
+import { makeGithubProfileUrl } from "src/utils";
 
 function UserFollowings() {
     const appStore = useStore("AppStore");
@@ -34,7 +35,9 @@ function UserFollowings() {
                         <a
                             className="text-md"
                             target="_blank"
-                            href={`https://github.com/${appStore.login}?tab=following`}
+                            href={`${makeGithubProfileUrl(
+                                appStore.userData.login,
+                            )}?tab=following`}
                         >
                             Open all
                         </a>
