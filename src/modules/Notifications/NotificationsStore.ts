@@ -1,9 +1,10 @@
 import { action, makeObservable, observable, when } from "mobx";
 import { NotificationsService } from "src/services";
 import { AppStore } from "src/stores";
+import { BaseStore } from "src/stores/BaseStore";
 import { INotification } from "src/types";
 
-export class NotificationsStore {
+export class NotificationsStore extends BaseStore {
     public appStore: AppStore;
     public notificationsService: NotificationsService;
     public notifications: INotification[];
@@ -12,6 +13,8 @@ export class NotificationsStore {
         appStore: AppStore,
         notificationsService: NotificationsService,
     ) {
+        super();
+
         makeObservable(this, {
             notifications: observable,
             setNotifications: action,
@@ -32,6 +35,8 @@ export class NotificationsStore {
 
     public initAsync = async (): Promise<void> => {
         try {
+            this.updateLoading(true);
+
             const notifications =
                 await this.notificationsService.getNotifications();
             // const {items} =
@@ -40,6 +45,7 @@ export class NotificationsStore {
             // TODO: check when PR is open
             // this.setNotifications(items);
             this.setNotifications(notifications);
+            this.updateLoading(false);
         } catch (error) {
             console.error(error);
         }

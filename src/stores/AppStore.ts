@@ -1,29 +1,44 @@
-import { action, makeAutoObservable, observable, reaction } from "mobx";
+import {
+    action,
+    makeAutoObservable,
+    observable,
+    override,
+    reaction,
+    when,
+} from "mobx";
 import { STORAGE_KEYS } from "src/constants";
 import { AppService } from "src/services";
 import { IUserData } from "src/types";
+import { BaseStore } from "./BaseStore";
 
-export class AppStore {
+export class AppStore extends BaseStore {
     public userData: IUserData;
     public accessToken: string | null;
     public appService: AppService;
-    public isLoading: boolean;
 
     public constructor() {
+        super();
+
         makeAutoObservable(this, {
+            isLoading: override,
             accessToken: observable,
             userData: observable,
             setUserData: action,
             setAccessToken: action,
+            updateLoading: override,
         });
 
         this.accessToken = "";
-        this.isLoading = true;
-
         this.appService = new AppService();
 
         this.init();
-        this.initAsync();
+
+        when(
+            () => this.isAuthorized,
+            async () => {
+                await this.initAsync();
+            },
+        );
 
         reaction(
             () => this.accessToken,
@@ -58,22 +73,16 @@ export class AppStore {
         await this.initUserData();
     };
 
-    public updateLoading = (isLoading: boolean) => {
-        this.isLoading = isLoading;
-    };
-
     public initUserData = async (): Promise<void> => {
-        if (this.isAuthorized) {
-            try {
-                this.updateLoading(true);
+        try {
+            this.updateLoading(true);
 
-                const userData = await this.appService.getUserData();
+            const userData = await this.appService.getUserData();
 
-                this.updateLoading(false);
-                this.setUserData(userData);
-            } catch (error) {
-                console.log(error);
-            }
+            this.setUserData(userData);
+            this.updateLoading(false);
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -83,6 +92,8 @@ export class AppStore {
 
     public handleLogout = (): void => {
         this.setAccessToken(null);
+
+        localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
     };
 
     public setAccessToken = (accessToken: string | null): void => {

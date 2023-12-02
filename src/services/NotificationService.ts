@@ -1,21 +1,19 @@
 import dayjs from "dayjs";
-import { STORAGE_KEYS } from "src/constants";
 import { urls } from "src/services/constants";
 import { Octokit } from "octokit";
+import { AppService } from ".";
 
-export class NotificationsService {
-    public constructor() {}
+export class NotificationsService extends AppService {
+    public constructor() {
+        super();
+    }
 
     public getNotificationsCreatedLastWeek = async () => {
         try {
-            const result = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
-
-            if (!result) {
-                throw Error("No Access Key provided.");
-            }
+            this.isAuthorized();
 
             const oktokit = new Octokit({
-                auth: result,
+                auth: this.accessToken,
             });
 
             const created = dayjs().subtract(7, "day").format("YYYY-MM-DD");
@@ -23,7 +21,7 @@ export class NotificationsService {
             const { data } = await oktokit.rest.search.issuesAndPullRequests({
                 q: `user-review-requested:@me+is:pull-request+created:>${created}`,
             });
-
+            // TODO: check result when Vlad opened PR with assinged to @me
             return data;
         } catch (error) {
             console.trace(error);
@@ -33,16 +31,12 @@ export class NotificationsService {
     };
 
     public getNotifications = async () => {
-        const result = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
-
-        if (!result) {
-            return;
-        }
-
         try {
+            this.isAuthorized();
+
             const headers = new Headers();
 
-            headers.set("Authorization", `Bearer ${result}`);
+            headers.set("Authorization", `Bearer ${this.accessToken}`);
             headers.set("Accept", "application/vnd.github+json");
             headers.set("X-GitHub-Api-Version", "2022-11-28");
 

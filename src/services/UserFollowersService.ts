@@ -1,23 +1,21 @@
-import { STORAGE_KEYS } from "src/constants";
 import { Octokit } from "octokit";
 import { IResponseFollower } from "src/types";
+import { AppService } from ".";
 
-export class UserFollowersService {
-    public constructor() {}
+export class UserFollowersService extends AppService {
+    public constructor() {
+        super();
+    }
 
     public getUserFollowers = async (
         limit: number,
         page: number = 1,
     ): Promise<IResponseFollower[]> => {
-        const result = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
-
-        if (!result) {
-            throw Error("No access token provided.");
-        }
-
         try {
+            this.isAuthorized();
+
             const oktokit = new Octokit({
-                auth: result,
+                auth: this.accessToken,
             });
 
             const { data = [] } =

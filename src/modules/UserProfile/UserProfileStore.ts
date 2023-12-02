@@ -24,7 +24,7 @@ export class UserDataStore extends BaseStore {
         this.userProfileService = userProfileService;
 
         when(
-            () => this.appStore.isAuthorized && !this.appStore.isLoading,
+            () => this.appStore.isAuthorized,
             async () => {
                 await this.initAsync();
             },

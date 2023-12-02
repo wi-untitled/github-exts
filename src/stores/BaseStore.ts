@@ -1,4 +1,4 @@
-import { makeObservable, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 
 export class BaseStore {
     public isLoading: boolean;
@@ -6,12 +6,13 @@ export class BaseStore {
     public constructor() {
         makeObservable(this, {
             isLoading: observable,
+            updateLoading: action,
         });
 
         this.isLoading = true;
     }
 
-    public updateLoading = async (isLoading: boolean) => {
+    public updateLoading = (isLoading: boolean) => {
         this.isLoading = isLoading;
     };
 }
