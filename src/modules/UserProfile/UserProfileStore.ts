@@ -1,15 +1,18 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, makeObservable, observable, when } from "mobx";
 import { AppStore } from "src/stores";
-import { AppService } from "src/services";
+import { UserProfileService } from "src/services";
 import { IUserData } from "src/types";
 import { BaseStore } from "src/stores/BaseStore";
 
 export class UserDataStore extends BaseStore {
     private appStore: AppStore;
-    private appService: AppService;
+    public userProfileService: UserProfileService;
     public user: IUserData;
 
-    public constructor(appStore: AppStore, appService: AppService) {
+    public constructor(
+        appStore: AppStore,
+        userProfileService: UserProfileService,
+    ) {
         super();
 
         makeObservable(this, {
@@ -18,10 +21,14 @@ export class UserDataStore extends BaseStore {
         });
 
         this.appStore = appStore;
-        this.appService = appService;
-        this.isLoading = true;
+        this.userProfileService = userProfileService;
 
-        this.initAsync();
+        when(
+            () => this.appStore.isAuthorized && !this.appStore.isLoading,
+            async () => {
+                await this.initAsync();
+            },
+        );
     }
 
     public initAsync = async (): Promise<void> => {
@@ -32,7 +39,7 @@ export class UserDataStore extends BaseStore {
 
             this.updateLoading(true);
 
-            const user = await this.appStore.userData;
+            const user = await this.userProfileService.getUserData();
 
             this.updateUser(user);
             this.updateLoading(false);
@@ -44,5 +51,9 @@ export class UserDataStore extends BaseStore {
 
     public updateUser = (user: IUserData): void => {
         this.user = user;
+    };
+
+    public handleLogout = (): void => {
+        this.appStore.handleLogout();
     };
 }

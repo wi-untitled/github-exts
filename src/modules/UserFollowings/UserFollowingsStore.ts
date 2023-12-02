@@ -1,4 +1,4 @@
-import { observable, makeObservable, action } from "mobx";
+import { observable, makeObservable, action, when } from "mobx";
 import { AppStore } from "src/stores";
 import { IFollower } from "src/types";
 import { BaseStore } from "src/stores/BaseStore";
@@ -32,9 +32,12 @@ export class UserFollowingsStore extends BaseStore {
         this.page = 1;
         this.totalPage = 0;
 
-        if (this.appStore.isAuthorized) {
-            this.initAsyncAuth();
-        }
+        when(
+            () => this.appStore.isAuthorized && !this.appStore.isLoading,
+            async () => {
+                await this.initAsyncAuth();
+            },
+        );
     }
 
     public initAsyncAuth = async (): Promise<void> => {
@@ -43,6 +46,8 @@ export class UserFollowingsStore extends BaseStore {
 
     public getUserFollowings = async (): Promise<void> => {
         try {
+            this.updateLoading(true);
+
             const userFollowings =
                 await this.userFollowingsService.getUserFollowings(
                     this.limit,

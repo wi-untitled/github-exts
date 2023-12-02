@@ -7,6 +7,7 @@ export class AppStore {
     public userData: IUserData;
     public accessToken: string | null;
     public appService: AppService;
+    public isLoading: boolean;
 
     public constructor() {
         makeAutoObservable(this, {
@@ -17,6 +18,7 @@ export class AppStore {
         });
 
         this.accessToken = "";
+        this.isLoading = true;
 
         this.appService = new AppService();
 
@@ -56,11 +58,22 @@ export class AppStore {
         await this.initUserData();
     };
 
+    public updateLoading = (isLoading: boolean) => {
+        this.isLoading = isLoading;
+    };
+
     public initUserData = async (): Promise<void> => {
         if (this.isAuthorized) {
-            const userData = await this.appService.getUserData();
+            try {
+                this.updateLoading(true);
 
-            this.setUserData(userData);
+                const userData = await this.appService.getUserData();
+
+                this.updateLoading(false);
+                this.setUserData(userData);
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
 

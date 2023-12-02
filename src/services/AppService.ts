@@ -1,4 +1,5 @@
-import { HOST, STORAGE_KEYS } from "src/constants";
+import { STORAGE_KEYS } from "src/constants";
+import { Octokit } from "octokit";
 
 export class AppService {
     public constructor() {}
@@ -7,24 +8,17 @@ export class AppService {
         const result = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
         if (!result) {
-            return;
+            throw Error("No access token provided.");
         }
 
         try {
-            const headers = new Headers();
-
-            headers.set("Authorization", `Bearer ${result}`);
-            headers.set("Accept", "application/vnd.github+json");
-            headers.set("X-GitHub-Api-Version", "2022-11-28");
-
-            const response = await fetch(`https://api.github.com/user`, {
-                method: "GET",
-                headers: headers,
+            const oktokit = new Octokit({
+                auth: result,
             });
 
-            const json = await response.json();
+            const { data } = await oktokit.rest.users.getAuthenticated();
 
-            return json;
+            return data;
         } catch (error) {
             console.trace(error);
 
@@ -32,29 +26,22 @@ export class AppService {
         }
     };
 
-    public getUserFollowers = async (login: string) => {
+    public getUserFollowers = async () => {
         const result = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
         if (!result) {
-            return;
+            throw Error("No access token provided.");
         }
 
         try {
-            const headers = new Headers();
+            const oktokit = new Octokit({
+                auth: result,
+            });
 
-            headers.set("Authorization", `Bearer ${result}`);
+            const { data } =
+                await oktokit.rest.users.listFollowersForAuthenticatedUser();
 
-            const response = await fetch(
-                `${HOST}/getUserFollower?login=${login}`,
-                {
-                    method: "GET",
-                    headers: headers,
-                },
-            );
-
-            const json = await response.json();
-
-            return json;
+            return data;
         } catch (error) {
             console.trace(error);
 

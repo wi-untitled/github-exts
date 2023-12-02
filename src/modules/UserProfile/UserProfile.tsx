@@ -10,9 +10,9 @@ import {
 
 function UserProfile() {
     const appStore = useStore("AppStore");
-    const appService = useService("AppService");
+    const userProfileService = useService("UserProfileService");
     const userDataStore = useLocalStore(
-        () => new UserDataStore(appStore, appService),
+        () => new UserDataStore(appStore, userProfileService),
     );
 
     return (
@@ -31,7 +31,7 @@ function UserProfile() {
                         </div>
                     </div>
                     <div
-                        onClick={appStore.handleLogout}
+                        onClick={userDataStore.handleLogout}
                         className="w-8 h-8 cursor-pointer"
                     >
                         <IconLogout />

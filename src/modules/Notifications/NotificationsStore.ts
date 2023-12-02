@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, makeObservable, observable, when } from "mobx";
 import { NotificationsService } from "src/services";
 import { AppStore } from "src/stores";
 import { INotification } from "src/types";
@@ -22,16 +22,23 @@ export class NotificationsStore {
 
         this.notifications = [];
 
-        if (this.appStore.isAuthorized) {
-            this.initAsync();
-        }
+        when(
+            () => this.appStore.isAuthorized && !this.appStore.isLoading,
+            async () => {
+                await this.initAsync();
+            },
+        );
     }
 
     public initAsync = async (): Promise<void> => {
         try {
             const notifications =
                 await this.notificationsService.getNotifications();
+            // const {items} =
+            // await this.notificationsService.getNotificationsCreatedLastWeek();
 
+            // TODO: check when PR is open
+            // this.setNotifications(items);
             this.setNotifications(notifications);
         } catch (error) {
             console.error(error);

@@ -1,9 +1,36 @@
 import dayjs from "dayjs";
 import { STORAGE_KEYS } from "src/constants";
 import { urls } from "src/services/constants";
+import { Octokit } from "octokit";
 
 export class NotificationsService {
     public constructor() {}
+
+    public getNotificationsCreatedLastWeek = async () => {
+        try {
+            const result = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
+
+            if (!result) {
+                throw Error("No Access Key provided.");
+            }
+
+            const oktokit = new Octokit({
+                auth: result,
+            });
+
+            const created = dayjs().subtract(7, "day").format("YYYY-MM-DD");
+
+            const { data } = await oktokit.rest.search.issuesAndPullRequests({
+                q: `user-review-requested:@me+is:pull-request+created:>${created}`,
+            });
+
+            return data;
+        } catch (error) {
+            console.trace(error);
+
+            return [];
+        }
+    };
 
     public getNotifications = async () => {
         const result = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);

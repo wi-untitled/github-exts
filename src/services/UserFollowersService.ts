@@ -1,38 +1,36 @@
 import { STORAGE_KEYS } from "src/constants";
-import { urls } from "src/services/constants";
+import { Octokit } from "octokit";
+import { IResponseFollower } from "src/types";
 
 export class UserFollowersService {
     public constructor() {}
 
-    public getUserFollowers = async (limit: number, page: number = 1) => {
+    public getUserFollowers = async (
+        limit: number,
+        page: number = 1,
+    ): Promise<IResponseFollower[]> => {
         const result = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
         if (!result) {
-            return;
+            throw Error("No access token provided.");
         }
 
         try {
-            const headers = new Headers();
+            const oktokit = new Octokit({
+                auth: result,
+            });
 
-            headers.set("Authorization", `Bearer ${result}`);
-            headers.set("Accept", "application/vnd.github+json");
-            headers.set("X-GitHub-Api-Version", "2022-11-28");
+            const { data = [] } =
+                await oktokit.rest.users.listFollowersForAuthenticatedUser({
+                    page: page,
+                    per_page: limit,
+                });
 
-            const response = await fetch(
-                `${urls.followers.url}?per_page=${limit}&page=${page}`,
-                {
-                    method: "GET",
-                    headers: headers,
-                },
-            );
-
-            const json = await response.json();
-
-            return json;
+            return data;
         } catch (error) {
             console.trace(error);
 
-            return {};
+            return [];
         }
     };
 }

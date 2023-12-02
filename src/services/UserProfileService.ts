@@ -1,16 +1,19 @@
 import { Octokit } from "octokit";
+import { STORAGE_KEYS } from "src/constants";
 
-export class LoginService {
+export class UserProfileService {
     public constructor() {}
 
-    public getUserData = async (token: string) => {
-        if (!token) {
+    public getUserData = async () => {
+        const result = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
+
+        if (!result) {
             return;
         }
 
         try {
             const oktokit = new Octokit({
-                auth: token,
+                auth: result,
             });
 
             const { data } = await oktokit.rest.users.getAuthenticated();
