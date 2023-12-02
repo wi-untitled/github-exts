@@ -1,6 +1,4 @@
 import { IconPullRequest } from "src/components";
-import { makeGithubPullRequestUrl } from "src/utils";
-
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -9,14 +7,14 @@ dayjs.extend(relativeTime);
 export interface IPullRequestProps {
     title: string;
     full_name: string;
-    updated_at: any;
-    url: string;
+    created_at: any;
+    html_url: string;
 }
 
 export function PullRequest({
     title,
-    updated_at,
-    url,
+    created_at,
+    html_url,
     full_name,
 }: IPullRequestProps) {
     return (
@@ -26,7 +24,7 @@ export function PullRequest({
             </div>
             <div className="flex flex-col flex-1 text-left overflow-hidden whitespace-nowrap">
                 <a
-                    href={makeGithubPullRequestUrl(url)}
+                    href={html_url}
                     target="_blank"
                     className="text-sm overflow-ellipsis overflow-hidden hover:underline"
                 >
@@ -38,7 +36,7 @@ export function PullRequest({
             </div>
             <div className="flex flex-col ml-1">
                 <div className="text-xs">
-                    {dayjs(updated_at.split("T")).fromNow()}
+                    {dayjs(created_at.split("T")).fromNow()}
                 </div>
             </div>
         </div>

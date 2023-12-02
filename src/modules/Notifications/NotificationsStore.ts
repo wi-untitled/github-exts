@@ -37,14 +37,10 @@ export class NotificationsStore extends BaseStore {
         try {
             this.updateLoading(true);
 
-            const notifications =
-                await this.notificationsService.getNotifications();
-            // const {items} =
-            // await this.notificationsService.getNotificationsCreatedLastWeek();
+            const { items } =
+                await this.notificationsService.getNotificationsCreatedLastWeek();
 
-            // TODO: check when PR is open
-            // this.setNotifications(items);
-            this.setNotifications(notifications);
+            this.setNotifications(items);
             this.updateLoading(false);
         } catch (error) {
             console.error(error);
@@ -55,13 +51,7 @@ export class NotificationsStore extends BaseStore {
         this.notifications = [...notifications];
     };
 
-    public get reviewRequestedNotifications(): INotification[] {
-        return this.notifications.filter(({ reason }) => {
-            return reason === "review_requested";
-        });
-    }
-
     public get isEmpty(): boolean {
-        return this.reviewRequestedNotifications.length === 0;
+        return this.notifications.length === 0;
     }
 }

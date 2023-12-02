@@ -48,19 +48,11 @@ export interface IResponseFollower {
 
 export type IFollower = IResponseFollower & any;
 
-// Response of notifications
-// https://docs.github.com/en/rest/activity/notifications?apiVersion=2022-11-28#list-notifications-for-the-authenticated-user
 export interface IResponseNotification {
-    updated_at: string;
-    reason: string;
+    created_at: string;
     title: string;
-    subject: {
-        type: string;
-        url: string;
-        title: string;
-    };
-    repository: {
-        full_name: string;
+    pull_request: {
+        html_url: string;
     };
 }
 

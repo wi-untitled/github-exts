@@ -2,6 +2,7 @@ import { observer, useLocalStore } from "mobx-react";
 import { NotificationsStore } from "./NotificationsStore";
 import { useService, useStore } from "src/hooks";
 import { NoResult, PullRequest } from "./components";
+import { makeGithubPullRequestUrl } from "src/utils";
 
 export function Notifications() {
     const appStore = useStore("AppStore");
@@ -18,18 +19,16 @@ export function Notifications() {
                 {notificationsStore.isEmpty ? (
                     <NoResult />
                 ) : (
-                    notificationsStore.reviewRequestedNotifications.map(
-                        ({
-                            updated_at,
-                            subject: { url, title },
-                            repository: { full_name },
-                        }) => {
+                    notificationsStore.notifications.map(
+                        ({ created_at, title, pull_request: { html_url } }) => {
                             return (
                                 <PullRequest
-                                    updated_at={updated_at}
-                                    url={url}
+                                    created_at={created_at}
+                                    html_url={html_url}
                                     title={title}
-                                    full_name={full_name}
+                                    full_name={makeGithubPullRequestUrl(
+                                        html_url,
+                                    )}
                                 />
                             );
                         },
