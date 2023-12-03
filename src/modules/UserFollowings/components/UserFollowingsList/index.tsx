@@ -8,7 +8,12 @@ export interface IUserFollowingsListProps {
 
 export function UserFollowingsList({ followings }: IUserFollowingsListProps) {
     return (
-        <div className="flex flex-col w-full">
+        <div
+            className={`flex flex-col w-full transition-height delay-300 ease-out overflow-hidden`}
+            style={{
+                height: `${2 * followings.length}rem`,
+            }}
+        >
             {followings.map((chunkFollowings) => {
                 let chunk = [];
 

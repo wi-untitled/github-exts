@@ -41,6 +41,7 @@ function UserFollowers() {
             <div className="p-3">
                 <UserFollowersList followers={followers} />
                 <UserFollowersButtonMore
+                    isLoading={userFollowersStore.isLoading}
                     disabled={userFollowersStore.showMore}
                     onClick={userFollowersStore.getMoreUserFollowers}
                 />
