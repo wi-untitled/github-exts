@@ -17,8 +17,8 @@ function AppComponent() {
     console.log(appStore.isLoading);
     return (
         <>
-            <div className="flex flex-col w-full">
-                {appStore.isAuthorized && <UserProfileModule />}
+            {appStore.isAuthorized && <UserProfileModule />}
+            <div className="flex flex-col w-full p-4">
                 {appStore.isAuthorized && <UserFollowersModule />}
                 {appStore.isAuthorized && <UserFollowingsModule />}
                 {appStore.isAuthorized && <NotificationsModule />}

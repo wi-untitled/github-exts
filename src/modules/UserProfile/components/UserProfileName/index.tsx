@@ -1,7 +1,9 @@
+import { FC } from "react";
+
 export interface IUserProfileNameProps {
     name: string;
 }
 
-export function UserProfileName({ name }: IUserProfileNameProps) {
-    return <div>{name}</div>;
-}
+export const UserProfileName: FC<IUserProfileNameProps> = ({ name }) => {
+    return <div className="font-bold">{name}</div>;
+};

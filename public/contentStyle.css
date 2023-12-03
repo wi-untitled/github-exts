@@ -1,5 +1,6 @@
 .github-exts-frame {
   border: 0;
+  border-right: 1px solid #30363d;
   height: 100%;
   left: 0;
   position: fixed;
@@ -8,9 +9,9 @@
   width: 320px;
 }
 
-.github-exts-frame--hidden {
-  transform: translateX(-100%);
-}
+  .github-exts-frame--hidden {
+    transform: translateX(-100%);
+  }
 
 .github-exts-toggler {
   background: rgba(0, 0, 0, 0.5);

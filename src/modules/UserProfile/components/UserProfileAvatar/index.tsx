@@ -3,5 +3,13 @@ export interface IUserProfileAvatarProps {
 }
 
 export function UserProfileAvatar({ url }: IUserProfileAvatarProps) {
-    return <img className="rounded-full h- w-16" src={url} alt="avatar_url" />;
+    return (
+        <div className="h-10 w-10">
+            <img
+                className="rounded-full h-10 w-10"
+                src={url}
+                alt="avatar_url"
+            />
+        </div>
+    );
 }

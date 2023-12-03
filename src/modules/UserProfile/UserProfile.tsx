@@ -16,7 +16,12 @@ function UserProfile() {
     );
 
     return (
-        <div className="w-full flex flex-row space-x-3 items-center">
+        <div
+            className="w-full flex flex-row space-x-3 items-center bg px-4 py-2 bg-gray-100 dark:bg-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800"
+            style={{
+                minHeight: "57px",
+            }}
+        >
             {userProfileStore.isLoading ? (
                 <div>loading</div>
             ) : (
@@ -34,7 +39,7 @@ function UserProfile() {
                     </div>
                     <div
                         onClick={userProfileStore.handleLogout}
-                        className="w-8 h-8 cursor-pointer"
+                        className="w-6 h-8 cursor-pointer text-gray-400 dark:text-gray-500"
                     >
                         <IconLogout />
                     </div>
