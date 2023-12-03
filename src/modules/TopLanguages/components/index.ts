@@ -1,0 +1,1 @@
+export { RacingBarChart } from "./RacingBarChart";

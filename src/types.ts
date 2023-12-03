@@ -57,3 +57,31 @@ export interface IResponseNotification {
 }
 
 export type INotification = IResponseNotification;
+
+export interface ITopLanguage {
+    name: string;
+    color: string;
+    size: number;
+    count: number;
+}
+
+export type ITopLanguageWithMaxSize = ITopLanguage & {
+    maxSize: number;
+};
+
+export interface INode {
+    color: string;
+    name: string;
+}
+
+export interface INodeWithSize {
+    node: INode;
+    size: number;
+}
+
+export interface ILanguage {
+    name: string;
+    languages: {
+        edges: INodeWithSize[];
+    };
+}
