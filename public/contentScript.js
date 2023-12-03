@@ -1,17 +1,5 @@
 function init() {
-    let isOpen = false;
-
     const iframe = document.createElement("iframe");
-
-    // Styles
-    iframe.style.display = "block";
-    iframe.style.position = "fixed";
-    iframe.style.top = "0px";
-    iframe.style.left = "0px";
-    iframe.style.width = "320px";
-    iframe.style.height = "100%";
-    iframe.style.border = "none";
-
     iframe.classList.add("github-exts-frame", "github-exts-frame--hidden");
     iframe.src = chrome.runtime.getURL("contentScript.html");
 
@@ -24,12 +12,7 @@ function init() {
     button.textContent = "Toggle GitHub Exts";
 
     function handleToggle() {
-        iframe.classList.toggle("github-exts-frame--hidden");
-        
-        isOpen = !isOpen;
-
-        sendMessage(isOpen);
-        
+        sendMessage(!iframe.classList.toggle("github-exts-frame--hidden"));
         document.body.addEventListener("click", handleClickOutside);
     }
 
@@ -38,19 +21,16 @@ function init() {
         const isClickInside = event.composedPath().includes(button);
 
         if (!isClickInside) {
-            iframe.classList.toggle("github-exts-frame--hidden");
+            iframe.classList.add("github-exts-frame--hidden");
             document.body.removeEventListener("click", handleClickOutside);
-            
-            isOpen = false;
-
-            sendMessage(isOpen);
+            sendMessage(false);
         }
     }
 
     button.addEventListener("click", handleToggle);
 
     /**
-     * 
+     *
      */
     function sendMessage(isOpen) {
         chrome.runtime.sendMessage({
@@ -61,7 +41,7 @@ function init() {
         });
     }
 
-    /** 
+    /**
      * Appending elements into body
      */
     document.body.appendChild(iframe);
