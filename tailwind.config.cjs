@@ -4,10 +4,14 @@ module.exports = {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     darkMode: "media", // or 'media' or 'class'
     theme: {
-        fontSize: {
-            "1/5xs": ".65rem",
+      fontSize: {
+        '1/5xs': '.65rem',
+      },
+      extend: {
+        transitionProperty: {
+          'height': 'height',
         },
-        extend: {},
+      },
     },
     variants: {
         extend: {},

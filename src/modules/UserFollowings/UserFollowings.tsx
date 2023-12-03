@@ -40,6 +40,7 @@ function UserFollowings() {
             <div className="p-3">
                 <UserFollowingsList followings={followings} />
                 <UserFollowingsButtonMore
+                    isLoading={userFollowingsStore.isLoading}
                     disabled={userFollowingsStore.showMore}
                     onClick={userFollowingsStore.getMoreUserFollowings}
                 />

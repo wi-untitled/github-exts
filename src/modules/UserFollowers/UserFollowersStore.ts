@@ -12,6 +12,7 @@ export class UserFollowersStore extends BaseStore {
     public limit: number;
     public page: number;
     public totalPage: number;
+    public isMoreUserFollowingsLoading: boolean;
 
     public constructor(
         appStore: AppStore,
@@ -19,11 +20,16 @@ export class UserFollowersStore extends BaseStore {
     ) {
         super();
 
-        makeObservable(this, {
-            followers: observable,
-            getUserFollowers: action,
-            updateFollowers: action,
-        });
+        makeObservable<UserFollowersStore, "updateMoreUserFollowingsLoading">(
+            this,
+            {
+                isMoreUserFollowingsLoading: observable,
+                followers: observable,
+                getUserFollowers: action,
+                updateFollowers: action,
+                updateMoreUserFollowingsLoading: action,
+            },
+        );
 
         this.appStore = appStore;
         this.userFollowersService = userFollowersService;
@@ -31,6 +37,7 @@ export class UserFollowersStore extends BaseStore {
         this.limit = CHUNK_LIMIT;
         this.page = 1;
         this.totalPage = 0;
+        this.isMoreUserFollowingsLoading = false;
 
         when(
             () => this.appStore.isAuthorized && !this.appStore.isLoading,
@@ -42,6 +49,12 @@ export class UserFollowersStore extends BaseStore {
 
     protected initAsyncAuth = async (): Promise<void> => {
         await this.getUserFollowers();
+    };
+
+    protected updateMoreUserFollowingsLoading = (
+        isMoreUserFollowingsLoading: boolean,
+    ): void => {
+        this.isMoreUserFollowingsLoading = isMoreUserFollowingsLoading;
     };
 
     public getUserFollowers = async (): Promise<void> => {
@@ -76,6 +89,8 @@ export class UserFollowersStore extends BaseStore {
             if (this.page < this.totalPage) {
                 this.page = this.page + 1;
 
+                this.updateMoreUserFollowingsLoading(true);
+
                 const userFollowers =
                     await this.userFollowersService.getUserFollowers(
                         this.limit,
@@ -83,6 +98,7 @@ export class UserFollowersStore extends BaseStore {
                     );
 
                 this.updateFollowers(userFollowers);
+                this.updateMoreUserFollowingsLoading(false);
             }
         } catch (error) {
             console.error(error);

@@ -2,11 +2,13 @@ import clsx from "clsx";
 
 export interface IUserFollowingsButtonMoreProps {
     disabled: boolean;
+    isLoading: boolean;
     onClick: () => void;
 }
 
 export function UserFollowingsButtonMore({
     disabled,
+    isLoading,
     onClick,
 }: IUserFollowingsButtonMoreProps) {
     return (
@@ -18,7 +20,7 @@ export function UserFollowingsButtonMore({
             onClick={onClick}
             disabled={!disabled}
         >
-            More
+            {isLoading ? <span>Loading...</span> : <span>More</span>}
         </button>
     );
 }
