@@ -3,7 +3,7 @@ export function IconLogout() {
         <div className="w-full h-full">
             <svg width="100%" height="100%" fill="none" viewBox="0 0 24 24">
                 <g
-                    stroke="#323232"
+                    stroke="currentColor"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"

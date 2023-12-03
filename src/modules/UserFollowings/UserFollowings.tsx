@@ -6,10 +6,11 @@ import { chunk } from "lodash";
 import {
     UserFollowingsButtonMore,
     UserFollowingsList,
-    UserFollowingsTitle,
 } from "src/modules/UserFollowings/components";
 import { CHUNK_LIMIT } from "src/modules/UserFollowings/constants";
 import { makeGithubProfileUrl } from "src/utils";
+import { Widget } from "src/components/Widget/Widget";
+import { WidgetHeaderLink } from "src/components/Widget/WidgetHeaderLink/WidgetHeaderLink";
 
 function UserFollowings() {
     const appStore = useStore("AppStore");
@@ -23,35 +24,27 @@ function UserFollowings() {
     }, [userFollowingsStore.followings]);
 
     return (
-        <div className="w-full flex flex-col mt-3 mb-3">
-            {userFollowingsStore.isLoading ? (
-                <div>loading</div>
-            ) : (
-                <>
-                    <div className="flex flex-row justify-between">
-                        <UserFollowingsTitle
-                            count={appStore.userData.following}
-                        />
-                        <a
-                            className="text-md"
-                            target="_blank"
-                            href={`${makeGithubProfileUrl(
-                                appStore.userData.login,
-                            )}?tab=following`}
-                        >
-                            Open all
-                        </a>
-                    </div>
-                    <UserFollowingsList followings={followings} />
-                    <div className="mt-2">
-                        <UserFollowingsButtonMore
-                            disabled={userFollowingsStore.showMore}
-                            onClick={userFollowingsStore.getMoreUserFollowings}
-                        />
-                    </div>
-                </>
-            )}
-        </div>
+        <Widget
+            title={`Followings • ${appStore.userData.following}`}
+            headerRight={
+                <WidgetHeaderLink
+                    href={`${makeGithubProfileUrl(
+                        appStore.userData.login,
+                    )}?tab=followers`}
+                >
+                    Open all
+                </WidgetHeaderLink>
+            }
+            minHeight="111px"
+        >
+            <div className="p-3">
+                <UserFollowingsList followings={followings} />
+                <UserFollowingsButtonMore
+                    disabled={userFollowingsStore.showMore}
+                    onClick={userFollowingsStore.getMoreUserFollowings}
+                />
+            </div>
+        </Widget>
     );
 }
 

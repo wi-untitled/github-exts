@@ -3,6 +3,7 @@ import { NotificationsRequstedChangesStore } from "./NotificationsRequstedChange
 import { useService, useStore } from "src/hooks";
 import { NoResult, RequestedChangesPullRequest } from "./components";
 import { makeGithubPullRequestUrl } from "src/utils";
+import { Widget } from "src/components/Widget/Widget";
 
 export function NotificationsRequstedChanges() {
     const appStore = useStore("AppStore");
@@ -16,9 +17,7 @@ export function NotificationsRequstedChanges() {
     );
 
     return (
-        <div className="my-2">
-            <div>Requested Changes for last week</div>
-            <div className="h-px w-full bg-gray-400 my-2" />
+        <Widget title="Requested Changes for the last week" minHeight="93px">
             <div className="max-h-32 overflow-y-scroll no-scrollbar">
                 {notificationsStore.isLoading && <div>loading</div>}
                 {notificationsStore.isEmpty && !notificationsStore.isLoading ? (
@@ -41,7 +40,7 @@ export function NotificationsRequstedChanges() {
                     )
                 )}
             </div>
-        </div>
+        </Widget>
     );
 }
 

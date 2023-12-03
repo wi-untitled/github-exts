@@ -3,6 +3,7 @@ import { NotificationsStore } from "./NotificationsStore";
 import { useService, useStore } from "src/hooks";
 import { NoResult, PullRequest } from "./components";
 import { makeGithubPullRequestUrl } from "src/utils";
+import { Widget } from "src/components/Widget/Widget";
 
 export function Notifications() {
     const appStore = useStore("AppStore");
@@ -12,9 +13,7 @@ export function Notifications() {
     );
 
     return (
-        <div className="my-2">
-            <div>Requested Pull Request for last week</div>
-            <div className="h-px w-full bg-gray-400 my-2" />
+        <Widget title="Requested PRs for the last week" minHeight="93px">
             <div className="max-h-32 overflow-y-scroll no-scrollbar">
                 {notificationsStore.isLoading && <div>loading</div>}
                 {notificationsStore.isEmpty && !notificationsStore.isLoading ? (
@@ -37,7 +36,7 @@ export function Notifications() {
                     )
                 )}
             </div>
-        </div>
+        </Widget>
     );
 }
 
