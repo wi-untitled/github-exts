@@ -17,9 +17,9 @@ export class AppService {
     };
 
     public getUserData = async () => {
-        this.isAuthorized();
-
         try {
+            this.isAuthorized();
+
             const oktokit = new Octokit({
                 auth: this.accessToken,
             });

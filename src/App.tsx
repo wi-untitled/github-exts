@@ -10,11 +10,12 @@ import {
     LoginModule,
     NotificationsModule,
     NotificationsRequstedChangesModule,
+    TopLanguagesModule,
 } from "./modules";
 
 function AppComponent() {
     const appStore = useStore("AppStore");
-    console.log(appStore.isLoading);
+
     return (
         <>
             {appStore.isAuthorized && <UserProfileModule />}
@@ -25,6 +26,7 @@ function AppComponent() {
                 {appStore.isAuthorized && (
                     <NotificationsRequstedChangesModule />
                 )}
+                {appStore.isAuthorized && <TopLanguagesModule />}
                 {!appStore.isAuthorized && <LoginModule />}
             </div>
         </>

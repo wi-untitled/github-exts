@@ -1,0 +1,12 @@
+/** 
+ * Color text for labels within top languages
+ */
+ .topLanguageLabel {
+    fill: rgba(255, 255, 255, 0.87);
+}
+
+@media (prefers-color-scheme: light) {
+    .topLanguageLabel {
+      fill: #213547;
+    }
+  }

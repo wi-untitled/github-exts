@@ -33,7 +33,7 @@ export function useLogin({
         } catch (error) {
             console.error(error);
         }
-    }, [onButtonClickSuccess, accessToken]);
+    }, [onButtonClickSuccess, accessToken, loginService]);
 
     return {
         accessToken: accessToken,
