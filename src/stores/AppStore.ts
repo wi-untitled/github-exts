@@ -34,6 +34,7 @@ export class AppStore extends BaseStore {
         this.accessToken = "";
         this.isOpen = false;
         this.appService = new AppService();
+        this.userData = {};
 
         this.init();
 
