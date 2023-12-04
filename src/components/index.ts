@@ -1,1 +1,1 @@
-export { IconPullRequest, IconLogout } from "./Icon";
+export { IconPullRequest, IconLogout, IconRequestedChanges } from "./Icon";

@@ -9,6 +9,7 @@ import {
     UserFollowingsModule,
     LoginModule,
     NotificationsModule,
+    NotificationsRequstedChangesModule,
 } from "./modules";
 
 function AppComponent() {
@@ -21,6 +22,9 @@ function AppComponent() {
                 {appStore.isAuthorized && <UserFollowersModule />}
                 {appStore.isAuthorized && <UserFollowingsModule />}
                 {appStore.isAuthorized && <NotificationsModule />}
+                {appStore.isAuthorized && (
+                    <NotificationsRequstedChangesModule />
+                )}
                 {!appStore.isAuthorized && <LoginModule />}
             </div>
         </>
