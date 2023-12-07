@@ -12,7 +12,7 @@ function init() {
     button.textContent = "Toggle GitHub Exts";
 
     function handleToggle() {
-        sendMessage(!iframe.classList.toggle("github-exts-frame--hidden"));
+        sendMessageIframeToggle(!iframe.classList.toggle("github-exts-frame--hidden"));
         document.body.addEventListener("click", handleClickOutside);
     }
 
@@ -23,22 +23,46 @@ function init() {
         if (!isClickInside) {
             iframe.classList.add("github-exts-frame--hidden");
             document.body.removeEventListener("click", handleClickOutside);
-            sendMessage(false);
+            sendMessageIframeToggle(false);
         }
     }
 
     button.addEventListener("click", handleToggle);
 
     /**
-     *
+     * Send event about iframe status visible
      */
-    function sendMessage(isOpen) {
+    function sendMessageIframeToggle(isOpen) {
         chrome.runtime.sendMessage({
             action: "IFRAME_TOGGLE",
             data: {
                 isOpen: isOpen,
             },
         });
+    }
+
+    /**
+     * Register message from application
+     */
+    window.addEventListener('message', event => {
+        if (event.source && event.origin === `chrome-extension://${chrome.runtime.id}`) {
+                const { data } = event;
+                
+                switch(data.action) {
+                    case "BROADCAST": {
+                        handleBroadcast();
+                        return;
+                    }
+                    default: {
+                        return;
+                    }
+                }
+            }
+        }   
+    );
+
+    function handleBroadcast() {
+        console.log('handleBroadcast is called');
     }
 
     /**
