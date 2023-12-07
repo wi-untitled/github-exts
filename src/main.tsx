@@ -4,11 +4,12 @@ import { Provider } from "mobx-react";
 import App from "src/App.tsx";
 import createGlobalStores from "src/stores/utils/createGlobalStores";
 import createGlobalServices from "src/services/utils/createGlobalServices";
+import { getTransport } from "src/transport";
 
 import "./index.css";
 
 export async function initialize(): Promise<any> {
-    const transport = {};
+    const transport = getTransport();
 
     const stores = createGlobalStores(transport);
     const services = createGlobalServices();
