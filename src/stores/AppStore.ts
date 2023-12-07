@@ -9,7 +9,8 @@ import {
 import { STORAGE_KEYS } from "src/constants";
 import { AppService } from "src/services";
 import { IUserData } from "src/types";
-import { BaseStore } from "./BaseStore";
+import { BaseStore } from "src/stores/BaseStore";
+import { Transport, IFRAME_TOGGLE_EVENT } from "src/transport";
 
 export class AppStore extends BaseStore {
     public userData: IUserData;
@@ -17,8 +18,8 @@ export class AppStore extends BaseStore {
     public appService: AppService;
     public isOpen: boolean;
 
-    public constructor() {
-        super();
+    public constructor(transport: Transport) {
+        super(transport);
 
         makeAutoObservable<AppStore, "updateIsOpen" | "updateLoading">(this, {
             isLoading: override,
@@ -68,6 +69,13 @@ export class AppStore extends BaseStore {
         if (action === "IFRAME_TOGGLE") {
             this.updateIsOpen(isOpen);
         }
+        // TODO: test message
+        this.transport.sendMessage({
+            action: "BROADCAST",
+            data: {
+                test: 42,
+            },
+        });
     };
 
     protected init = (): void => {
@@ -88,7 +96,7 @@ export class AppStore extends BaseStore {
     };
 
     protected registerRuntimeMessageHandler = (): void => {
-        chrome.runtime.onMessage.addListener(this.handleStateIframe);
+        this.transport.onValue<IFRAME_TOGGLE_EVENT>(this.handleStateIframe);
     };
 
     protected initAsync = async (): Promise<void> => {
