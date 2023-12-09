@@ -1,6 +1,8 @@
 import { useState, useMemo, useCallback } from "react";
-import { useService } from "./useService";
 import { isEmpty } from "lodash";
+import { useNavigate } from "react-router-dom";
+import { MainScreen } from "src/screens";
+import { useService } from "src/hooks/useService";
 
 export function useLogin({
     onButtonClickSuccess,
@@ -9,7 +11,7 @@ export function useLogin({
 }) {
     const [accessToken, setAccessToken] = useState<string>("");
     const loginService = useService("LoginService");
-
+    const navigate = useNavigate();
     const isActionDisabled = useMemo(() => {
         return isEmpty(accessToken);
     }, [accessToken]);
@@ -29,11 +31,13 @@ export function useLogin({
              */
             await loginService.getUserData(accessToken);
 
+            navigate(MainScreen.routeName);
+
             onButtonClickSuccess(accessToken);
         } catch (error) {
             console.error(error);
         }
-    }, [onButtonClickSuccess, accessToken, loginService]);
+    }, [onButtonClickSuccess, accessToken, navigate, loginService]);
 
     return {
         accessToken: accessToken,
