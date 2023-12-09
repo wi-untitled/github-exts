@@ -3,9 +3,6 @@
   "name": "github-exts",
   "version": "1.0.1",
   "key": "fieeefkagleofippeagmkffbbbjgokgo",
-  "action": {
-    "default_popup": "popup.html"
-  },
   "background": {
     "service_worker": "background.js"
   },

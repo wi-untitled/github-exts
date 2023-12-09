@@ -1,36 +1,28 @@
 import { observer } from "mobx-react";
-import { useStore } from "src/hooks";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { LoginScreen, MainScreen } from "src/screens";
+import { ProtectedRoute } from "./screens/components";
 
 import "./App.css";
 
-import {
-    UserProfileModule,
-    UserFollowersModule,
-    UserFollowingsModule,
-    LoginModule,
-    NotificationsModule,
-    NotificationsRequstedChangesModule,
-    TopLanguagesModule,
-} from "./modules";
+const router = createBrowserRouter(
+    [
+        {
+            path: MainScreen.routeName,
+            element: <ProtectedRoute element={<MainScreen />} />,
+        },
+        {
+            path: LoginScreen.routeName,
+            element: <LoginScreen />,
+        },
+    ],
+    {
+        basename: "/contentScript.html",
+    },
+);
 
 function AppComponent() {
-    const appStore = useStore("AppStore");
-
-    return (
-        <>
-            {appStore.isAuthorized && <UserProfileModule />}
-            <div className="flex flex-col w-full p-4">
-                {appStore.isAuthorized && <UserFollowersModule />}
-                {appStore.isAuthorized && <UserFollowingsModule />}
-                {appStore.isAuthorized && <NotificationsModule />}
-                {appStore.isAuthorized && (
-                    <NotificationsRequstedChangesModule />
-                )}
-                {appStore.isAuthorized && <TopLanguagesModule />}
-                {!appStore.isAuthorized && <LoginModule />}
-            </div>
-        </>
-    );
+    return <RouterProvider router={router} />;
 }
 
 const App = observer(AppComponent);
