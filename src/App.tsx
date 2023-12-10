@@ -2,6 +2,7 @@ import { observer } from "mobx-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { LoginScreen, MainScreen } from "src/screens";
 import { ProtectedRoute } from "./screens/components";
+import { Assets } from "src/components";
 
 import "./App.css";
 
@@ -22,7 +23,12 @@ const router = createBrowserRouter(
 );
 
 function AppComponent() {
-    return <RouterProvider router={router} />;
+    return (
+        <>
+            <Assets />
+            <RouterProvider router={router} />
+        </>
+    );
 }
 
 const App = observer(AppComponent);

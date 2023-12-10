@@ -1,1 +1,2 @@
-export { IconPullRequest, IconLogout, IconRequestedChanges } from "./Icon";
+export { Icon } from "./Icon";
+export { Assets } from "./Assets";

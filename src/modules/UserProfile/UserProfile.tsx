@@ -1,5 +1,5 @@
 import { observer, useLocalStore } from "mobx-react";
-import { IconLogout } from "src/components";
+import { Icon } from "src/components";
 import { useService, useStore } from "src/hooks";
 import { UserProfileStore } from "src/modules/UserProfile/UserProfileStore";
 import {
@@ -39,9 +39,12 @@ function UserProfile() {
                     </div>
                     <div
                         onClick={userProfileStore.handleLogout}
-                        className="w-6 h-8 cursor-pointer text-gray-400 dark:text-gray-500"
+                        className="cursor-pointer"
                     >
-                        <IconLogout />
+                        <Icon
+                            icon="logout"
+                            className="w-6 h-6 text-gray-400 dark:text-gray-500"
+                        />
                     </div>
                 </>
             )}
