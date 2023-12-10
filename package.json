@@ -1,83 +1,83 @@
 {
-  "name": "github-exts",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "prepare": "./node_modules/.bin/husky install",
-    "dev": "vite",
-    "build-server": "node --loader ts-node/esm ./src/server.ts",
-    "build": "tsc && vite build",
-    "build-extentions": "tsc && vite build",
-    "build:watch": "vite build --watch --mode=development",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --config .eslintrc.cjs",
-    "preview": "vite preview",
-    "commit": "git-cz",
-    "format": "prettier --write src/**/*.{ts,tsx}",
-    "test": "vitest watch",
-    "test:unit": "vitest",
-    "test:no-watch": "vitest run",
-    "test:coverage": "vitest run --coverage"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+    "name": "github-exts",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "prepare": "./node_modules/.bin/husky install",
+        "dev": "vite",
+        "build-server": "node --loader ts-node/esm ./src/server.ts",
+        "build": "tsc && vite build",
+        "build-extentions": "tsc && vite build",
+        "build:watch": "vite build --watch --mode=development",
+        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --config .eslintrc.cjs",
+        "preview": "vite preview",
+        "commit": "git-cz",
+        "format": "prettier --write src/**/*.{ts,tsx}",
+        "test": "vitest watch",
+        "test:unit": "vitest",
+        "test:no-watch": "vitest run",
+        "test:coverage": "vitest run --coverage"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "npm run lint",
+            "npm run format"
+        ]
+    },
+    "dependencies": {
+        "@types/lodash": "^4.14.202",
+        "body-parser": "^1.20.2",
+        "clsx": "^2.0.0",
+        "cors": "^2.8.5",
+        "d3": "^7.8.5",
+        "dayjs": "^1.11.10",
+        "express": "^4.18.2",
+        "lodash": "^4.17.21",
+        "mobx": "^6.7.0",
+        "mobx-react": "^7.6.0",
+        "morgan": "^1.10.0",
+        "node-fetch": "^3.3.2",
+        "octokit": "^3.1.2",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.20.1",
+        "ts-node": "^10.9.1"
+    },
+    "devDependencies": {
+        "@types/chrome": "^0.0.253",
+        "@types/cors": "^2.8.17",
+        "@types/d3": "^7.4.3",
+        "@types/express": "^4.17.21",
+        "@types/morgan": "^1.9.9",
+        "@types/react": "^18.2.37",
+        "@types/react-dom": "^18.2.15",
+        "@typescript-eslint/eslint-plugin": "^6.10.0",
+        "@typescript-eslint/parser": "^6.10.0",
+        "@vitejs/plugin-react": "^4.2.0",
+        "@vitest/coverage-v8": "^0.34.6",
+        "@vitest/ui": "^0.34.3",
+        "autoprefixer": "^9.8.8",
+        "c8": "^7.12.0",
+        "commitizen": "^4.2.5",
+        "cz-conventional-changelog": "^3.3.0",
+        "eslint": "^8.53.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-prettier": "^5.0.1",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.4.4",
+        "husky": "^8.0.2",
+        "lint-staged": "^13.2.0",
+        "postcss": "^7.0.39",
+        "prettier": "^3.1.0",
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+        "typescript": "^5.2.2",
+        "vite": "^5.0.0",
+        "vitest": "^0.34.2"
     }
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "npm run lint",
-      "npm run format"
-    ]
-  },
-  "dependencies": {
-    "@types/lodash": "^4.14.202",
-    "body-parser": "^1.20.2",
-    "clsx": "^2.0.0",
-    "cors": "^2.8.5",
-    "d3": "^7.8.5",
-    "dayjs": "^1.11.10",
-    "express": "^4.18.2",
-    "lodash": "^4.17.21",
-    "mobx": "^6.7.0",
-    "mobx-react": "^7.6.0",
-    "morgan": "^1.10.0",
-    "node-fetch": "^3.3.2",
-    "octokit": "^3.1.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.1",
-    "ts-node": "^10.9.1"
-  },
-  "devDependencies": {
-    "@types/chrome": "^0.0.253",
-    "@types/cors": "^2.8.17",
-    "@types/d3": "^7.4.3",
-    "@types/express": "^4.17.21",
-    "@types/morgan": "^1.9.9",
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "@vitejs/plugin-react": "^4.2.0",
-    "@vitest/coverage-v8": "^0.34.6",
-    "@vitest/ui": "^0.34.3",
-    "autoprefixer": "^9.8.8",
-    "c8": "^7.12.0",
-    "commitizen": "^4.2.5",
-    "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.53.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.4",
-    "husky": "^8.0.2",
-    "lint-staged": "^13.2.0",
-    "postcss": "^7.0.39",
-    "prettier": "^3.1.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0",
-    "vitest": "^0.34.2"
-  }
 }
