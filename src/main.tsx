@@ -4,6 +4,7 @@ import { Provider } from "mobx-react";
 import App from "src/App.tsx";
 import createGlobalStores from "src/stores/utils/createGlobalStores";
 import createGlobalServices from "src/services/utils/createGlobalServices";
+import { FeatureFlagProvider, defaultState } from "src/core";
 
 import "./index.css";
 
@@ -47,7 +48,9 @@ export function RenderApp() {
     return initialized ? (
         <Provider stores={ref.current.stores} services={ref.current.services}>
             <React.StrictMode>
-                <App />
+                <FeatureFlagProvider initialFeatureFlags={defaultState}>
+                    <App />
+                </FeatureFlagProvider>
             </React.StrictMode>
         </Provider>
     ) : (
