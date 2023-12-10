@@ -11,6 +11,7 @@ import { CHUNK_LIMIT } from "src/modules/UserFollowers/constants";
 import { makeGithubProfileUrl } from "src/utils";
 import { Widget } from "src/components/Widget/Widget";
 import { WidgetHeaderLink } from "src/components/Widget/WidgetHeaderLink/WidgetHeaderLink";
+import { useTranslation } from "react-i18next";
 
 function UserFollowers() {
     const appStore = useStore("AppStore");
@@ -18,6 +19,7 @@ function UserFollowers() {
     const userFollowersStore = useLocalStore(
         () => new UserFollowersStore(appStore, userFollowersService),
     );
+    const { t } = useTranslation();
 
     // TODO: make custom use with Generic
     const followers = useMemo(() => {
@@ -26,14 +28,16 @@ function UserFollowers() {
 
     return (
         <Widget
-            title={`Followers • ${appStore.userData.followers}`}
+            title={`${t("userFollowers.title")} • ${
+                appStore.userData.followers
+            }`}
             headerRight={
                 <WidgetHeaderLink
                     href={`${makeGithubProfileUrl(
                         appStore.userData.login,
                     )}?tab=followers`}
                 >
-                    Open all
+                    {t("userFollowers.openAll")}
                 </WidgetHeaderLink>
             }
             minHeight="111px"

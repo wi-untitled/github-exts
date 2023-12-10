@@ -1,11 +1,11 @@
 import { observer } from "mobx-react";
 import { Button, Input } from "src/modules/Login/components";
-import { DEFAULT_INPUT_PLACEHOLDER } from "src/modules/Login/constants";
 import { useLogin, useStore } from "src/hooks";
+import { useTranslation } from "react-i18next";
 
 export function Login() {
     const appStore = useStore("AppStore");
-
+    const { t } = useTranslation();
     const {
         accessToken,
         isActionDisabled,
@@ -21,7 +21,7 @@ export function Login() {
                 onChange={handleInputChange}
                 defaultValue={accessToken}
                 value={accessToken}
-                placeholder={DEFAULT_INPUT_PLACEHOLDER}
+                placeholder={t("login.placeholder")}
             />
             <Button isDisabled={isActionDisabled} onClick={handleButtonClick} />
         </div>

@@ -7,6 +7,7 @@ import createGlobalServices from "src/services/utils/createGlobalServices";
 import { FeatureFlagProvider, defaultState } from "src/core";
 import { getTransport } from "src/transport";
 
+import "src/i18n/config";
 import "./index.css";
 
 export async function initialize(): Promise<any> {

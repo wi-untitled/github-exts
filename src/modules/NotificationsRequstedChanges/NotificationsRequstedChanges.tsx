@@ -4,6 +4,7 @@ import { useService, useStore } from "src/hooks";
 import { NoResult, RequestedChangesPullRequest } from "./components";
 import { makeGithubPullRequestUrl } from "src/utils";
 import { Widget } from "src/components/Widget/Widget";
+import { useTranslation } from "react-i18next";
 
 export function NotificationsRequstedChanges() {
     const appStore = useStore("AppStore");
@@ -15,9 +16,13 @@ export function NotificationsRequstedChanges() {
                 notificationsService,
             ),
     );
+    const { t } = useTranslation();
 
     return (
-        <Widget title="Requested Changes for the last week" minHeight="93px">
+        <Widget
+            title={t("notificationsRequestedChanges.title")}
+            minHeight="93px"
+        >
             <div className="max-h-32 overflow-y-scroll no-scrollbar">
                 {notificationsStore.isLoading && <div>loading</div>}
                 {notificationsStore.isEmpty && !notificationsStore.isLoading ? (
