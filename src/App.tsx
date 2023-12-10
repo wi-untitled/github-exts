@@ -1,6 +1,6 @@
 import { observer } from "mobx-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { LoginScreen, MainScreen } from "src/screens";
+import { LoginScreen, MainScreen, SettingsScreen } from "src/screens";
 import { ProtectedRoute } from "./screens/components";
 import { Assets } from "src/components";
 
@@ -15,6 +15,10 @@ const router = createBrowserRouter(
         {
             path: LoginScreen.routeName,
             element: <LoginScreen />,
+        },
+        {
+            path: SettingsScreen.routeName,
+            element: <ProtectedRoute element={<SettingsScreen />} />,
         },
     ],
     {
