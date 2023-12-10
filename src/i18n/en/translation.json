@@ -1,0 +1,27 @@
+{
+    "userFollowings": {
+        "title": "Followings",
+        "openAll": "Open all",
+        "more": "More"
+    },
+    "userFollowers": {
+        "title": "Followers",
+        "openAll": "Open all",
+        "more": "More"
+    },
+    "topLanguages": {
+        "title": "Top 5 Languages"
+    },
+    "notificationsRequestedChanges": {
+        "title": "Requested Changes for the last week",
+        "empty": "No requested pull requests"
+    },
+    "notifications": {
+        "title": "Requested PRs for the last week",
+        "empty": "No requested pull requests"
+    },
+    "login": {
+        "btnLogin": "Setup access key",
+        "placeholder": "Insert your access token"
+    }
+}

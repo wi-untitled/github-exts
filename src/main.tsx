@@ -6,6 +6,7 @@ import createGlobalStores from "src/stores/utils/createGlobalStores";
 import createGlobalServices from "src/services/utils/createGlobalServices";
 import { FeatureFlagProvider, defaultState } from "src/core";
 
+import "src/i18n/config";
 import "./index.css";
 
 export async function initialize(): Promise<any> {

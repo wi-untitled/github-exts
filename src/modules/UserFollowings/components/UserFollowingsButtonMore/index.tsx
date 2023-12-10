@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 export interface IUserFollowingsButtonMoreProps {
     disabled: boolean;
@@ -11,6 +12,8 @@ export function UserFollowingsButtonMore({
     isLoading,
     onClick,
 }: IUserFollowingsButtonMoreProps) {
+    const { t } = useTranslation();
+
     return (
         <button
             className={clsx({
@@ -20,7 +23,11 @@ export function UserFollowingsButtonMore({
             onClick={onClick}
             disabled={!disabled}
         >
-            {isLoading ? <span>Loading...</span> : <span>More</span>}
+            {isLoading ? (
+                <span>Loading...</span>
+            ) : (
+                <span>{t("userFollowings.more")}</span>
+            )}
         </button>
     );
 }

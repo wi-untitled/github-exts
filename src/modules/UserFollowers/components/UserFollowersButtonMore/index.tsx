@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 export interface IUserFollowersButtonMoreProps {
     disabled: boolean;
     isLoading: boolean;
@@ -9,9 +11,15 @@ export function UserFollowersButtonMore({
     isLoading,
     onClick,
 }: IUserFollowersButtonMoreProps) {
+    const { t } = useTranslation();
+
     return (
         <button onClick={onClick} disabled={!disabled}>
-            {isLoading ? <span>Loading...</span> : <span>More</span>}
+            {isLoading ? (
+                <span>Loading...</span>
+            ) : (
+                <span>{t("userFollowers.more")}</span>
+            )}
         </button>
     );
 }

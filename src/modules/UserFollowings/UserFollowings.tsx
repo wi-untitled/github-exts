@@ -11,6 +11,7 @@ import { CHUNK_LIMIT } from "src/modules/UserFollowings/constants";
 import { makeGithubProfileUrl } from "src/utils";
 import { Widget } from "src/components/Widget/Widget";
 import { WidgetHeaderLink } from "src/components/Widget/WidgetHeaderLink/WidgetHeaderLink";
+import { useTranslation } from "react-i18next";
 
 function UserFollowings() {
     const appStore = useStore("AppStore");
@@ -19,20 +20,24 @@ function UserFollowings() {
         () => new UserFollowingsStore(appStore, userFollowingsService),
     );
 
+    const { t } = useTranslation();
+
     const followings = useMemo(() => {
         return chunk(userFollowingsStore.followings, CHUNK_LIMIT);
     }, [userFollowingsStore.followings]);
 
     return (
         <Widget
-            title={`Followings • ${appStore.userData.following}`}
+            title={`${t("userFollowings.title")} • ${
+                appStore.userData.following
+            }`}
             headerRight={
                 <WidgetHeaderLink
                     href={`${makeGithubProfileUrl(
                         appStore.userData.login,
                     )}?tab=followers`}
                 >
-                    Open all
+                    {t("userFollowings.openAll")}
                 </WidgetHeaderLink>
             }
             minHeight="111px"

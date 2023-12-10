@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 export interface IButtonProps {
     onClick: () => void;
@@ -6,6 +7,8 @@ export interface IButtonProps {
 }
 
 export function Button({ onClick, isDisabled }: IButtonProps) {
+    const { t } = useTranslation();
+
     return (
         <button
             disabled={isDisabled}
@@ -14,7 +17,7 @@ export function Button({ onClick, isDisabled }: IButtonProps) {
             })}
             onClick={onClick}
         >
-            Setup access key
+            {t("login.btnLogin")}
         </button>
     );
 }
