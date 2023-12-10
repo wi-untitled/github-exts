@@ -7,6 +7,9 @@ import {
     UserProfileName,
     UserProfileLogin,
 } from "src/modules/UserProfile/components";
+import { FeatureFlag } from "src/core";
+import { useNavigate } from "react-router-dom";
+import { SettingsScreen } from "src/screens";
 
 function UserProfile() {
     const appStore = useStore("AppStore");
@@ -14,6 +17,11 @@ function UserProfile() {
     const userProfileStore = useLocalStore(
         () => new UserProfileStore(appStore, userProfileService),
     );
+    const navigate = useNavigate();
+
+    const handleRedirectToSettingPageCallback = () => {
+        navigate(SettingsScreen.routeName);
+    };
 
     return (
         <div
@@ -37,14 +45,27 @@ function UserProfile() {
                             />
                         </div>
                     </div>
-                    <div
-                        onClick={userProfileStore.handleLogout}
-                        className="cursor-pointer"
-                    >
-                        <Icon
-                            icon="logout"
-                            className="w-6 h-6 text-gray-400 dark:text-gray-500"
-                        />
+                    <div className="flex flex-row space-x-2">
+                        <FeatureFlag name="settingsPage">
+                            <span
+                                className="cursor-pointer"
+                                onClick={handleRedirectToSettingPageCallback}
+                            >
+                                <Icon
+                                    icon="settings"
+                                    className="w-6 h-6 text-gray-400 dark:text-gray-500"
+                                />
+                            </span>
+                        </FeatureFlag>
+                        <span
+                            className="cursor-pointer"
+                            onClick={userProfileStore.handleLogout}
+                        >
+                            <Icon
+                                icon="logout"
+                                className="w-6 h-6 text-gray-400 dark:text-gray-500"
+                            />
+                        </span>
                     </div>
                 </>
             )}

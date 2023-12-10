@@ -1,4 +1,9 @@
-export const icons = ["pull-request", "changes-request", "logout"] as const;
+export const icons = [
+    "pull-request",
+    "changes-request",
+    "logout",
+    "settings",
+] as const;
 
 export interface IIconProps {
     icon: (typeof icons)[number];
