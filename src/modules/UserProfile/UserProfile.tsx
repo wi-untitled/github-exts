@@ -1,5 +1,6 @@
 import { observer, useLocalStore } from "mobx-react";
 import { Icon } from "src/components";
+import Spinner from "src/components/Spinner";
 import { useService, useStore } from "src/hooks";
 import { UserProfileStore } from "src/modules/UserProfile/UserProfileStore";
 import {
@@ -25,15 +26,13 @@ function UserProfile() {
 
     return (
         <div
-            className="w-full flex flex-row space-x-3 items-center bg px-4 py-2 bg-gray-100 dark:bg-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800"
-            style={{
-                minHeight: "57px",
-            }}
+            className="w-full bg px-4 py-2 bg-gray-100 dark:bg-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 relative"
+            style={{ minHeight: "57px" }}
         >
             {userProfileStore.isLoading ? (
-                <div>loading</div>
+                <Spinner absoluteFill />
             ) : (
-                <>
+                <div className="flex flex-row space-x-3 items-center">
                     <UserProfileAvatar url={userProfileStore.user.avatar_url} />
                     <div className="flex flex-col justify-center text-left flex-1">
                         <div className="flex flex-col space-y-0.5">
@@ -67,7 +66,7 @@ function UserProfile() {
                             />
                         </span>
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

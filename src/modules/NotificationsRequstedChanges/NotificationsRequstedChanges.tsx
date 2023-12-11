@@ -20,11 +20,10 @@ export function NotificationsRequstedChanges() {
 
     return (
         <Widget
+            isLoading={notificationsStore.isLoading}
             title={t("notificationsRequestedChanges.title")}
-            minHeight="93px"
         >
             <div className="max-h-32 overflow-y-scroll no-scrollbar">
-                {notificationsStore.isLoading && <div>loading</div>}
                 {notificationsStore.isEmpty && !notificationsStore.isLoading ? (
                     <NoResult />
                 ) : (

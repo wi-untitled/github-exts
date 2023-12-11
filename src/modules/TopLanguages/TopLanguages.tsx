@@ -14,15 +14,14 @@ export function TopLanguages() {
     const { t } = useTranslation();
     // TODO: do we need to think for new github user who doesn't have any repos
     return (
-        <Widget title={t("topLanguages.title")} minHeight="197px">
-            {topLanguagesStore.isLoading ? (
-                <div>Loading</div>
-            ) : (
-                <RacingBarChart
-                    initData={topLanguagesStore.data}
-                    medium={topLanguagesStore.medium}
-                />
-            )}
+        <Widget
+            isLoading={topLanguagesStore.isLoading}
+            title={t("topLanguages.title")}
+        >
+            <RacingBarChart
+                initData={topLanguagesStore.data}
+                medium={topLanguagesStore.medium}
+            />
         </Widget>
     );
 }
