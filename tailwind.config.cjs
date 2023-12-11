@@ -1,17 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    purge: [],
+    // purge: [],
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     darkMode: "media", // or 'media' or 'class'
     theme: {
-      fontSize: {
-        '1/5xs': '.65rem',
-      },
-      extend: {
-        transitionProperty: {
-          'height': 'height',
+        fontSize: {
+            "1/5xs": ".65rem",
         },
-      },
+        extend: {
+            transitionProperty: {
+                height: "height",
+            },
+        },
     },
     variants: {
         extend: {},
