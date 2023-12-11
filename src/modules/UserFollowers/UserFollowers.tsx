@@ -40,7 +40,7 @@ function UserFollowers() {
                     {t("userFollowers.openAll")}
                 </WidgetHeaderLink>
             }
-            minHeight="111px"
+            isLoading={userFollowersStore.isLoading}
         >
             <div className="p-3">
                 <UserFollowersList followers={followers} />

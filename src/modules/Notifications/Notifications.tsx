@@ -15,9 +15,11 @@ export function Notifications() {
     const { t } = useTranslation();
 
     return (
-        <Widget title={t("notifications.title")} minHeight="93px">
+        <Widget
+            title={t("notifications.title")}
+            isLoading={notificationsStore.isLoading}
+        >
             <div className="max-h-32 overflow-y-scroll no-scrollbar">
-                {notificationsStore.isLoading && <div>loading</div>}
                 {notificationsStore.isEmpty && !notificationsStore.isLoading ? (
                     <NoResult />
                 ) : (
