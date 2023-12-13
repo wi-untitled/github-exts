@@ -7,6 +7,7 @@ import {
     NotificationsModule,
     NotificationsRequstedChangesModule,
     TopLanguagesModule,
+    NotificationsApprovedTop10Module,
 } from "src/modules";
 
 export function Main() {
@@ -20,6 +21,7 @@ export function Main() {
                 <UserFollowingsModule />
                 <NotificationsModule />
                 <NotificationsRequstedChangesModule />
+                <NotificationsApprovedTop10Module />
                 <TopLanguagesModule />
             </div>
         </>

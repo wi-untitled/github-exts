@@ -23,5 +23,9 @@
     "login": {
         "btnLogin": "Setup access key",
         "placeholder": "Insert your access token"
+    },
+    "notificationsApprovedTop10": {
+        "title": "Top 10 Approved Pull Requests",
+        "empty": "No requested pull requests"
     }
 }
