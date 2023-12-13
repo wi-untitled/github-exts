@@ -1,11 +1,11 @@
 import { action, makeObservable, observable } from "mobx";
-import { Transport } from "src/transport";
+import { Transport, getTransport } from "src/transport";
 
 export class BaseStore {
     public isLoading: boolean;
     protected transport: Transport;
 
-    public constructor(transport: Transport) {
+    public constructor() {
         makeObservable<BaseStore, "updateLoading">(this, {
             isLoading: observable,
             updateLoading: action,
@@ -13,7 +13,7 @@ export class BaseStore {
 
         this.isLoading = true;
 
-        this.transport = transport;
+        this.transport = getTransport();
     }
 
     protected updateLoading = (isLoading: boolean) => {

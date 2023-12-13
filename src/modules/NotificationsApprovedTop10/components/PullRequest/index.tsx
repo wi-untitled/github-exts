@@ -1,26 +1,29 @@
-import { IconRequestedChanges } from "src/components";
+import { Icon } from "src/components";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-export interface IRequestedChangesPullRequestProps {
+export interface IPullRequestProps {
     title: string;
     full_name: string;
     created_at: any;
     html_url: string;
 }
 
-export function RequestedChangesPullRequest({
+export function PullRequest({
     title,
     created_at,
     html_url,
     full_name,
-}: IRequestedChangesPullRequestProps) {
+}: IPullRequestProps) {
     return (
-        <div className="flex flex-row p-2 items-center border-2 border-transparent rounded-lg hover:border-red-400">
+        <div className="flex flex-row p-2 items-center border-2 border-transparent rounded-lg hover:border-green-400">
             <div className="mr-2">
-                <IconRequestedChanges />
+                <Icon
+                    icon="pull-request"
+                    className="w-4 h-4 fill-current text-green-400"
+                />
             </div>
             <div className="flex flex-col flex-1 text-left overflow-hidden whitespace-nowrap">
                 <a

@@ -9,16 +9,12 @@ export interface AppOptions {
 export interface IResponseUserData {
     avatar_url: string;
     bio: string;
-    // company: null;
     created_at: string;
-    // email: null;
     followers: number;
     followers_url: string;
     following: number;
     following_url: string;
     gists_url: string;
-    // gravatar_id: null;
-    // hireadle: null;
     html_url: string;
     location: string;
     login: string;
@@ -83,5 +79,35 @@ export interface ILanguage {
     name: string;
     languages: {
         edges: INodeWithSize[];
+    };
+}
+
+export interface IPullRequest {
+    totalCount: number;
+    nodes: IPullRequestNode[];
+}
+
+export interface IPullRequestNode {
+    createdAt: string;
+    number: number;
+    title: string;
+    state: string;
+    url: string;
+    reviewDecision: string | null;
+    reviewRequests: {
+        nodes: {
+            requestedReviewer: {
+                login: string;
+            };
+        }[];
+    };
+    reviews: {
+        nodes: {
+            state: string;
+            createdAt: string;
+            author: {
+                login: string;
+            };
+        };
     };
 }
