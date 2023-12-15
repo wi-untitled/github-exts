@@ -38,7 +38,7 @@ export function RequestedChangesPullRequest({
                 </div>
             </div>
             <div className="flex flex-col ml-1">
-                <span className="text-1/5xs">created</span>
+                <span className="text-2xs text-end">created</span>
                 <span className="text-xs">
                     {dayjs(created_at.split("T")).fromNow()}
                 </span>

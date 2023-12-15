@@ -2,6 +2,8 @@ import { useCallback } from "react";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 
+import { SettingsWidgetModule } from "src/modules";
+
 export function Settings() {
     const navigate = useNavigate();
 
@@ -11,8 +13,9 @@ export function Settings() {
 
     return (
         <div>
-            Setting Page{" "}
+            Setting Page
             <button onClick={handleNavigateBackCallback}>Back</button>
+            <SettingsWidgetModule />
         </div>
     );
 }
