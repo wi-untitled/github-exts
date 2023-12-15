@@ -1,3 +1,4 @@
+import { WidgetsId } from "./enums";
 import { Stores } from "./stores/types";
 
 export interface AppOptions {
@@ -110,4 +111,10 @@ export interface IPullRequestNode {
             };
         };
     };
+}
+
+export interface IWidget {
+    id: WidgetsId | string;
+    enabled: boolean;
+    title: string;
 }

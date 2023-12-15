@@ -28,5 +28,21 @@
         "title": "Top 10 Approved Pull Requests",
         "empty": "No requested pull requests"
     },
-    "welcomeLoading": "Loading..."
+    "welcomeLoading": "Loading...",
+    "settingsWidgets": {
+        "title": "Setup your widgets view",
+        "UserFollowers": "Enable User Followers",
+        "UserFollowings": "Enable User Followings",
+        "Notifications": "Enable Notifications",
+        "NotificationsRequestedChanges": "Enable Notifications Requested Changes",
+        "NotificationsApprovedTop10": "Enable Notifications Top 10 Approved Pull Requests",
+        "TopLanguages": "Enable Top Languages",
+        "saveButton": "Save Settings"
+    },
+    "components": {
+        "switch": {
+            "on": "on",
+            "off": "off"
+        }
+    }
 }

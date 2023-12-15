@@ -6,3 +6,4 @@ export { NotificationsModule } from "src/modules/Notifications/Notifications";
 export { NotificationsApprovedTop10Module } from "src/modules/NotificationsApprovedTop10/NotificationsApprovedTop10";
 export { NotificationsRequstedChangesModule } from "src/modules/NotificationsRequstedChanges/NotificationsRequstedChanges";
 export { TopLanguagesModule } from "src/modules/TopLanguages/TopLanguages";
+export { SettingsWidgetModule } from "src/modules/SettingsWidgets/SettingsWidgets";

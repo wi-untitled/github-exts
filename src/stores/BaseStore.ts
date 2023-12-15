@@ -5,7 +5,7 @@ export class BaseStore {
     public isLoading: boolean;
     protected transport: Transport;
 
-    public constructor() {
+    public constructor(transport: Transport = getTransport) {
         makeObservable<BaseStore, "updateLoading">(this, {
             isLoading: observable,
             updateLoading: action,
@@ -13,7 +13,7 @@ export class BaseStore {
 
         this.isLoading = true;
 
-        this.transport = getTransport();
+        this.transport = transport;
     }
 
     protected updateLoading = (isLoading: boolean) => {
