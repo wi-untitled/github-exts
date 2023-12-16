@@ -26,7 +26,11 @@ export class NotificationsRequstedChangesStore extends BaseStore {
         this.notifications = [];
 
         autorun(async () => {
-            if (this.appStore.isAuthorized && this.appStore.isOpen) {
+            if (
+                this.appStore.isAuthorized &&
+                this.appStore.isOpen &&
+                !this.appStore.isLoading
+            ) {
                 await this.initAsync();
             }
         });
