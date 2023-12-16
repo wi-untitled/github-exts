@@ -27,5 +27,6 @@
     "notificationsApprovedTop10": {
         "title": "Top 10 Approved Pull Requests",
         "empty": "No requested pull requests"
-    }
+    },
+    "welcomeLoading": "Loading..."
 }

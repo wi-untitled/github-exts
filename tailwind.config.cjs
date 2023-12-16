@@ -11,6 +11,17 @@ module.exports = {
             transitionProperty: {
                 height: "height",
             },
+            keyframes: {
+                loading: {
+                    "0%": { left: "0px" },
+                    "100%": { left: "320px" },
+                },
+            },
+            animation: {
+                dot1: "loading 2s infinite",
+                dot2: "loading 2s 0.5s infinite",
+                dot3: "loading 2s 1s infinite",
+            },
         },
     },
     variants: {

@@ -9,6 +9,7 @@ import { getTransport } from "src/transport";
 
 import "src/i18n/config";
 import "./index.css";
+import { WelcomeLoading } from "./components";
 
 export async function initialize(): Promise<any> {
     const transport = getTransport();
@@ -22,7 +23,7 @@ export async function initialize(): Promise<any> {
                 stores: stores,
                 services: services,
             });
-        }, 1000);
+        }, 3000);
     });
 
     return promise;
@@ -56,7 +57,7 @@ export function RenderApp() {
             </React.StrictMode>
         </Provider>
     ) : (
-        <div>loading</div>
+        <WelcomeLoading />
     );
 }
 
