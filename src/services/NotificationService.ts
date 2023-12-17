@@ -2,6 +2,8 @@ import dayjs from "dayjs";
 import { Octokit } from "octokit";
 import { AppService } from ".";
 import { INotification, IPullRequest, IPullRequestNode } from "src/types";
+import { NotificationsApprovedTop10Query } from "src/services/graphql";
+import { flow } from "lodash";
 
 export class NotificationsService extends AppService {
     public constructor() {
@@ -87,59 +89,30 @@ export class NotificationsService extends AppService {
                 user: {
                     pullRequests: IPullRequest;
                 };
-            }>(`
-                {
-                    user(login: "${login}") {
-                        pullRequests(last: 10, states: OPEN) {
-                            totalCount
-                            nodes {
-                                createdAt
-                                number
-                                title
-                                state
-                                url
-                                reviewDecision
-                                reviewRequests(first: 1) {
-                                    nodes {
-                                        requestedReviewer {
-                                            ... on User {
-                                                login
-                                            }
-                                        }
-                                    }
-                                }
-                                reviews(first: 1, states: [PENDING, APPROVED]) {
-                                    nodes {
-                                        state
-                                        createdAt
-                                        author {
-                                            login
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            `);
+            }>({
+                query: NotificationsApprovedTop10Query,
+                login: login,
+            });
 
-            const filteredByReviewDecitionApproved =
-                response.user.pullRequests.nodes.filter(
-                    ({ reviewDecision }: IPullRequestNode) => {
-                        return reviewDecision === "APPROVED";
-                    },
-                );
-
-            return {
-                items: filteredByReviewDecitionApproved.map((x) => {
-                    return {
+            const notificationsApprovedTop10Items = flow(
+                () =>
+                    response.user.pullRequests.nodes.filter(
+                        ({ reviewDecision }: IPullRequestNode) => {
+                            return reviewDecision === "APPROVED";
+                        },
+                    ),
+                (xs) =>
+                    xs.map((x) => ({
                         pull_request: {
                             html_url: x.url,
                         },
                         title: x.title,
                         created_at: x.createdAt,
-                    };
-                }),
+                    })),
+            );
+
+            return {
+                items: notificationsApprovedTop10Items(),
             };
         } catch (error) {
             console.trace(error);
