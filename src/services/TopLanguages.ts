@@ -3,6 +3,8 @@ import { AppService } from ".";
 import { ILanguage, ITopLanguage } from "src/types";
 import { flattenLanguagesEdges } from "src/utils";
 import { getTotalSizesByLanguages } from "src/utils/getTotalSizesByLanguages";
+import { TopLanguagesQuery } from "src/services/graphql";
+import { flow } from "lodash";
 
 export class TopLanguagesService extends AppService {
     public getTopLanguages = async (
@@ -32,53 +34,23 @@ export class TopLanguagesService extends AppService {
                         }[];
                     };
                 };
-            }>(
-                `
-                    {
-                        user(login: "${login}") {
-                            repositories(ownerAffiliations: OWNER, isFork: false, first: 100) {
-                              nodes {
-                                name
-                                languages(first: 10, orderBy: { field: SIZE, direction: DESC }) {
-                                  edges {
-                                    size
-                                    node {
-                                      color
-                                      name
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                    }
-                `,
-                {
-                    headers: {
-                        authorization: `token ${this.accessToken}`,
-                    },
-                },
-            );
+            }>({
+                query: TopLanguagesQuery,
+                login: login,
+            });
 
             const repoNodes: ILanguage[] = response.user.repositories.nodes;
 
-            const withoutEmptyLanguagesEdges = repoNodes.filter((node) => {
-                return node.languages.edges.length;
-            });
-
-            const withFlattenLanguagesEdges = flattenLanguagesEdges(
-                withoutEmptyLanguagesEdges,
-            );
-
-            const totalSizesByLanguages = getTotalSizesByLanguages(
-                withFlattenLanguagesEdges,
-            );
-
-            const topLanguages = Object.entries(totalSizesByLanguages).sort(
-                (x, y) => {
-                    return Math.sign(y[1].size - x[1].size);
-                },
-            );
+            const topLanguages = flow(
+                (xs) =>
+                    xs.filter((node: ILanguage) => node.languages.edges.length),
+                flattenLanguagesEdges,
+                getTotalSizesByLanguages,
+                (total: Record<string, ITopLanguage>) =>
+                    Object.entries(total).sort((x, y) =>
+                        Math.sign(y[1].size - x[1].size),
+                    ),
+            )(repoNodes);
 
             return topLanguages;
         } catch (error) {
