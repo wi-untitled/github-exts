@@ -17,6 +17,8 @@ export function TopLanguages() {
         <Widget
             isLoading={topLanguagesStore.isLoading}
             title={t("topLanguages.title")}
+            info={t("topLanguages.info")}
+            id={TopLanguages.TooltipId}
         >
             <RacingBarChart
                 initData={topLanguagesStore.data}
@@ -25,5 +27,7 @@ export function TopLanguages() {
         </Widget>
     );
 }
+
+TopLanguages.TooltipId = "TopLanguages";
 
 export const TopLanguagesModule = observer(TopLanguages);

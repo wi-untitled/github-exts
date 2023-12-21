@@ -10,7 +10,8 @@
         "more": "More"
     },
     "topLanguages": {
-        "title": "Top 5 Languages"
+        "title": "Top 5 Languages",
+        "info": "The result is measured by top 100 of your repositories and first 10 languages are sorted by size"
     },
     "notificationsRequestedChanges": {
         "title": "Requested Changes for the last week",
@@ -30,7 +31,10 @@
     },
     "welcomeLoading": "Loading...",
     "settingsWidgets": {
-        "title": "Setup your widgets view",
+        "widgetTitle": "Setup your widgets view",
+        "widgetTitleTooltipText": "Enable tooltip in title on widget",
+        "globalText": "Global configuration(dev mode only)",
+        "globalInfo": "No need to save in local storage",
         "UserFollowers": "Enable User Followers",
         "UserFollowings": "Enable User Followings",
         "Notifications": "Enable Notifications",

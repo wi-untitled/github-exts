@@ -1,13 +1,18 @@
 import { useCallback } from "react";
 import { observer } from "mobx-react";
-import { useStore } from "src/hooks";
+import { useFeatureFlags, useStore } from "src/hooks";
 import { useTranslation } from "react-i18next";
-import { SaveSettingsButton, SettingsSwitch } from "./components";
+import {
+    SaveSettingsButton,
+    SettingsSwitch,
+    SettingsTitle,
+} from "./components";
 import { WidgetsId } from "src/enums";
 
 export function SettingsWidget() {
     const settingsStore = useStore("SettingsStore");
     const { t } = useTranslation();
+    const { updateFeatureFlag, flags } = useFeatureFlags();
 
     const handleWidgetChangeEnabledCallback = useCallback(
         ({ id, value }: { id: string; value: boolean }) => {
@@ -23,23 +28,43 @@ export function SettingsWidget() {
         settingsStore.saveSettings();
     }, [settingsStore]);
 
+    const handleToggleWidgetTitleTooltipCallback = useCallback(() => {
+        const current = flags["enableWidgetTitleTooltip"];
+
+        updateFeatureFlag("enableWidgetTitleTooltip", !current);
+    }, [flags, updateFeatureFlag]);
+
     return (
         <div className="py-2 px-4 space-y-3">
-            <p className="text-base">{t("settingsWidgets.title")}</p>
-            <div className="space-y-2">
-                {settingsStore.widgets.map(({ id, enabled }) => {
-                    const widgetId = id as WidgetsId;
-                    const i18nKey = `settingsWidgets.${widgetId}` as const;
+            <div className="space-y-1">
+                <SettingsTitle title={t("settingsWidgets.widgetTitle")} />
+                <div className="space-y-2">
+                    {settingsStore.widgets.map(({ id, enabled }) => {
+                        const widgetId = id as WidgetsId;
+                        const i18nKey = `settingsWidgets.${widgetId}` as const;
 
-                    return (
-                        <SettingsSwitch
-                            id={id}
-                            enabled={enabled}
-                            title={t(i18nKey)}
-                            onChange={handleWidgetChangeEnabledCallback}
-                        />
-                    );
-                })}
+                        return (
+                            <SettingsSwitch
+                                id={id}
+                                enabled={enabled}
+                                title={t(i18nKey)}
+                                onChange={handleWidgetChangeEnabledCallback}
+                            />
+                        );
+                    })}
+                </div>
+            </div>
+            <div className="space-y-1">
+                <SettingsTitle
+                    title={t("settingsWidgets.globalText")}
+                    info={t("settingsWidgets.globalInfo")}
+                />
+                <SettingsSwitch
+                    id="topLanguagesTooltip"
+                    enabled={flags["enableWidgetTitleTooltip"]}
+                    title={t("settingsWidgets.widgetTitleTooltipText")}
+                    onChange={handleToggleWidgetTitleTooltipCallback}
+                />
             </div>
             <div>
                 <SaveSettingsButton
