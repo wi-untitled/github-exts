@@ -1,10 +1,14 @@
 import { FC, PropsWithChildren } from "react";
+import { Tooltip } from "react-tooltip";
 import Spinner from "src/components/Spinner";
+import { FeatureFlag } from "src/core";
 
 interface IWidgetProps {
     isLoading?: boolean;
     headerRight?: React.ReactNode;
     title: string;
+    info?: string;
+    id?: string;
 }
 
 export const Widget: FC<PropsWithChildren<IWidgetProps>> = ({
@@ -12,14 +16,29 @@ export const Widget: FC<PropsWithChildren<IWidgetProps>> = ({
     isLoading = false,
     headerRight,
     title,
+    info,
+    id,
 }) => {
     return (
         <div className="mb-3 border rounded-md border-gray-200 dark:border-gray-800 overflow-hidden">
-            <header className="dark:bg-gray-900 bg-gray-100 px-3 py-2 flex space-x-0 justify-between border-b border-gray-200 dark:border-gray-800">
+            <header
+                data-tooltip-id={id}
+                data-tooltip-content={info}
+                className="dark:bg-gray-900 bg-gray-100 px-3 py-2 flex space-x-0 justify-between border-b border-gray-200 dark:border-gray-800"
+            >
                 <strong className="text-sm">{title}</strong>
                 {headerRight}
             </header>
             <div className="relative">{isLoading ? <Spinner /> : children}</div>
+            <FeatureFlag name="enableWidgetTitleTooltip">
+                {info && (
+                    <Tooltip
+                        delayShow={3000}
+                        className="!bg-gray-600 !w-[310px]"
+                        id={id}
+                    />
+                )}
+            </FeatureFlag>
         </div>
     );
 };

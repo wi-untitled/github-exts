@@ -160,11 +160,14 @@ export class SettingsStore extends BaseStore {
     };
 
     public get needSave(): boolean {
-        const mapWidgets = this.initWidgets.reduce((acc, widget) => {
-            acc[widget.id] = widget.enabled;
+        const mapWidgets = this.initWidgets.reduce(
+            (acc, widget) => {
+                acc[widget.id] = widget.enabled;
 
-            return acc;
-        }, {}); // O(n)
+                return acc;
+            },
+            {} as Record<string, boolean>,
+        ); // O(n)
 
         const hasDiff = this.widgets.some(({ id, enabled }) => {
             return enabled !== mapWidgets[id];

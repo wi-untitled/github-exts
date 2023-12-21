@@ -45,7 +45,7 @@ function UserProfile() {
                         </div>
                     </div>
                     <div className="flex flex-row space-x-2">
-                        <FeatureFlag name="settingsPage">
+                        <FeatureFlag name="enableSettingsPage">
                             <span
                                 className="cursor-pointer"
                                 onClick={handleRedirectToSettingPageCallback}

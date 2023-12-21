@@ -4,8 +4,9 @@ import { Provider } from "mobx-react";
 import App from "src/App.tsx";
 import createGlobalStores from "src/stores/utils/createGlobalStores";
 import createGlobalServices from "src/services/utils/createGlobalServices";
-import { FeatureFlagProvider, defaultState } from "src/core";
+import { FeatureFlagProvider } from "src/core";
 import { getTransport } from "src/transport";
+import { defaultState } from "src/featureFlags";
 
 import "src/i18n/config";
 import "./index.css";

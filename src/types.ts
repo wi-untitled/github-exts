@@ -116,5 +116,4 @@ export interface IPullRequestNode {
 export interface IWidget {
     id: WidgetsId | string;
     enabled: boolean;
-    title: string;
 }
