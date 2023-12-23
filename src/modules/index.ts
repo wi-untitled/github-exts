@@ -7,3 +7,4 @@ export { NotificationsApprovedTop10Module } from "src/modules/NotificationsAppro
 export { NotificationsRequstedChangesModule } from "src/modules/NotificationsRequstedChanges/NotificationsRequstedChanges";
 export { TopLanguagesModule } from "src/modules/TopLanguages/TopLanguages";
 export { SettingsWidgetModule } from "src/modules/SettingsWidgets/SettingsWidgets";
+export { SocialAccountsModule } from "src/modules/SocialAccounts/SocialAccounts";

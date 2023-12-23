@@ -3,6 +3,11 @@ export const icons = [
     "changes-request",
     "logout",
     "settings",
+    "linkedin",
+    "instagram",
+    "facebook",
+    "twitter",
+    "youtube",
 ] as const;
 
 export interface IIconProps {

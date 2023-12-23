@@ -39,6 +39,15 @@
         "TopLanguages": "Enable Top Languages",
         "saveButton": "Save Settings"
     },
+    "socialAccounts": {
+        "title": "Social Accounts",
+        "instagram": "Instagram",
+        "youtube": "youtube",
+        "linkedin": "linkedin",
+        "twitter": "twitter",
+        "facebook": "facebook",
+        "noResult": "Not result"
+    },
     "components": {
         "switch": {
             "on": "on",

@@ -3,3 +3,7 @@ export { makeGithubPullRequestUrl } from "./makeGithubPullRequestUrl";
 export { getRandomIndex } from "./getRandomIndex";
 export { flattenLanguagesEdges } from "./flattenLanguagesEdges";
 export { getTotalSizesByLanguages } from "./getTotalSizesByLanguages";
+export { makeYoutubeUrl } from "./makeYoutubeUrl";
+export { makeLinkeinUrl } from "./makeLinkeinUrl";
+export { makeInstagramUrl } from "./makeInstagramUrl";
+export { makeFacebookUrl } from "./makeFacebookUrl";

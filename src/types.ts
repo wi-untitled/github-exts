@@ -118,3 +118,17 @@ export interface IWidget {
     enabled: boolean;
     title: string;
 }
+
+export enum ISocialAccountsProvider {
+    INSTAGRAM = "INSTAGRAM",
+    YOUTUBE = "YOUTUBE",
+    LINKEDIN = "LINKEDIN",
+    TWITTER = "TWITTER",
+    FACEBOOK = "FACEBOOK",
+}
+
+export interface ISocialAccountsItem {
+    type: string;
+    name: string;
+    provider: ISocialAccountsProvider;
+}

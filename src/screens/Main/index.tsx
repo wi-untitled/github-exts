@@ -9,6 +9,7 @@ import {
     NotificationsRequstedChangesModule,
     TopLanguagesModule,
     NotificationsApprovedTop10Module,
+    SocialAccountsModule,
 } from "src/modules";
 
 export function Main() {
@@ -37,6 +38,7 @@ export function Main() {
                 {settingsStore.visibleWidgets[WidgetsId.TopLanguages] && (
                     <TopLanguagesModule />
                 )}
+                <SocialAccountsModule />
             </div>
         </>
     );
