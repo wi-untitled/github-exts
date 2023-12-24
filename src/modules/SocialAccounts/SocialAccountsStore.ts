@@ -40,7 +40,9 @@ export class SocialAccountsStore extends BaseStore {
             this.updateLoading(true);
 
             const socialAccounts =
-                await this.socialAccountsService.getSocialAccounts();
+                await this.socialAccountsService.getSocialAccounts({
+                    login: this.appStore.userData.login,
+                });
 
             this.setSocialAccounts(socialAccounts);
         } catch (error) {

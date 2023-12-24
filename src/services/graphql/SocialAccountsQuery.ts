@@ -1,6 +1,6 @@
 export const SocialAccountsQuery = `
-  query {
-   user(login: "vladislavkovaliov") {
+  query SocialAccounts($login: String!) {
+   user(login: $login) {
       socialAccounts(first: 100) {
         edges {
           node {

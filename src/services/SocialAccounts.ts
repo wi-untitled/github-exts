@@ -4,7 +4,11 @@ import { SocialAccountsQuery } from "src/services/graphql";
 import { ISocialAccountsItem, ISocialAccountsProvider } from "src/types";
 
 export class SocialAccountsService extends AppService {
-    public getSocialAccounts = async (): Promise<ISocialAccountsItem[]> => {
+    public getSocialAccounts = async ({
+        login,
+    }: {
+        login: string;
+    }): Promise<ISocialAccountsItem[]> => {
         try {
             this.isAuthorized();
             const oktokit = new Octokit({
@@ -23,7 +27,7 @@ export class SocialAccountsService extends AppService {
                         }[];
                     };
                 };
-            }>(SocialAccountsQuery);
+            }>({ query: SocialAccountsQuery, login: login });
 
             const socialAccounts = response.user.socialAccounts;
 
