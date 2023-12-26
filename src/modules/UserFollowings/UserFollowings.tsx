@@ -1,7 +1,7 @@
 import { observer, useLocalStore } from "mobx-react";
 import { UserFollowingsStore } from "src/modules/UserFollowings/UserFollowingsStore";
-import { useService, useStore } from "src/hooks";
-import { useMemo } from "react";
+import { useCollapse, useService, useStore } from "src/hooks";
+import { useCallback, useEffect, useMemo } from "react";
 import { chunk } from "lodash";
 import {
     UserFollowingsButtonMore,
@@ -14,6 +14,8 @@ import { WidgetHeaderLink } from "src/components/Widget/WidgetHeaderLink/WidgetH
 import { useTranslation } from "react-i18next";
 
 function UserFollowings() {
+    const { isCollapsed, visibleCount, updateVisibleCount, updateCollapse } =
+        useCollapse({ initVisibleCount: CHUNK_LIMIT });
     const appStore = useStore("AppStore");
     const userFollowingsService = useService("UserFollowingsService");
     const userFollowingsStore = useLocalStore(
@@ -26,6 +28,34 @@ function UserFollowings() {
         return chunk(userFollowingsStore.followings, CHUNK_LIMIT);
     }, [userFollowingsStore.followings]);
 
+    const handleGetMoreFollowersCallback = useCallback(() => {
+        if (userFollowingsStore.pageInfo?.hasNextPage) {
+            userFollowingsStore.getMoreUserFollowings();
+        } else {
+            updateCollapse(!isCollapsed);
+        }
+    }, [updateCollapse, userFollowingsStore, isCollapsed]);
+
+    const handleHideCallback = useCallback(() => {
+        updateCollapse(true);
+    }, [updateCollapse]);
+
+    const isShowHide = useMemo(() => {
+        return visibleCount === userFollowingsStore.totalCount && !isCollapsed;
+    }, [visibleCount, userFollowingsStore.totalCount, isCollapsed]);
+
+    useEffect(() => {
+        if (visibleCount !== userFollowingsStore.followings.length) {
+            updateCollapse(false);
+            updateVisibleCount(userFollowingsStore.followings.length);
+        }
+    }, [
+        visibleCount,
+        userFollowingsStore.followings.length,
+        updateCollapse,
+        updateVisibleCount,
+    ]);
+
     return (
         <Widget
             title={`${t("userFollowings.title")} • ${
@@ -34,7 +64,7 @@ function UserFollowings() {
             headerRight={
                 <WidgetHeaderLink
                     href={`${makeGithubProfileUrl(
-                        appStore.userData.login,
+                        userFollowingsStore.totalCount.toString(),
                     )}?tab=followers`}
                 >
                     {t("userFollowings.openAll")}
@@ -43,11 +73,16 @@ function UserFollowings() {
             isLoading={userFollowingsStore.isLoading}
         >
             <div className="p-3">
-                <UserFollowingsList followings={followings} />
+                <UserFollowingsList
+                    followings={followings}
+                    isCollapsed={isCollapsed}
+                />
                 <UserFollowingsButtonMore
-                    isLoading={userFollowingsStore.isLoading}
-                    disabled={userFollowingsStore.showMore}
-                    onClick={userFollowingsStore.getMoreUserFollowings}
+                    isLoading={userFollowingsStore.isMoreUserFollowingsLoading}
+                    onMore={handleGetMoreFollowersCallback}
+                    onHide={handleHideCallback}
+                    showHide={isShowHide}
+                    canLoadMore={userFollowingsStore.canLoadMore}
                 />
             </div>
         </Widget>

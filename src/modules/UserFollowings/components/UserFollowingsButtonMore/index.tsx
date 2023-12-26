@@ -1,28 +1,36 @@
-import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 
 export interface IUserFollowingsButtonMoreProps {
-    disabled: boolean;
     isLoading: boolean;
-    onClick: () => void;
+    onMore: () => void;
+    onHide: () => void;
+    showHide: boolean;
+    canLoadMore: boolean;
 }
 
 export function UserFollowingsButtonMore({
-    disabled,
     isLoading,
-    onClick,
+    onMore,
+    onHide,
+    showHide,
+    canLoadMore,
 }: IUserFollowingsButtonMoreProps) {
     const { t } = useTranslation();
 
+    if (!canLoadMore) {
+        return null;
+    }
+
+    if (showHide) {
+        return (
+            <button onClick={onHide}>
+                <span>{t("userFollowings.hide")}</span>
+            </button>
+        );
+    }
+
     return (
-        <button
-            className={clsx({
-                ["text-gray-100"]: !disabled,
-                ["text-opacity-25"]: !disabled,
-            })}
-            onClick={onClick}
-            disabled={!disabled}
-        >
+        <button onClick={onMore}>
             {isLoading ? (
                 <span>Loading...</span>
             ) : (

@@ -2,12 +2,14 @@
     "userFollowings": {
         "title": "Followings",
         "openAll": "Open all",
-        "more": "More"
+        "more": "More",
+        "hide": "Hide"
     },
     "userFollowers": {
         "title": "Followers",
         "openAll": "Open all",
-        "more": "More"
+        "more": "More",
+        "hide": "Hide"
     },
     "topLanguages": {
         "title": "Top 5 Languages",

@@ -1,6 +1,6 @@
 import { observable, makeObservable, action, when } from "mobx";
 import { AppStore } from "src/stores";
-import { IFollower } from "src/types";
+import { IFollower, IPageInfo } from "src/types";
 import { BaseStore } from "src/stores/BaseStore";
 import { UserFollowingsService } from "src/services";
 import { CHUNK_LIMIT } from "./constants";
@@ -10,9 +10,9 @@ export class UserFollowingsStore extends BaseStore {
     private userFollowingsService: UserFollowingsService;
     public followings: IFollower[];
     public limit: number;
-    public page: number;
-    public totalPage: number;
     public isMoreUserFollowingsLoading: boolean;
+    public pageInfo?: IPageInfo;
+    public totalCount: number;
 
     public constructor(
         appStore: AppStore,
@@ -25,9 +25,13 @@ export class UserFollowingsStore extends BaseStore {
             {
                 isMoreUserFollowingsLoading: observable,
                 followings: observable,
+                pageInfo: observable,
+                totalCount: observable,
                 getUserFollowings: action,
                 updateFollowings: action,
                 updateMoreUserFollowingsLoading: action,
+                updatePageInfo: action,
+                updateTotalCount: action,
             },
         );
 
@@ -35,8 +39,8 @@ export class UserFollowingsStore extends BaseStore {
         this.userFollowingsService = userFollowingsService;
         this.followings = [];
         this.limit = CHUNK_LIMIT;
-        this.page = 1;
-        this.totalPage = 0;
+        this.pageInfo = undefined;
+        this.totalCount = 0;
         this.isMoreUserFollowingsLoading = false;
 
         when(
@@ -61,51 +65,64 @@ export class UserFollowingsStore extends BaseStore {
         try {
             this.updateLoading(true);
 
-            const userFollowings =
-                await this.userFollowingsService.getUserFollowings(
-                    this.limit,
-                    this.page,
-                );
+            const { items, pageInfo, totalCount } =
+                await this.userFollowingsService.getUserFollowings({
+                    login: this.appStore.userData.login,
+                    first: this.limit,
+                    after: null,
+                });
 
-            this.updateFollowings(userFollowings);
-            this.updateTotalPage();
+            this.updateFollowings(items);
+            this.updatePageInfo(pageInfo);
+            this.updateTotalCount(totalCount);
             this.updateLoading(false);
         } catch (error) {
             console.error(error);
             this.updateLoading(false);
         }
-    };
-
-    public updateTotalPage = async (): Promise<void> => {
-        this.totalPage = this.appStore.userData.following / this.limit;
     };
 
     public updateFollowings = (followings: IFollower[]): void => {
         this.followings = [...this.followings, ...followings];
     };
 
+    public updatePageInfo = (pageInfo?: IPageInfo): void => {
+        this.pageInfo = pageInfo;
+    };
+
+    public updateTotalCount = (totalCount: number): void => {
+        this.totalCount = totalCount;
+    };
+
     public getMoreUserFollowings = async (): Promise<void> => {
         try {
-            if (this.page < this.totalPage) {
-                this.page = this.page + 1;
-
+            if (this.pageInfo?.hasNextPage) {
                 this.updateMoreUserFollowingsLoading(true);
 
-                const userFollowings =
-                    await this.userFollowingsService.getUserFollowings(
-                        this.limit,
-                        this.page,
-                    );
+                const { items, pageInfo, totalCount } =
+                    await this.userFollowingsService.getUserFollowings({
+                        login: this.appStore.userData.login,
+                        first: this.limit,
+                        after: this.pageInfo?.endCursor || null,
+                    });
 
-                this.updateFollowings(userFollowings);
+                this.updateFollowings(items);
+                this.updatePageInfo(pageInfo);
+                this.updateTotalCount(totalCount);
                 this.updateMoreUserFollowingsLoading(false);
             }
         } catch (error) {
             console.error(error);
+        } finally {
+            this.updateMoreUserFollowingsLoading(false);
         }
     };
 
     public get showMore(): boolean {
-        return this.followings.length !== this.appStore.userData.followings;
+        return this.pageInfo?.hasNextPage ?? false;
+    }
+
+    public get canLoadMore(): boolean {
+        return this.totalCount > CHUNK_LIMIT;
     }
 }
