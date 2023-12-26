@@ -1,17 +1,21 @@
-import { IFollower } from "../../../../types";
-import { makeGithubProfileUrl } from "../../../../utils";
-import { CHUNK_LIMIT } from "../../constants";
+import { IFollower } from "src/types";
+import { makeGithubProfileUrl } from "src/utils";
+import { CHUNK_LIMIT } from "src/modules/UserFollowings/constants";
 
 export interface IUserFollowingsListProps {
     followings: IFollower[][];
+    isCollapsed: boolean;
 }
 
-export function UserFollowingsList({ followings }: IUserFollowingsListProps) {
+export function UserFollowingsList({
+    followings,
+    isCollapsed,
+}: IUserFollowingsListProps) {
     return (
         <div
             className={`flex flex-col w-full transition-height delay-300 ease-out overflow-hidden`}
             style={{
-                height: `${2 * followings.length}rem`,
+                height: isCollapsed ? `2rem` : `${2 * followings.length}rem`,
             }}
         >
             {followings.map((chunkFollowings) => {
@@ -34,7 +38,7 @@ export function UserFollowingsList({ followings }: IUserFollowingsListProps) {
                                 return <div className="w-8 h-8"></div>;
                             }
 
-                            const { login, avatar_url } = follower;
+                            const { login, avatarUrl } = follower;
 
                             return (
                                 <a
@@ -44,7 +48,7 @@ export function UserFollowingsList({ followings }: IUserFollowingsListProps) {
                                 >
                                     <img
                                         className="rounded-full"
-                                        src={avatar_url}
+                                        src={avatarUrl}
                                     />
                                 </a>
                             );

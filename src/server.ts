@@ -103,7 +103,6 @@ app.get("/getUserFollower", async (req, res) => {
 
 app.get("/getUserFollowing", async (req, res) => {
     try {
-        console.log(42);
         const { login, limit = 10, page = 1 } = req.query;
 
         const params = `per_page=${limit}&page=${page}`;

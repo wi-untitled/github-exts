@@ -37,9 +37,20 @@ export interface IResponseUserData {
 
 export type IUserData = IResponseUserData & any;
 
+export interface IPageInfo {
+    hasNextPage: boolean;
+    endCursor: string;
+}
+
 export interface IResponseFollower {
     login: string;
-    avatar_url: string;
+    avatarUrl: string;
+    url: string;
+}
+
+export interface IResponseFollowing {
+    login: string;
+    avatarUrl: string;
     url: string;
 }
 

@@ -15,11 +15,6 @@ export function SocialAccounts() {
     );
     const { t } = useTranslation();
 
-    console.log(
-        socialAccountsStore.socialAccounts,
-        socialAccountsStore.isLoading,
-    );
-
     return (
         <Widget
             title={t("socialAccounts.title")}
@@ -36,6 +31,7 @@ export function SocialAccounts() {
                              * Uncomment when icons are ready.
                              */
                             const Render = iconRender[provider];
+
                             return <Render name={name} />;
                         },
                     )

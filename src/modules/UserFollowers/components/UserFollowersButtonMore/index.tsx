@@ -1,20 +1,36 @@
 import { useTranslation } from "react-i18next";
 
 export interface IUserFollowersButtonMoreProps {
-    disabled: boolean;
     isLoading: boolean;
-    onClick: () => void;
+    onMore: () => void;
+    onHide: () => void;
+    showHide: boolean;
+    canLoadMore: boolean;
 }
 
 export function UserFollowersButtonMore({
-    disabled,
     isLoading,
-    onClick,
+    onMore,
+    onHide,
+    showHide,
+    canLoadMore,
 }: IUserFollowersButtonMoreProps) {
     const { t } = useTranslation();
 
+    if (!canLoadMore) {
+        return null;
+    }
+
+    if (showHide) {
+        return (
+            <button onClick={onHide}>
+                <span>{t("userFollowers.hide")}</span>
+            </button>
+        );
+    }
+
     return (
-        <button onClick={onClick} disabled={!disabled}>
+        <button onClick={onMore}>
             {isLoading ? (
                 <span>Loading...</span>
             ) : (
