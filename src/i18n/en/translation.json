@@ -43,7 +43,9 @@
         "NotificationsRequestedChanges": "Enable Notifications Requested Changes",
         "NotificationsApprovedTop10": "Enable Notifications Top 10 Approved Pull Requests",
         "TopLanguages": "Enable Top Languages",
-        "saveButton": "Save Settings"
+        "saveButton": "Save Settings",
+        "autoUpdate": "Enable autoupdate notifications",
+        "autoUpdateInfo": "Enable autoupdate for extentions button. Possibility to recieve marker on button to notify the user that you have got updates."
     },
     "socialAccounts": {
         "title": "Social Accounts",

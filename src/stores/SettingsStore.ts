@@ -37,18 +37,25 @@ export const definedWidgets: IWidget[] = [
     },
 ];
 
+export const DEFAULT_AUTOUPDATE_ENABLED = false;
+
 export class SettingsStore extends BaseStore {
     private initWidgets: IWidget[];
     public widgets: IWidget[];
+    private initIsAutoUpdateEnabled: boolean;
+    public isAutoUpdateEnabled: boolean;
+
     public constructor() {
         super();
 
         makeAutoObservable<SettingsStore, "updateLoading" | "updateWidgets">(
             this,
             {
+                isAutoUpdateEnabled: observable,
                 widgets: observable,
                 updateWidgetById: action,
                 updateWidgets: action,
+                updateAutoUpdateEnabled: action,
                 isLoading: override,
                 updateLoading: override,
                 needSave: computed,
@@ -56,6 +63,7 @@ export class SettingsStore extends BaseStore {
         );
 
         this.widgets = definedWidgets;
+        this.isAutoUpdateEnabled = DEFAULT_AUTOUPDATE_ENABLED;
 
         // TODO: removes when local storage sync is implemented
         this.isLoading = false;
@@ -65,6 +73,7 @@ export class SettingsStore extends BaseStore {
         }
 
         this.initWidgets = this.widgets;
+        this.initIsAutoUpdateEnabled = this.isAutoUpdateEnabled;
     }
 
     private checkSettingsInLocalStorage = (): boolean => {
@@ -90,9 +99,10 @@ export class SettingsStore extends BaseStore {
                 return;
             }
 
-            const { widgets } = JSON.parse(data);
+            const { widgets, isAutoUpdateEnabled } = JSON.parse(data);
 
             this.updateWidgets(widgets);
+            this.updateAutoUpdateEnabled(isAutoUpdateEnabled ?? false);
         } catch (error) {
             console.trace(error);
         }
@@ -104,10 +114,12 @@ export class SettingsStore extends BaseStore {
                 STORAGE_KEYS.SETTINGS,
                 JSON.stringify({
                     widgets: this.widgets,
+                    isAutoUpdateEnabled: this.isAutoUpdateEnabled,
                 }),
             );
 
             this.initWidgets = this.widgets;
+            this.initIsAutoUpdateEnabled = this.isAutoUpdateEnabled;
         } catch (error) {
             console.trace(error);
         }
@@ -159,6 +171,12 @@ export class SettingsStore extends BaseStore {
         }
     };
 
+    public updateAutoUpdateEnabled = (
+        newIsAutoUpdateEnabled: boolean,
+    ): void => {
+        this.isAutoUpdateEnabled = newIsAutoUpdateEnabled;
+    };
+
     public get needSave(): boolean {
         const mapWidgets = this.initWidgets.reduce(
             (acc, widget) => {
@@ -173,6 +191,9 @@ export class SettingsStore extends BaseStore {
             return enabled !== mapWidgets[id];
         }); // O(n)
 
-        return hasDiff; // O(n + n)
+        const hasAutoUpdateDiff =
+            this.isAutoUpdateEnabled !== this.initIsAutoUpdateEnabled;
+
+        return hasDiff || hasAutoUpdateDiff;
     }
 }
