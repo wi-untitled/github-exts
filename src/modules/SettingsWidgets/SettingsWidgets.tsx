@@ -34,6 +34,12 @@ export function SettingsWidget() {
         updateFeatureFlag("enableWidgetTitleTooltip", !current);
     }, [flags, updateFeatureFlag]);
 
+    const handleAutoUpdateEnabled = useCallback(() => {
+        const prevAutoUpdateEnabled = settingsStore.isAutoUpdateEnabled;
+
+        settingsStore.updateAutoUpdateEnabled(!prevAutoUpdateEnabled);
+    }, [settingsStore]);
+
     return (
         <div className="py-2 px-4 space-y-3">
             <div className="space-y-1">
@@ -54,7 +60,7 @@ export function SettingsWidget() {
                     })}
                 </div>
             </div>
-            <div className="space-y-1">
+            <div className="space-y-2">
                 <SettingsTitle
                     title={t("settingsWidgets.globalText")}
                     info={t("settingsWidgets.globalInfo")}
@@ -64,6 +70,13 @@ export function SettingsWidget() {
                     enabled={flags["enableWidgetTitleTooltip"]}
                     title={t("settingsWidgets.widgetTitleTooltipText")}
                     onChange={handleToggleWidgetTitleTooltipCallback}
+                />
+                <SettingsSwitch
+                    id="autoUpdateEnabled"
+                    enabled={settingsStore.isAutoUpdateEnabled}
+                    title={t("settingsWidgets.autoUpdate")}
+                    onChange={handleAutoUpdateEnabled}
+                    info={t("settingsWidgets.autoUpdateInfo")}
                 />
             </div>
             <div>

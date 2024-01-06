@@ -31,13 +31,15 @@ export const Widget: FC<PropsWithChildren<IWidgetProps>> = ({
             </header>
             <div className="relative">{isLoading ? <Spinner /> : children}</div>
             <FeatureFlag name="enableWidgetTitleTooltip">
-                {info && (
-                    <Tooltip
-                        delayShow={3000}
-                        className="!bg-gray-600 !w-[310px]"
-                        id={id}
-                    />
-                )}
+                <>
+                    {info && (
+                        <Tooltip
+                            delayShow={3000}
+                            className="!bg-gray-600 !w-[310px]"
+                            id={id}
+                        />
+                    )}
+                </>
             </FeatureFlag>
         </div>
     );
