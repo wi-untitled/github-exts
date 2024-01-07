@@ -1,7 +1,9 @@
+import { NotificationsService } from "src/services";
 import * as stores from "src/stores";
+import { Transport } from "src/transport";
 
 export interface StoreClass<T> {
-    new (transport: any): T;
+    new (transport: Transport, notificationService: NotificationsService): T;
 }
 
 export type StoreName = keyof typeof stores;

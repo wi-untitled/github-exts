@@ -1,10 +1,10 @@
 import { action, computed, makeObservable, observable, when } from "mobx";
 import { TopLanguagesService } from "src/services";
 import { AppStore } from "src/stores";
-import { BaseStore } from "src/stores/BaseStore";
+import { LoadableStore } from "src/stores/LoadableStore";
 import { ITopLanguage, ITopLanguageWithMaxSize } from "src/types";
 
-export class TopLanguagesStore extends BaseStore {
+export class TopLanguagesStore extends LoadableStore {
     protected appStore: AppStore;
     protected topLanguagesService: TopLanguagesService;
     public topLanguages: [string, ITopLanguage][];

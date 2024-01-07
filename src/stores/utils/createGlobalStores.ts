@@ -1,11 +1,24 @@
+import { NotificationsService } from "src/services";
 import * as stores from "src/stores";
 import { ModuleStores, StoreName, Stores } from "src/stores/types";
+import { Transport } from "src/transport";
 
-export function createGlobalStores(globalStores: ModuleStores, transport: any) {
+export const ignoreStores = ["LoadableStore"];
+
+export function createGlobalStores(
+    globalStores: ModuleStores,
+    transport: Transport,
+) {
+    const notificationService = new NotificationsService();
+
     return Object.keys(globalStores).reduce(
         // @ts-expect-error Need to build stores object
         (table: Stores, name: StoreName) => {
-            table[name] = new globalStores[name](transport);
+            // @ts-expect-error Need to build stores object
+            table[name] = new globalStores[name](
+                transport,
+                notificationService,
+            );
 
             return table;
         },
@@ -13,4 +26,4 @@ export function createGlobalStores(globalStores: ModuleStores, transport: any) {
     );
 }
 
-export default (transport: any) => createGlobalStores(stores, transport);
+export default (transport: Transport) => createGlobalStores(stores, transport);

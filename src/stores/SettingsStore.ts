@@ -9,6 +9,8 @@ import { BaseStore } from "src/stores/BaseStore";
 import { IWidget } from "src/types";
 import { WidgetsId } from "src/enums";
 import { STORAGE_KEYS } from "src/constants";
+import { Transport } from "src/transport";
+import { NotificationsService } from "src/services";
 
 export const definedWidgets: IWidget[] = [
     {
@@ -40,13 +42,16 @@ export const definedWidgets: IWidget[] = [
 export const DEFAULT_AUTOUPDATE_ENABLED = false;
 
 export class SettingsStore extends BaseStore {
-    private initWidgets: IWidget[];
+    protected initWidgets: IWidget[];
     public widgets: IWidget[];
-    private initIsAutoUpdateEnabled: boolean;
+    protected initIsAutoUpdateEnabled: boolean;
     public isAutoUpdateEnabled: boolean;
 
-    public constructor() {
-        super();
+    public constructor(
+        transport: Transport,
+        notificationsService: NotificationsService,
+    ) {
+        super(transport, notificationsService);
 
         makeAutoObservable<SettingsStore, "updateLoading" | "updateWidgets">(
             this,
@@ -76,7 +81,7 @@ export class SettingsStore extends BaseStore {
         this.initIsAutoUpdateEnabled = this.isAutoUpdateEnabled;
     }
 
-    private checkSettingsInLocalStorage = (): boolean => {
+    protected checkSettingsInLocalStorage = (): boolean => {
         try {
             const hasData = localStorage.getItem(STORAGE_KEYS.SETTINGS);
 
@@ -91,7 +96,7 @@ export class SettingsStore extends BaseStore {
      * Sync with local storage when user reload page
      * need load them from there.
      */
-    private syncSettingsWithLocalStorage = (): void => {
+    protected syncSettingsWithLocalStorage = (): void => {
         try {
             const data = localStorage.getItem(STORAGE_KEYS.SETTINGS);
 
@@ -108,7 +113,7 @@ export class SettingsStore extends BaseStore {
         }
     };
 
-    private writeSettingsInLocalStorage = (): void => {
+    protected writeSettingsInLocalStorage = (): void => {
         try {
             localStorage.setItem(
                 STORAGE_KEYS.SETTINGS,
@@ -147,7 +152,7 @@ export class SettingsStore extends BaseStore {
         });
     };
 
-    private updateWidgets = (newWidgets: IWidget[]): void => {
+    protected updateWidgets = (newWidgets: IWidget[]): void => {
         this.widgets = newWidgets;
     };
 
@@ -166,6 +171,16 @@ export class SettingsStore extends BaseStore {
     public saveSettings = (): void => {
         try {
             this.writeSettingsInLocalStorage();
+            // TODO: create fn for this
+            this.transport.sendMessage<{
+                action: string;
+                data: {
+                    isAutoUpdateEnabled: boolean;
+                };
+            }>({
+                action: "AutoUpdateChange",
+                data: { isAutoUpdateEnabled: this.isAutoUpdateEnabled },
+            });
         } catch (error) {
             console.trace(error);
         }

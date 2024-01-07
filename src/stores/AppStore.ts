@@ -7,10 +7,15 @@ import {
     when,
 } from "mobx";
 import { STORAGE_KEYS } from "src/constants";
-import { AppService } from "src/services";
+import { AppService, NotificationsService } from "src/services";
 import { IUserData } from "src/types";
 import { BaseStore } from "src/stores/BaseStore";
-import { Transport, IFRAME_TOGGLE_EVENT } from "src/transport";
+import { Transport, IFRAME_TOGGLE_EVENT, ISendAction } from "src/transport";
+import { LinkedList } from "src/core/LinkedList";
+
+export const AUTO_UPDATES_INTERVAL = 120000;
+
+export type IHandleAutoUpdateArguments = { isAutoUpdateEnabled: boolean };
 
 export class AppStore extends BaseStore {
     public userData: IUserData;
@@ -18,10 +23,20 @@ export class AppStore extends BaseStore {
     public appService: AppService;
     public isOpen: boolean;
 
-    public constructor(transport: Transport) {
-        super(transport);
+    protected isAutoUpdateEnabled: boolean;
+    protected intervalId: any | null;
+    public listeners: LinkedList<() => void>;
 
-        makeAutoObservable<AppStore, "updateIsOpen" | "updateLoading">(this, {
+    public constructor(
+        transport: Transport,
+        notificationsService: NotificationsService,
+    ) {
+        super(transport, notificationsService);
+
+        makeAutoObservable<
+            AppStore,
+            "updateIsOpen" | "updateLoading" | "isLoading"
+        >(this, {
             isLoading: override,
             isOpen: observable,
             accessToken: observable,
@@ -33,9 +48,11 @@ export class AppStore extends BaseStore {
         });
 
         this.accessToken = "";
-        this.isOpen = false;
-        this.appService = new AppService();
         this.userData = {};
+        this.isOpen = false;
+        this.isAutoUpdateEnabled = false;
+        this.listeners = new LinkedList();
+        this.appService = new AppService();
 
         this.init();
 
@@ -57,9 +74,20 @@ export class AppStore extends BaseStore {
                 }
             },
         );
+
+        reaction(
+            () => this.isAutoUpdateEnabled,
+            (isAutoUpdateEnabled) => {
+                if (isAutoUpdateEnabled && this.isAuthorized) {
+                    this.registerAutoUpdateHandler();
+                } else {
+                    clearInterval(this.intervalId);
+                }
+            },
+        );
     }
 
-    private handleStateIframe = ({
+    protected handleStateIframe = ({
         action,
         data: { isOpen },
     }: {
@@ -70,7 +98,7 @@ export class AppStore extends BaseStore {
             this.updateIsOpen(isOpen);
         }
         // TODO: test message
-        this.transport.sendMessage({
+        this.transport.sendMessageRuntime({
             action: "BROADCAST",
             data: {
                 test: 42,
@@ -78,9 +106,21 @@ export class AppStore extends BaseStore {
         });
     };
 
+    protected handleAutoUpdateChange = ({
+        isAutoUpdateEnabled,
+    }: IHandleAutoUpdateArguments): void => {
+        this.isAutoUpdateEnabled = isAutoUpdateEnabled;
+    };
+
     protected init = (): void => {
         this.initializeAccessToken();
+        this.readAutoUpdateEnabledFromLocalStorage();
         this.registerRuntimeMessageHandler();
+        this.registerAutoUpdate();
+
+        if (this.isAutoUpdateEnabled) {
+            this.registerAutoUpdateHandler();
+        }
     };
 
     protected initializeAccessToken = (): void => {
@@ -95,8 +135,40 @@ export class AppStore extends BaseStore {
         }
     };
 
+    protected registerAutoUpdate = (): void => {
+        this.transport.addListener<IHandleAutoUpdateArguments>(
+            "AutoUpdateChange",
+            (payload) => {
+                this.handleAutoUpdateChange(payload.data);
+            },
+        );
+    };
+
     protected registerRuntimeMessageHandler = (): void => {
-        this.transport.onValue<IFRAME_TOGGLE_EVENT>(this.handleStateIframe);
+        this.transport.onValueRuntime<IFRAME_TOGGLE_EVENT>(
+            this.handleStateIframe,
+        );
+    };
+
+    protected registerAutoUpdateHandler = (): void => {
+        try {
+            this.intervalId = setInterval(() => {
+                if (this.isAutoUpdateEnabled === false) {
+                    clearInterval(this.intervalId);
+                }
+
+                let cursor = this.listeners.head;
+
+                while (cursor) {
+                    if (typeof cursor.value === "function") {
+                        cursor.value();
+                    }
+                    cursor = cursor.next;
+                }
+            }, AUTO_UPDATES_INTERVAL);
+        } catch (error) {
+            console.trace(error);
+        }
     };
 
     protected initAsync = async (): Promise<void> => {
@@ -118,6 +190,23 @@ export class AppStore extends BaseStore {
 
     protected updateIsOpen = (isOpen: boolean): void => {
         this.isOpen = isOpen;
+    };
+
+    protected readAutoUpdateEnabledFromLocalStorage = (): void => {
+        try {
+            const data = localStorage.getItem(STORAGE_KEYS.SETTINGS);
+
+            if (!data) {
+                return;
+            }
+
+            const { isAutoUpdateEnabled } = JSON.parse(data);
+
+            this.isAutoUpdateEnabled = Boolean(isAutoUpdateEnabled);
+        } catch (error) {
+            console.trace(error);
+            this.isAutoUpdateEnabled = false;
+        }
     };
 
     public setUserData = (userData: IUserData): void => {
