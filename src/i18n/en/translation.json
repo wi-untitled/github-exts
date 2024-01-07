@@ -45,7 +45,7 @@
         "TopLanguages": "Enable Top Languages",
         "saveButton": "Save Settings",
         "autoUpdate": "Enable autoupdate notifications",
-        "autoUpdateInfo": "Enable autoupdate for extentions button. Possibility to recieve marker on button to notify the user that you have got updates."
+        "autoUpdateInfo": "Enable autoupdate for extentions button. Possibility to recieve marker on button to notify the user that you have got updates every 120 seconds."
     },
     "socialAccounts": {
         "title": "Social Accounts",

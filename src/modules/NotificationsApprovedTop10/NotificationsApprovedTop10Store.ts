@@ -1,13 +1,18 @@
+import { difference } from "lodash";
 import { action, autorun, makeObservable, observable } from "mobx";
 import { NotificationsService } from "src/services";
 import { AppStore } from "src/stores";
-import { BaseStore } from "src/stores/BaseStore";
+import { LoadableStore } from "src/stores/LoadableStore";
+import { Transport, getTransport } from "src/transport";
 import { INotification } from "src/types";
 
-export class NotificationsApprovedTop10Store extends BaseStore {
+export class NotificationsApprovedTop10Store extends LoadableStore {
     public appStore: AppStore;
     public notificationsService: NotificationsService;
     public notifications: INotification[];
+
+    protected uniqueUrls: Set<string>;
+    protected transport: Transport;
 
     public constructor(
         appStore: AppStore,
@@ -24,6 +29,11 @@ export class NotificationsApprovedTop10Store extends BaseStore {
         this.notificationsService = notificationsService;
 
         this.notifications = [];
+        this.uniqueUrls = new Set(
+            this.notifications.map(({ pull_request }) => pull_request.html_url),
+        );
+
+        this.transport = getTransport();
 
         autorun(async () => {
             if (
@@ -37,6 +47,12 @@ export class NotificationsApprovedTop10Store extends BaseStore {
     }
 
     protected initAsync = async (): Promise<void> => {
+        await this.fetch();
+
+        this.appStore.listeners.add(this.fetch);
+    };
+
+    protected fetch = async (): Promise<void> => {
         try {
             this.updateLoading(true);
 
@@ -47,6 +63,20 @@ export class NotificationsApprovedTop10Store extends BaseStore {
                 });
 
             this.setNotifications(items);
+
+            const newUrls = items.map(
+                ({ pull_request }) => pull_request.html_url,
+            );
+            const hasDiff =
+                difference([...this.uniqueUrls], newUrls).length > 0;
+
+            this.transport.sendMessageRuntime({
+                action: "NOTIFY_BROADCAST",
+                data: {
+                    hasDiff: hasDiff,
+                },
+            });
+
             this.updateLoading(false);
         } catch (error) {
             console.error(error);
@@ -55,6 +85,15 @@ export class NotificationsApprovedTop10Store extends BaseStore {
 
     public setNotifications = (notifications: INotification[]): void => {
         this.notifications = [...notifications];
+
+        const newUniqueUrls = this.notifications.map(
+            ({ pull_request }) => pull_request.html_url,
+        );
+
+        this.uniqueUrls = new Set(newUniqueUrls);
+
+        // TODO: just for test
+        //this.uniqueUrls.add("qwe");
     };
 
     public get isEmpty(): boolean {

@@ -1,11 +1,11 @@
 import { observable, makeObservable, action, when } from "mobx";
 import { AppStore } from "src/stores";
+import { LoadableStore } from "src/stores/LoadableStore";
 import { IFollower, IPageInfo } from "src/types";
-import { BaseStore } from "src/stores/BaseStore";
 import { UserFollowersService } from "src/services";
 import { CHUNK_LIMIT } from "src/modules/UserFollowers/constants";
 
-export class UserFollowersStore extends BaseStore {
+export class UserFollowersStore extends LoadableStore {
     private appStore: AppStore;
     private userFollowersService: UserFollowersService;
     public followers: IFollower[];

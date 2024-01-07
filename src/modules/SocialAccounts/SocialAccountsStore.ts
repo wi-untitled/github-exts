@@ -1,10 +1,10 @@
 import { makeObservable, observable, when, action } from "mobx";
 import { SocialAccountsService } from "src/services";
 import { AppStore } from "src/stores";
-import { BaseStore } from "src/stores/BaseStore";
+import { LoadableStore } from "src/stores/LoadableStore";
 import { ISocialAccountsItem } from "src/types";
 
-export class SocialAccountsStore extends BaseStore {
+export class SocialAccountsStore extends LoadableStore {
     public socialAccounts: ISocialAccountsItem[];
     private socialAccountsService: SocialAccountsService;
     protected appStore: AppStore;

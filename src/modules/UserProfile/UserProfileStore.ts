@@ -1,10 +1,10 @@
 import { action, makeObservable, observable, when } from "mobx";
 import { AppStore } from "src/stores";
+import { LoadableStore } from "src/stores/LoadableStore";
 import { UserProfileService } from "src/services";
 import { IUserData } from "src/types";
-import { BaseStore } from "src/stores/BaseStore";
 
-export class UserProfileStore extends BaseStore {
+export class UserProfileStore extends LoadableStore {
     public appStore: AppStore;
     public userProfileService: UserProfileService;
     public user: IUserData;
