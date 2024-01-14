@@ -1,22 +1,54 @@
-import { useCallback } from "react";
 import "./AppPopup.css";
 
-function App() {
-    const handleClickCallback = useCallback(() => {
-        window.open(
-            "https://github.com/login/oauth/authorize?client_id=Iv1.1247dc257ee98cdd",
-            "_blank",
-        );
+import { useStore } from "src/hooks";
+import { WidgetsId } from "src/enums";
+import {
+    NotificationsApprovedTop10Module,
+    NotificationsModule,
+    NotificationsRequstedChangesModule,
+} from "src/modules";
+import { observer } from "mobx-react";
+import { useEffect } from "react";
+import { PopupNoAuth } from "src/components";
+
+function AppComponent() {
+    const appStore = useStore("AppStore");
+    const settingsStore = useStore("SettingsStore");
+
+    useEffect(() => {
+        appStore.updateIsOpen(true);
     }, []);
+
+    useEffect(() => {
+        // chrome.runtime.sendMessage({ action: 'IFRAME_TOGGLE', data: {isOpen: true} }, response => {
+        //     console.log({response});
+        // });
+        chrome.runtime.connect();
+    }, []);
+
     return (
         <>
-            <div>
-                <button onClick={handleClickCallback} id="loginBtn">
-                    Click
-                </button>
-            </div>
+            {appStore.isAuthorized ? (
+                <>
+                    <div className="flex flex-col w-full p-4 space-y-2">
+                        {settingsStore.visibleWidgets[
+                            WidgetsId.Notifications
+                        ] && <NotificationsModule />}
+                        {settingsStore.visibleWidgets[
+                            WidgetsId.NotificationsRequestedChanges
+                        ] && <NotificationsRequstedChangesModule />}
+                        {settingsStore.visibleWidgets[
+                            WidgetsId.NotificationsApprovedTop10
+                        ] && <NotificationsApprovedTop10Module />}
+                    </div>
+                </>
+            ) : (
+                <PopupNoAuth />
+            )}
         </>
     );
 }
+
+const App = observer(AppComponent);
 
 export default App;

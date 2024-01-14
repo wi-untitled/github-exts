@@ -54,6 +54,21 @@ function init() {
         });
     }
 
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+
+         console.log({request})
+
+         if (request.message === "Hello from popup!") {
+            chrome.runtime.sendMessage({
+                action: "IFRAME_TOGGLE",
+                data: {
+                    isOpen: request.data.isOpen,
+                },
+            });
+         }
+
+      });
+
     /**
      * Register message from application
      */
