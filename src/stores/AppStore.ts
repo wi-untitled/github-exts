@@ -188,7 +188,11 @@ export class AppStore extends BaseStore {
         }
     };
 
-    protected updateIsOpen = (isOpen: boolean): void => {
+    /**
+     * Make it public because inside popup.html
+     * there is no way pass message to change "isOpen" to "true".
+     */
+    public updateIsOpen = (isOpen: boolean): void => {
         this.isOpen = isOpen;
     };
 

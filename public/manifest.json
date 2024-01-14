@@ -19,7 +19,8 @@
     "tabs",
     "identity",
     "webNavigation",
-    "storage"  
+    "storage",
+    "activeTab"
   ],
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'",
@@ -30,5 +31,8 @@
       "resources": ["*"],
       "matches": ["<all_urls>"]
     }
-  ]
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
 }
