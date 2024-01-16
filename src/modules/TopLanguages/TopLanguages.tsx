@@ -2,7 +2,7 @@ import { observer, useLocalStore } from "mobx-react";
 import { useService, useStore } from "src/hooks";
 import { TopLanguagesStore } from "./TopLanguagesStore";
 import { RacingBarChart } from "./components";
-import { Widget } from "src/components/Widget/Widget";
+import { Widget } from "src/components";
 import { useTranslation } from "react-i18next";
 
 export function TopLanguages() {

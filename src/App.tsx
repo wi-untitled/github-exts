@@ -5,6 +5,7 @@ import { ProtectedRoute } from "./screens/components";
 import { Assets } from "src/components";
 
 import "./App.css";
+import { InstructionScreen } from "./screens/Instruction";
 
 const router = createBrowserRouter(
     [
@@ -15,6 +16,10 @@ const router = createBrowserRouter(
         {
             path: LoginScreen.routeName,
             element: <LoginScreen />,
+        },
+        {
+            path: InstructionScreen.routeName,
+            element: <InstructionScreen />,
         },
         {
             path: SettingsScreen.routeName,

@@ -3,7 +3,7 @@ import { NotificationsStore } from "./NotificationsStore";
 import { useService, useStore } from "src/hooks";
 import { NoResult, PullRequest } from "./components";
 import { makeGithubPullRequestUrl } from "src/utils";
-import { Widget } from "src/components/Widget/Widget";
+import { Widget } from "src/components";
 import { useTranslation } from "react-i18next";
 
 export function Notifications() {
