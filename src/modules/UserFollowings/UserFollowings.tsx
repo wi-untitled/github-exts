@@ -9,8 +9,7 @@ import {
 } from "src/modules/UserFollowings/components";
 import { CHUNK_LIMIT } from "src/modules/UserFollowings/constants";
 import { makeGithubProfileUrl } from "src/utils";
-import { Widget } from "src/components/Widget/Widget";
-import { WidgetHeaderLink } from "src/components/Widget/WidgetHeaderLink/WidgetHeaderLink";
+import { Widget, Link } from "src/components";
 import { useTranslation } from "react-i18next";
 
 function UserFollowings() {
@@ -62,13 +61,13 @@ function UserFollowings() {
                 appStore.userData.following
             }`}
             headerRight={
-                <WidgetHeaderLink
+                <Link
                     href={`${makeGithubProfileUrl(
                         userFollowingsStore.totalCount.toString(),
                     )}?tab=followers`}
                 >
                     {t("userFollowings.openAll")}
-                </WidgetHeaderLink>
+                </Link>
             }
             isLoading={userFollowingsStore.isLoading}
         >

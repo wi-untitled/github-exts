@@ -56,6 +56,14 @@
         "facebook": "facebook",
         "noResult": "Not result"
     },
+    "popup": {
+        "notAuthorized": "Not Authorized",
+        "githubInstruction": "Follow the github instruction about managing access token",
+        "permissionTitle": "Permission",
+        "permissionTitleUserRead": "User followers and following need to be read only access",
+        "whatYouNeedToDoHere": "What you need to do here",
+        "whatYouNeedToDoHereDescription": "After proccess of creation acces token you need to insert it into input on login screen."
+    },
     "components": {
         "switch": {
             "on": "on",

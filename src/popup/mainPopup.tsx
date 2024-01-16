@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 import AppPopup from "./AppPopup.tsx";
-
-import "./indexPopup.css";
 import { Provider } from "mobx-react";
 import createGlobalServices from "src/services/utils/createGlobalServices.ts";
 import createGlobalStores from "src/stores/utils/createGlobalStores.ts";
 import { getTransport } from "src/transport/Transport.ts";
-import "src/i18n/config";
 import { WelcomeLoading } from "src/components/index.ts";
+
+import "src/i18n/config";
+import "./indexPopup.css";
 
 export async function initialize(): Promise<any> {
     const transport = getTransport();
@@ -22,7 +22,7 @@ export async function initialize(): Promise<any> {
                 stores: stores,
                 services: services,
             });
-        }, 30000000);
+        }, 3000);
     });
 
     return promise;

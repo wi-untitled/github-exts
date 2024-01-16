@@ -3,3 +3,7 @@ export { Assets } from "./Assets";
 export { WelcomeLoading } from "./WelcomeLoading";
 export { Switch } from "./Switch";
 export { PopupNoAuth } from "./PopupNoAuth";
+export { Instruction } from "./Instruction";
+export { SecurityMan } from "./SecurityMan";
+export { Link } from "./Link";
+export { Widget } from "./Widget";

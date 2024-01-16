@@ -1,9 +1,8 @@
 import { observer, useLocalStore } from "mobx-react";
 import { useService, useStore } from "src/hooks";
 import { SocialAccountsStore } from "./SocialAccountsStore";
-import { Widget } from "src/components/Widget/Widget";
+import { Widget } from "src/components";
 import { useTranslation } from "react-i18next";
-
 import { iconRender } from "./constants";
 import { NoResult } from "./components/NoResult";
 
