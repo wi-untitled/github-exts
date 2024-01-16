@@ -10,7 +10,6 @@ export function FeatureFlagProvider({
 
     const handleUpdateFeatureFlag = useCallback(
         (featureFlagName: string, value: boolean) => {
-            console.log(flags, featureFlagName);
             if (flags[featureFlagName]) {
                 setFlags({
                     ...flags,

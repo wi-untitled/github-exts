@@ -8,6 +8,7 @@ export const icons = [
     "facebook",
     "twitter",
     "youtube",
+    "back",
 ] as const;
 
 export interface IIconProps {

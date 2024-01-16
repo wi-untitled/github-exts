@@ -17,10 +17,9 @@
   }
   
 .man {
-  left: 200px;
-  position: absolute;
-  top: calc(100% - 225px);
-
+    left: 200px;
+    position: fixed;
+    top: calc(100% - 270px);
     --barrier: gold;
     --barrier-dark: orange;
     --string: #c00;

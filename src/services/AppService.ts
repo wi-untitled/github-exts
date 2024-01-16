@@ -6,7 +6,7 @@ export class AppService {
 
     public constructor() {}
 
-    public isAuthorized = async () => {
+    public isAuthorized = () => {
         const accessToken = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 
         if (!accessToken) {

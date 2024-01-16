@@ -20,9 +20,6 @@ function AppComponent() {
     }, []);
 
     useEffect(() => {
-        // chrome.runtime.sendMessage({ action: 'IFRAME_TOGGLE', data: {isOpen: true} }, response => {
-        //     console.log({response});
-        // });
         chrome.runtime.connect();
     }, []);
 

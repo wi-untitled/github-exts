@@ -184,7 +184,7 @@ export class AppStore extends BaseStore {
             this.setUserData(userData);
             this.updateLoading(false);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     };
 
@@ -225,6 +225,8 @@ export class AppStore extends BaseStore {
 
     public setAccessToken = (accessToken: string | null): void => {
         this.accessToken = accessToken;
+
+        localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, accessToken);
     };
 
     public get isAuthorized(): boolean {

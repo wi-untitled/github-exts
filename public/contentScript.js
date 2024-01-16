@@ -55,19 +55,15 @@ function init() {
     }
 
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-
-         console.log({request})
-
-         if (request.message === "Hello from popup!") {
+        if (request.message === "Hello from popup!") {
             chrome.runtime.sendMessage({
                 action: "IFRAME_TOGGLE",
                 data: {
                     isOpen: request.data.isOpen,
                 },
             });
-         }
-
-      });
+        }
+    });
 
     /**
      * Register message from application
@@ -107,7 +103,7 @@ function init() {
     });
 
     function handleBroadcast() {
-        console.log("handleBroadcast is called");
+        // code here
     }
 
     /**

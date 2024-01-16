@@ -64,6 +64,24 @@
         "whatYouNeedToDoHere": "What you need to do here",
         "whatYouNeedToDoHereDescription": "After proccess of creation acces token you need to insert it into input on login screen."
     },
+    "instruction": {
+        "instruction": "Instruction",
+        "privateRepositoriesTitle": "Full control of private repositories",
+        "privateRepositoriesCommitStatus": "Full control of private repositories",
+        "privateRepositoriesDeploymentStatus": "Full control of private repositories",
+        "privateRepositoriesPublicRepositories": "Full control of private repositories",
+        "orgTeamTitle": "Full control of orgs and teams, read and write org projects",
+        "orgTeamRead": "Read org and team membership, read org projects",
+        "gistTitle": "Full control of private repositories",
+        "userAllDataTitle": "Full control of private repositories",
+        "userAllDataReadProfileData": "Full control of private repositories",
+        "teamDiscussionsTitle": "Read and write team discussions",
+        "teamDiscussionsRead": "Read team discussions",
+        "auditLogTitle": "Full control of audit log",
+        "auditLogRead": "Read access of audit log",
+        "projectTitle": "Full control of projects",
+        "projectRead": "Read access of projects"
+    },
     "components": {
         "switch": {
             "on": "on",

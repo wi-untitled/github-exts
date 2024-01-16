@@ -12,7 +12,7 @@ export function Button({ onClick, isDisabled }: IButtonProps) {
     return (
         <button
             disabled={isDisabled}
-            className={clsx("w-full rounded-md py-1", {
+            className={clsx("w-full rounded-md py-1 text-white bg-slate-800 ", {
                 "bg-red-200": isDisabled,
             })}
             onClick={onClick}

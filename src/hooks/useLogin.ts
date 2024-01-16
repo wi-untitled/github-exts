@@ -29,11 +29,12 @@ export function useLogin({
              * There is important to recieve any 200 status http code
              * to make sure that the access token is valid.
              */
-            await loginService.getUserData(accessToken);
+            const data = await loginService.getUserData(accessToken);
 
-            navigate(MainScreen.routeName);
-
-            onButtonClickSuccess(accessToken);
+            if (data) {
+                onButtonClickSuccess(accessToken);
+                navigate(MainScreen.routeName);
+            }
         } catch (error) {
             console.error(error);
         }
