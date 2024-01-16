@@ -11,6 +11,7 @@ export class SocialAccountsService extends AppService {
     }): Promise<ISocialAccountsItem[]> => {
         try {
             this.isAuthorized();
+
             const oktokit = new Octokit({
                 auth: this.accessToken,
             });

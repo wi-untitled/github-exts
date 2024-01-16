@@ -1,14 +1,21 @@
 import { observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import { LoginModule } from "src/modules";
-import { InstructionScreen } from "../Instruction";
+import { InstructionScreen } from "src/screens";
 import { Link } from "react-router-dom";
 
 function Login() {
+    const { t } = useTranslation();
+
     return (
-        <div className="flex flex-col w-full p-4">
+        <div className="flex flex-col w-full p-4 space-y-2">
             <LoginModule />
-            {/* TODO: update i18n */}
-            <Link to={InstructionScreen.routeName}>Instruction</Link>
+            <Link
+                className="underline hover:no-underline text-blue-500"
+                to={InstructionScreen.routeName}
+            >
+                {t("instruction.instruction")}
+            </Link>
         </div>
     );
 }

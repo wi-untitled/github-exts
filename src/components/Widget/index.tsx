@@ -1,5 +1,6 @@
 import { FC, PropsWithChildren } from "react";
 import { Tooltip } from "react-tooltip";
+import clsx from "clsx";
 import Spinner from "src/components/Spinner";
 import { FeatureFlag } from "src/core";
 
@@ -9,6 +10,7 @@ interface IWidgetProps {
     title: string;
     info?: string;
     id?: string;
+    className?: string;
 }
 
 export const Widget: FC<PropsWithChildren<IWidgetProps>> = ({
@@ -18,9 +20,15 @@ export const Widget: FC<PropsWithChildren<IWidgetProps>> = ({
     title,
     info,
     id,
+    className,
 }) => {
     return (
-        <div className="mb-3 border rounded-md border-gray-200 dark:border-gray-800 overflow-hidden">
+        <div
+            className={clsx(
+                "mb-3 border rounded-md border-gray-200 dark:border-gray-800 overflow-hidden",
+                className,
+            )}
+        >
             <header
                 data-tooltip-id={id}
                 data-tooltip-content={info}

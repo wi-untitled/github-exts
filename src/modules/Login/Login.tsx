@@ -16,7 +16,7 @@ export function Login() {
     });
 
     return (
-        <div className="flex flex-col space-y-2 border rounded-md p-2">
+        <div className="flex flex-col space-y-2">
             <Input
                 onChange={handleInputChange}
                 defaultValue={accessToken}

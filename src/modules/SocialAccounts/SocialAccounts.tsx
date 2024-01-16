@@ -18,22 +18,19 @@ export function SocialAccounts() {
         <Widget
             title={t("socialAccounts.title")}
             isLoading={socialAccountsStore.isLoading}
+            className="mb-6"
         >
             <div className="py-2 px-1 space-x-1 space-y-1">
-                {socialAccountsStore.socialAccounts.length === 0 ? (
-                    <NoResult />
-                ) : (
-                    socialAccountsStore.socialAccounts.map(
-                        ({ name, provider }) => {
-                            /**
-                             * Ignores others cause there is no icons.
-                             * Uncomment when icons are ready.
-                             */
-                            const Render = iconRender[provider];
+                {socialAccountsStore.socialAccounts.map(
+                    ({ name, provider }) => {
+                        /**
+                         * Ignores others cause there is no icons.
+                         * Uncomment when icons are ready.
+                         */
+                        const Render = iconRender[provider];
 
-                            return <Render name={name} />;
-                        },
-                    )
+                        return <Render name={name} />;
+                    },
                 )}
             </div>
         </Widget>
