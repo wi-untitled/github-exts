@@ -9,7 +9,7 @@ import {
 } from "src/modules";
 import { observer } from "mobx-react";
 import { useEffect } from "react";
-import { PopupNoAuth } from "src/components";
+import { Assets, PopupNoAuth } from "src/components";
 
 function AppComponent() {
     const appStore = useStore("AppStore");
@@ -25,6 +25,7 @@ function AppComponent() {
 
     return (
         <>
+            <Assets />
             {appStore.isAuthorized ? (
                 <>
                     <div className="flex flex-col w-full p-4 space-y-2">
