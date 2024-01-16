@@ -226,7 +226,9 @@ export class AppStore extends BaseStore {
     public setAccessToken = (accessToken: string | null): void => {
         this.accessToken = accessToken;
 
-        localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, accessToken);
+        if (accessToken) {
+            localStorage.setItem(STORAGE_KEYS.ACCESS_TOKEN, accessToken);
+        }
     };
 
     public get isAuthorized(): boolean {
