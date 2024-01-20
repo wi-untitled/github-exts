@@ -1,9 +1,9 @@
-import { action, makeObservable, observable } from "mobx";
 import { NotificationsService } from "src/services";
 import { Transport, getTransport } from "src/transport";
+import { ILoadable } from "./interfaces";
+import { LoadableStore } from "./LoadableStore";
 
-export class BaseStore {
-    public isLoading: boolean;
+export class BaseStore extends LoadableStore implements ILoadable {
     protected transport: Transport;
     protected notificationService: NotificationsService;
 
@@ -11,18 +11,9 @@ export class BaseStore {
         transport: Transport = getTransport(),
         notificationService: NotificationsService,
     ) {
-        makeObservable<BaseStore, "updateLoading">(this, {
-            isLoading: observable,
-            updateLoading: action,
-        });
-
-        this.isLoading = true;
+        super();
 
         this.transport = transport;
         this.notificationService = notificationService;
     }
-
-    protected updateLoading = (isLoading: boolean) => {
-        this.isLoading = isLoading;
-    };
 }

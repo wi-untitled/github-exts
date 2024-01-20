@@ -29,6 +29,7 @@ export class AppService {
             return data;
         } catch (error) {
             console.trace(error);
+            // throw new Error('Value must be a number');
 
             return {};
         }

@@ -1,10 +1,4 @@
-import {
-    action,
-    computed,
-    makeAutoObservable,
-    observable,
-    override,
-} from "mobx";
+import { action, computed, makeObservable, observable } from "mobx";
 import { BaseStore } from "src/stores/BaseStore";
 import { IWidget } from "src/types";
 import { WidgetsId } from "src/enums";
@@ -53,19 +47,18 @@ export class SettingsStore extends BaseStore {
     ) {
         super(transport, notificationsService);
 
-        makeAutoObservable<SettingsStore, "updateLoading" | "updateWidgets">(
-            this,
-            {
-                isAutoUpdateEnabled: observable,
-                widgets: observable,
-                updateWidgetById: action,
-                updateWidgets: action,
-                updateAutoUpdateEnabled: action,
-                isLoading: override,
-                updateLoading: override,
-                needSave: computed,
-            },
-        );
+        makeObservable<
+            SettingsStore,
+            "updateWidgets" | "writeSettingsInLocalStorage"
+        >(this, {
+            isAutoUpdateEnabled: observable,
+            widgets: observable,
+            updateWidgetById: action,
+            updateWidgets: action,
+            updateAutoUpdateEnabled: action,
+            writeSettingsInLocalStorage: action,
+            needSave: computed,
+        });
 
         this.widgets = definedWidgets;
         this.isAutoUpdateEnabled = DEFAULT_AUTOUPDATE_ENABLED;
@@ -123,7 +116,10 @@ export class SettingsStore extends BaseStore {
                 }),
             );
 
-            this.initWidgets = this.widgets;
+            // TODO: use observable.array
+            this.initWidgets = this.widgets.map((x) => x);
+            this.widgets = this.initWidgets.map((x) => x);
+
             this.initIsAutoUpdateEnabled = this.isAutoUpdateEnabled;
         } catch (error) {
             console.trace(error);
@@ -173,10 +169,7 @@ export class SettingsStore extends BaseStore {
             this.writeSettingsInLocalStorage();
             // TODO: create fn for this
             this.transport.sendMessage<{
-                action: string;
-                data: {
-                    isAutoUpdateEnabled: boolean;
-                };
+                isAutoUpdateEnabled: boolean;
             }>({
                 action: "AutoUpdateChange",
                 data: { isAutoUpdateEnabled: this.isAutoUpdateEnabled },
@@ -189,6 +182,7 @@ export class SettingsStore extends BaseStore {
     public updateAutoUpdateEnabled = (
         newIsAutoUpdateEnabled: boolean,
     ): void => {
+        this.initIsAutoUpdateEnabled = this.isAutoUpdateEnabled;
         this.isAutoUpdateEnabled = newIsAutoUpdateEnabled;
     };
 
