@@ -22,6 +22,9 @@ export default defineConfig({
         },
     },
     test: {
+        globals: true, // required
+        setupFiles: ["vitest-localstorage-mock"],
+        mockReset: false,
         coverage: {
             // you can include other reporters, but 'json-summary' is required, json is recommended
             reporter: ["text", "json-summary", "json"],

@@ -1,6 +1,7 @@
 import { action, makeObservable, observable } from "mobx";
+import { ILoadable } from "./interfaces";
 
-export class LoadableStore {
+export class LoadableStore implements ILoadable {
     public isLoading: boolean;
 
     public constructor() {
@@ -12,7 +13,7 @@ export class LoadableStore {
         this.isLoading = true;
     }
 
-    protected updateLoading = (isLoading: boolean) => {
+    public updateLoading = (isLoading: boolean) => {
         this.isLoading = isLoading;
     };
 }

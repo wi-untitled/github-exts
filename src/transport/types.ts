@@ -3,7 +3,11 @@ export interface IFRAME_TOGGLE_EVENT {
     data: { isOpen: boolean };
 }
 
-export type ISendAction = "BROADCAST" | "NOTIFY_BROADCAST" | "IFRAME_TOGGLE";
+export type ISendAction =
+    | "BROADCAST"
+    | "NOTIFY_BROADCAST"
+    | "IFRAME_TOGGLE"
+    | "AutoUpdateChange";
 
 export interface ICallbackFnArguments<T> {
     action: ISendAction;

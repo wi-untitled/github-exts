@@ -10,14 +10,15 @@ import { STORAGE_KEYS } from "src/constants";
 import { AppService, NotificationsService } from "src/services";
 import { IUserData } from "src/types";
 import { BaseStore } from "src/stores/BaseStore";
-import { Transport, IFRAME_TOGGLE_EVENT, ISendAction } from "src/transport";
+import { IState } from "src/stores/interfaces";
+import { Transport, IFRAME_TOGGLE_EVENT } from "src/transport";
 import { LinkedList } from "src/core/LinkedList";
 
 export const AUTO_UPDATES_INTERVAL = 120000;
 
 export type IHandleAutoUpdateArguments = { isAutoUpdateEnabled: boolean };
 
-export class AppStore extends BaseStore {
+export class AppStore extends BaseStore implements IState {
     public userData: IUserData;
     public accessToken: string | null;
     public appService: AppService;
@@ -123,6 +124,10 @@ export class AppStore extends BaseStore {
         }
     };
 
+    protected initAsync = async (): Promise<void> => {
+        await this.initUserData();
+    };
+
     protected initializeAccessToken = (): void => {
         try {
             const token = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
@@ -171,10 +176,6 @@ export class AppStore extends BaseStore {
         }
     };
 
-    protected initAsync = async (): Promise<void> => {
-        await this.initUserData();
-    };
-
     protected initUserData = async (): Promise<void> => {
         try {
             this.updateLoading(true);
@@ -186,14 +187,6 @@ export class AppStore extends BaseStore {
         } catch (error) {
             console.error(error);
         }
-    };
-
-    /**
-     * Make it public because inside popup.html
-     * there is no way pass message to change "isOpen" to "true".
-     */
-    public updateIsOpen = (isOpen: boolean): void => {
-        this.isOpen = isOpen;
     };
 
     protected readAutoUpdateEnabledFromLocalStorage = (): void => {
@@ -211,6 +204,14 @@ export class AppStore extends BaseStore {
             console.trace(error);
             this.isAutoUpdateEnabled = false;
         }
+    };
+
+    /**
+     * Make it public because inside popup.html
+     * there is no way pass message to change "isOpen" to "true".
+     */
+    public updateIsOpen = (isOpen: boolean): void => {
+        this.isOpen = isOpen;
     };
 
     public setUserData = (userData: IUserData): void => {
