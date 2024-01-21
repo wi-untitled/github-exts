@@ -1,4 +1,3 @@
-import { describe, test, expect } from "vitest";
 import { getTotalSizesByLanguages } from "..";
 
 describe("[flattenLanguagesEdges.ts]", () => {

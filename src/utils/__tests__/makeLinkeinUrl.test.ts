@@ -1,4 +1,3 @@
-import { describe, test, expect } from "vitest";
 import { makeLinkeinUrl } from "..";
 
 describe("[makeLinkeinUrl.ts]", () => {
