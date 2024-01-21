@@ -33,7 +33,15 @@ export class SocialAccountsService extends AppService {
             const socialAccounts = response.user.socialAccounts;
 
             const mappedSocialAccounts = socialAccounts.edges.map(
-                ({ node: { __typename, displayName, provider } }) => {
+                ({
+                    node: { __typename, displayName, provider },
+                }: {
+                    node: {
+                        __typename: string;
+                        displayName: string;
+                        provider: string;
+                    };
+                }) => {
                     return {
                         type: __typename,
                         name: displayName,

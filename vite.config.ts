@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
 import react from "@vitejs/plugin-react";
+import AutoImport from "unplugin-auto-import/vite";
 
 // TODO: makes dedicated enrties for popup and content script
 // https://vitejs.dev/config/
@@ -15,7 +16,13 @@ export default defineConfig({
             },
         },
     },
-    plugins: [react()],
+    plugins: [
+        react(),
+        AutoImport({
+            imports: ["vitest"],
+            dts: true, // generate TypeScript declaration
+        }),
+    ],
     resolve: {
         alias: {
             src: "/src",
@@ -24,7 +31,7 @@ export default defineConfig({
     test: {
         globals: true, // required
         environment: "jsdom",
-        setupFiles: ["vitest-localstorage-mock"],
+        setupFiles: ["./octokit.ts", "./localStorage.ts"],
         mockReset: false,
         coverage: {
             // you can include other reporters, but 'json-summary' is required, json is recommended
