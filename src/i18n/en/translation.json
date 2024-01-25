@@ -43,6 +43,7 @@
         "NotificationsRequestedChanges": "Enable Notifications Requested Changes",
         "NotificationsApprovedTop10": "Enable Notifications Top 10 Approved Pull Requests",
         "TopLanguages": "Enable Top Languages",
+        "Stats": "Enable Github's Stats",
         "saveButton": "Save Settings",
         "autoUpdate": "Enable autoupdate notifications",
         "autoUpdateInfo": "Enable autoupdate for extentions button. Possibility to recieve marker on button to notify the user that you have got updates every 120 seconds."
@@ -81,6 +82,16 @@
         "auditLogRead": "Read access of audit log",
         "projectTitle": "Full control of projects",
         "projectRead": "Read access of projects"
+    },
+    "stats": {
+        "title": "Github's Stats",
+        "totalIssues": "Total Issues",
+        "totalMergedPullRequests": "Total Merged Pull Requests",
+        "totalPullRequests": "Total PullRequests",
+        "totalRepositoriesContributedTo": "Total Repositories Contributed To",
+        "totalRepositoryDiscussionComments": "Total Repository Discussion Comments",
+        "totalRepositoryDiscussions": "Total Repository Discussions",
+        "totalStars": "Total Stars"
     },
     "components": {
         "switch": {

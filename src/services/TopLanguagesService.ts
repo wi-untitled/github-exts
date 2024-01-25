@@ -37,6 +37,7 @@ export class TopLanguagesService extends AppService {
             }>({
                 query: TopLanguagesQuery,
                 login: login,
+                includeMergedPullRequests: true,
             });
 
             const repoNodes: ILanguage[] = response.user.repositories.nodes;

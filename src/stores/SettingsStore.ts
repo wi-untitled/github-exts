@@ -31,6 +31,10 @@ export const definedWidgets: IWidget[] = [
         id: WidgetsId.NotificationsApprovedTop10,
         enabled: true,
     },
+    {
+        id: WidgetsId.Stats,
+        enabled: true,
+    },
 ];
 
 export const DEFAULT_AUTOUPDATE_ENABLED = false;

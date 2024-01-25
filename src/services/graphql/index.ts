@@ -3,3 +3,4 @@ export { NotificationsApprovedTop10Query } from "./NotificationsApprovedTop10Que
 export { SocialAccountsQuery } from "./SocialAccountsQuery";
 export { UserFollowerQuery } from "./UserFollowerQuery";
 export { UserFollowingQuery } from "./UserFollowingQuery";
+export { StatsQuery } from "./StatsQuery";

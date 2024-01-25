@@ -7,3 +7,4 @@ export { makeYoutubeUrl } from "./makeYoutubeUrl";
 export { makeLinkeinUrl } from "./makeLinkeinUrl";
 export { makeInstagramUrl } from "./makeInstagramUrl";
 export { makeFacebookUrl } from "./makeFacebookUrl";
+export { formatNumber } from "./formatNumber";

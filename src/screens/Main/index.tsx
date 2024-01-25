@@ -10,6 +10,7 @@ import {
     TopLanguagesModule,
     NotificationsApprovedTop10Module,
     SocialAccountsModule,
+    StatsModule,
 } from "src/modules";
 
 export function Main() {
@@ -35,6 +36,9 @@ export function Main() {
                 {settingsStore.visibleWidgets[
                     WidgetsId.NotificationsApprovedTop10
                 ] && <NotificationsApprovedTop10Module />}
+                {settingsStore.visibleWidgets[WidgetsId.Stats] && (
+                    <StatsModule />
+                )}
                 {settingsStore.visibleWidgets[WidgetsId.TopLanguages] && (
                     <TopLanguagesModule />
                 )}

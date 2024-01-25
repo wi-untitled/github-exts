@@ -15,6 +15,7 @@ import { SettingsScreen } from "src/screens";
 function UserProfile() {
     const appStore = useStore("AppStore");
     const userProfileService = useService("UserProfileService");
+
     const userProfileStore = useLocalStore(
         () => new UserProfileStore(appStore, userProfileService),
     );
