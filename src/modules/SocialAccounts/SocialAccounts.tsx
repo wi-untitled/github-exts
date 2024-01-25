@@ -20,7 +20,7 @@ export function SocialAccounts() {
             isLoading={socialAccountsStore.isLoading}
             className="mb-6"
         >
-            <div className="py-2 px-1 space-x-1 space-y-1">
+            <div className="p-3 space-x-2 flex">
                 {socialAccountsStore.socialAccounts.map(
                     ({ name, provider }) => {
                         /**
