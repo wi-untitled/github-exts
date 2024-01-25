@@ -5,4 +5,5 @@ export enum WidgetsId {
     Notifications = "Notifications",
     NotificationsRequestedChanges = "NotificationsRequestedChanges",
     NotificationsApprovedTop10 = "NotificationsApprovedTop10",
+    Stats = "Stats",
 }

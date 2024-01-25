@@ -1,5 +1,5 @@
 import { Octokit } from "octokit";
-import { TopLanguagesService } from "../TopLanguages";
+import { TopLanguagesService } from "../TopLanguagesService";
 import { STORAGE_KEYS } from "src/constants";
 
 const mock = {

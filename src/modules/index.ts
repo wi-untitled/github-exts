@@ -8,3 +8,4 @@ export { NotificationsRequstedChangesModule } from "src/modules/NotificationsReq
 export { TopLanguagesModule } from "src/modules/TopLanguages/TopLanguages";
 export { SettingsWidgetModule } from "src/modules/SettingsWidgets/SettingsWidgets";
 export { SocialAccountsModule } from "src/modules/SocialAccounts/SocialAccounts";
+export { StatsModule } from "src/modules/Stats/Stats";

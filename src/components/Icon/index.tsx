@@ -9,6 +9,10 @@ export const icons = [
     "twitter",
     "youtube",
     "back",
+    "issues",
+    "commits",
+    "star",
+    "repository",
 ] as const;
 
 export interface IIconProps {
