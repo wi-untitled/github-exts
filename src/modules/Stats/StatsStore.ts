@@ -50,7 +50,7 @@ export class StatsStore extends LoadableStore {
         );
     }
 
-    public initAsync = async () => {
+    public initAsync = async (): Promise<void> => {
         try {
             await this.getStats();
         } catch (error) {
@@ -58,7 +58,7 @@ export class StatsStore extends LoadableStore {
         }
     };
 
-    public getStats = async () => {
+    public getStats = async (): Promise<void> => {
         try {
             this.updateLoading(true);
 
@@ -71,8 +71,6 @@ export class StatsStore extends LoadableStore {
             this.updateData({ ...result });
         } catch (error) {
             console.log(error);
-
-            return {};
         } finally {
             this.updateLoading(false);
         }

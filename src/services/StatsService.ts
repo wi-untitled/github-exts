@@ -1,6 +1,7 @@
 import { AppService } from ".";
 import { Octokit } from "octokit";
 import { StatsQuery } from "src/services/graphql";
+import { IStatsResponse } from "src/types";
 
 export class StatsService extends AppService {
     public constructor() {
@@ -23,13 +24,13 @@ export class StatsService extends AppService {
                 auth: this.accessToken,
             });
 
-            const response = await octokit.graphql<any>({
+            const response = (await octokit.graphql({
                 query: StatsQuery,
                 login: login,
                 includeMergedPullRequests: includeMergedPullRequests,
                 includeDiscussions: includeDiscussions,
                 after: null,
-            });
+            })) as IStatsResponse;
 
             const totalStars = response.user.repositories.nodes.reduce(
                 (acc, repository) => {

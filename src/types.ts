@@ -142,3 +142,77 @@ export interface ISocialAccountsItem {
     name: string;
     provider: ISocialAccountsProvider;
 }
+
+export interface ITopLanguageResponse {
+    user: {
+        repositories: {
+            nodes: {
+                name: string;
+                languages: {
+                    edges: {
+                        size: number; // bytes
+                        node: {
+                            color: string;
+                            name: string;
+                        };
+                    }[];
+                };
+            }[];
+        };
+    };
+}
+
+export interface IStatsResponse {
+    user: {
+        name: string;
+        login: string;
+        contributionsCollection: {
+            totalCommitContributions: number;
+            totalPullRequestReviewContributions: number;
+        };
+        repositoriesContributedTo: {
+            totalCount: number;
+        };
+        pullRequests: {
+            totalCount: number;
+        };
+        mergedPullRequests: {
+            totalCount: number;
+        };
+        openIssues: {
+            totalCount: number;
+        };
+        closedIssues: {
+            totalCount: number;
+        };
+        repositoryDiscussions: {
+            totalCount: number;
+        };
+        repositoryDiscussionComments: {
+            totalCount: number;
+        };
+        repositories: {
+            totalCount: number;
+            nodes: Array<{
+                name: string;
+                stargazers: {
+                    totalCount: number;
+                };
+            }>;
+            pageInfo: {
+                hasNextPage: boolean;
+                endCursor: string;
+            };
+        };
+    };
+}
+
+export interface IStats {
+    totalRepositoriesContributedTo: number;
+    totalPullRequests: number;
+    totalMergedPullRequests: number;
+    totalIssues: number;
+    totalRepositoryDiscussions: number;
+    totalRepositoryDiscussionComments: number;
+    totalStars: number;
+}

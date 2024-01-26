@@ -1,15 +1,18 @@
 import { Octokit } from "octokit";
 import { AppService } from ".";
-import { ILanguage, ITopLanguage } from "src/types";
+import {
+    ILanguage,
+    IStats,
+    ITopLanguage,
+    ITopLanguageResponse,
+} from "src/types";
 import { flattenLanguagesEdges } from "src/utils";
 import { getTotalSizesByLanguages } from "src/utils/getTotalSizesByLanguages";
 import { TopLanguagesQuery } from "src/services/graphql";
 import { flow } from "lodash";
 
 export class TopLanguagesService extends AppService {
-    public getTopLanguages = async (
-        login: string,
-    ): Promise<[string, ITopLanguage][]> => {
+    public getTopLanguages = async (login: string): Promise<IStats | []> => {
         try {
             this.isAuthorized();
 
@@ -17,28 +20,11 @@ export class TopLanguagesService extends AppService {
                 auth: this.accessToken,
             });
 
-            const response = await oktokit.graphql<{
-                user: {
-                    repositories: {
-                        nodes: {
-                            name: string;
-                            languages: {
-                                edges: {
-                                    size: number; // bytes
-                                    node: {
-                                        color: string;
-                                        name: string;
-                                    };
-                                }[];
-                            };
-                        }[];
-                    };
-                };
-            }>({
+            const response = (await oktokit.graphql({
                 query: TopLanguagesQuery,
                 login: login,
                 includeMergedPullRequests: true,
-            });
+            })) as ITopLanguageResponse;
 
             const repoNodes: ILanguage[] = response.user.repositories.nodes;
 
