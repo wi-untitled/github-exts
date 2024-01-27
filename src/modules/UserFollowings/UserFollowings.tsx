@@ -9,7 +9,7 @@ import {
 } from "src/modules/UserFollowings/components";
 import { CHUNK_LIMIT } from "src/modules/UserFollowings/constants";
 import { makeGithubProfileUrl } from "src/utils";
-import { Widget, Link } from "src/components";
+import { Widget, Link, NoResult } from "src/components";
 import { useTranslation } from "react-i18next";
 
 function UserFollowings() {
@@ -58,7 +58,7 @@ function UserFollowings() {
     return (
         <Widget
             title={`${t("userFollowings.title")} • ${
-                appStore.userData.following
+                userFollowingsStore.totalCount
             }`}
             headerRight={
                 <Link
@@ -71,19 +71,25 @@ function UserFollowings() {
             }
             isLoading={userFollowingsStore.isLoading}
         >
-            <div className="p-3">
-                <UserFollowingsList
-                    followings={followings}
-                    isCollapsed={isCollapsed}
-                />
-                <UserFollowingsButtonMore
-                    isLoading={userFollowingsStore.isMoreUserFollowingsLoading}
-                    onMore={handleGetMoreFollowersCallback}
-                    onHide={handleHideCallback}
-                    showHide={isShowHide}
-                    canLoadMore={userFollowingsStore.canLoadMore}
-                />
-            </div>
+            {userFollowingsStore.totalCount === 0 ? (
+                <NoResult message={t("userFollowings.noResult")} />
+            ) : (
+                <div className="p-3">
+                    <UserFollowingsList
+                        followings={followings}
+                        isCollapsed={isCollapsed}
+                    />
+                    <UserFollowingsButtonMore
+                        isLoading={
+                            userFollowingsStore.isMoreUserFollowingsLoading
+                        }
+                        onMore={handleGetMoreFollowersCallback}
+                        onHide={handleHideCallback}
+                        showHide={isShowHide}
+                        canLoadMore={userFollowingsStore.canLoadMore}
+                    />
+                </div>
+            )}
         </Widget>
     );
 }

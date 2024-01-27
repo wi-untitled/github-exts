@@ -1,9 +1,9 @@
 import { observer, useLocalStore } from "mobx-react";
 import { NotificationsStore } from "./NotificationsStore";
 import { useService, useStore } from "src/hooks";
-import { NoResult, PullRequest } from "./components";
+import { PullRequest } from "./components";
 import { makeGithubPullRequestUrl } from "src/utils";
-import { Widget } from "src/components";
+import { Widget, NoResult } from "src/components";
 import { useTranslation } from "react-i18next";
 
 export function Notifications() {
@@ -21,7 +21,7 @@ export function Notifications() {
         >
             <div className="max-h-32 overflow-y-scroll no-scrollbar">
                 {notificationsStore.isEmpty && !notificationsStore.isLoading ? (
-                    <NoResult />
+                    <NoResult message={t("notifications.empty")} />
                 ) : (
                     !notificationsStore.isLoading &&
                     notificationsStore.notifications.map(

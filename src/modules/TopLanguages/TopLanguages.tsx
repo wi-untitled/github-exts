@@ -2,7 +2,7 @@ import { observer, useLocalStore } from "mobx-react";
 import { useService, useStore } from "src/hooks";
 import { TopLanguagesStore } from "./TopLanguagesStore";
 import { RacingBarChart } from "./components";
-import { Widget } from "src/components";
+import { NoResult, Widget } from "src/components";
 import { useTranslation } from "react-i18next";
 
 export function TopLanguages() {
@@ -20,10 +20,14 @@ export function TopLanguages() {
             info={t("topLanguages.info")}
             id={TopLanguages.TooltipId}
         >
-            <RacingBarChart
-                initData={topLanguagesStore.data}
-                medium={topLanguagesStore.medium}
-            />
+            {topLanguagesStore.data.length === 0 ? (
+                <NoResult message={t("topLanguages.noResult")} />
+            ) : (
+                <RacingBarChart
+                    initData={topLanguagesStore.data}
+                    medium={topLanguagesStore.medium}
+                />
+            )}
         </Widget>
     );
 }

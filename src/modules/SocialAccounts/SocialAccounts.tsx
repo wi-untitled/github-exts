@@ -1,10 +1,9 @@
 import { observer, useLocalStore } from "mobx-react";
 import { useService, useStore } from "src/hooks";
 import { SocialAccountsStore } from "./SocialAccountsStore";
-import { Widget } from "src/components";
+import { Widget, NoResult } from "src/components";
 import { useTranslation } from "react-i18next";
 import { iconRender } from "./constants";
-import { NoResult } from "./components/NoResult";
 
 export function SocialAccounts() {
     const appStore = useStore("AppStore");
@@ -20,19 +19,23 @@ export function SocialAccounts() {
             isLoading={socialAccountsStore.isLoading}
             className="mb-6"
         >
-            <div className="p-3 space-x-2 flex">
-                {socialAccountsStore.socialAccounts.map(
-                    ({ name, provider }) => {
-                        /**
-                         * Ignores others cause there is no icons.
-                         * Uncomment when icons are ready.
-                         */
-                        const Render = iconRender[provider];
+            {socialAccountsStore.socialAccounts.length === 0 ? (
+                <NoResult message={t("socialAccounts.noResult")} />
+            ) : (
+                <div className="p-3 space-x-2 flex">
+                    {socialAccountsStore.socialAccounts.map(
+                        ({ name, provider }) => {
+                            /**
+                             * Ignores others cause there is no icons.
+                             * Uncomment when icons are ready.
+                             */
+                            const Render = iconRender[provider];
 
-                        return <Render name={name} />;
-                    },
-                )}
-            </div>
+                            return <Render name={name} />;
+                        },
+                    )}
+                </div>
+            )}
         </Widget>
     );
 }

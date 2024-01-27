@@ -75,9 +75,9 @@ export class UserFollowersStore extends LoadableStore {
             this.updateFollowers(items);
             this.updatePageInfo(pageInfo);
             this.updateTotalCount(totalCount);
-            this.updateLoading(false);
         } catch (error) {
             console.error(error);
+        } finally {
             this.updateLoading(false);
         }
     };
