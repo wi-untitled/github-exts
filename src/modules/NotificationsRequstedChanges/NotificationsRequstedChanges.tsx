@@ -1,9 +1,9 @@
 import { observer, useLocalStore } from "mobx-react";
 import { NotificationsRequstedChangesStore } from "./NotificationsRequstedChangesStore";
 import { useService, useStore } from "src/hooks";
-import { NoResult, RequestedChangesPullRequest } from "./components";
+import { RequestedChangesPullRequest } from "./components";
 import { makeGithubPullRequestUrl } from "src/utils";
-import { Widget } from "src/components";
+import { Widget, NoResult } from "src/components";
 import { useTranslation } from "react-i18next";
 
 export function NotificationsRequstedChanges() {
@@ -25,7 +25,9 @@ export function NotificationsRequstedChanges() {
         >
             <div className="max-h-32 overflow-y-scroll no-scrollbar">
                 {notificationsStore.isEmpty && !notificationsStore.isLoading ? (
-                    <NoResult />
+                    <NoResult
+                        message={t("notificationsRequestedChanges.empty")}
+                    />
                 ) : (
                     !notificationsStore.isLoading &&
                     notificationsStore.notifications.map(

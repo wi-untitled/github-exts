@@ -7,3 +7,4 @@ export { Instruction } from "./Instruction";
 export { SecurityMan } from "./SecurityMan";
 export { Link } from "./Link";
 export { Widget } from "./Widget";
+export { NoResult } from "./NoResult";

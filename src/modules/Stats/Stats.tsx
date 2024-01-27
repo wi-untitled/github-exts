@@ -16,7 +16,12 @@ export function Stats() {
     );
 
     return (
-        <Widget title={`${t("stats.title")}`} isLoading={statsStore.isLoading}>
+        <Widget
+            title={`${t("stats.title")}`}
+            info={t("stats.info")}
+            id={Stats.TooltipId}
+            isLoading={statsStore.isLoading}
+        >
             <div className="space-y-2 p-3">
                 {props.map((p) => {
                     const hasIcon = Boolean(iconsConfig[p]);
@@ -40,5 +45,7 @@ export function Stats() {
         </Widget>
     );
 }
+
+Stats.TooltipId = "Stats";
 
 export const StatsModule = observer(Stats);

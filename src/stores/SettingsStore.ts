@@ -85,6 +85,7 @@ export class SettingsStore extends BaseStore {
             return Boolean(hasData);
         } catch (error) {
             console.trace(error);
+
             return false;
         }
     };
@@ -186,7 +187,6 @@ export class SettingsStore extends BaseStore {
     public updateAutoUpdateEnabled = (
         newIsAutoUpdateEnabled: boolean,
     ): void => {
-        this.initIsAutoUpdateEnabled = this.isAutoUpdateEnabled;
         this.isAutoUpdateEnabled = newIsAutoUpdateEnabled;
     };
 

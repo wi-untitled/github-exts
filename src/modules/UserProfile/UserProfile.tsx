@@ -27,14 +27,18 @@ function UserProfile() {
 
     return (
         <div
-            className="w-full bg px-4 py-2 bg-gray-100 dark:bg-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 relative"
+            className="w-full flex items-center bg px-4 py-2 bg-gray-100 dark:bg-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 relative"
             style={{ minHeight: "57px" }}
         >
             {userProfileStore.isLoading ? (
                 <Spinner absoluteFill />
             ) : (
-                <div className="flex flex-row space-x-3 items-center">
-                    <UserProfileAvatar url={userProfileStore.user.avatar_url} />
+                <div className="flex flex-row space-x-3 items-center w-full">
+                    {userProfileStore.user.avatar_url ? (
+                        <UserProfileAvatar
+                            url={userProfileStore.user.avatar_url}
+                        />
+                    ) : null}
                     <div className="flex flex-col justify-center text-left flex-1">
                         <div className="flex flex-col space-y-0.5">
                             <UserProfileName

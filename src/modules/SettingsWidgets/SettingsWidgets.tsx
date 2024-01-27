@@ -44,6 +44,7 @@ export function SettingsWidget() {
         <div className="py-2 px-4 space-y-3">
             <div className="space-y-1">
                 <SettingsTitle title={t("settingsWidgets.widgetTitle")} />
+                <div className="h-px w-full bg-gray-700 mb-2" />
                 <div className="space-y-2">
                     {settingsStore.widgets.map(({ id, enabled }) => {
                         const widgetId = id as WidgetsId;
@@ -65,6 +66,7 @@ export function SettingsWidget() {
                     title={t("settingsWidgets.globalText")}
                     info={t("settingsWidgets.globalInfo")}
                 />
+                <div className="h-px w-full bg-gray-700 mb-2" />
                 <SettingsSwitch
                     id="topLanguagesTooltip"
                     enabled={flags["enableWidgetTitleTooltip"]}

@@ -3,33 +3,36 @@
         "title": "Followings",
         "openAll": "Open all",
         "more": "More",
-        "hide": "Hide"
+        "hide": "Hide",
+        "noResult": "No Followings"
     },
     "userFollowers": {
         "title": "Followers",
         "openAll": "Open all",
         "more": "More",
-        "hide": "Hide"
+        "hide": "Hide",
+        "noResult": "No Followers"
     },
     "topLanguages": {
         "title": "Top 5 Languages",
-        "info": "The result is measured by top 100 of your repositories and first 10 languages are sorted by size"
+        "info": "The result is measured by top 100 of your repositories and first 10 languages are sorted by size",
+        "noResult": "No data"
     },
     "notificationsRequestedChanges": {
         "title": "Requested Changes for the last week",
-        "empty": "No requested pull requests"
+        "empty": "No pull requests"
     },
     "notifications": {
         "title": "Requested PRs for the last week",
-        "empty": "No requested pull requests"
+        "empty": "No pull requests"
     },
     "login": {
-        "btnLogin": "Setup access key",
+        "btnLogin": "Setup up access token",
         "placeholder": "Insert your access token"
     },
     "notificationsApprovedTop10": {
         "title": "Top 10 Approved Pull Requests",
-        "empty": "No requested pull requests"
+        "empty": "No pull requests"
     },
     "welcomeLoading": "Loading...",
     "settingsWidgets": {
@@ -55,7 +58,7 @@
         "linkedin": "linkedin",
         "twitter": "twitter",
         "facebook": "facebook",
-        "noResult": "Not result"
+        "noResult": "No result"
     },
     "popup": {
         "notAuthorized": "Not Authorized",
@@ -87,11 +90,12 @@
         "title": "Github's Stats",
         "totalIssues": "Total Issues",
         "totalMergedPullRequests": "Total Merged Pull Requests",
-        "totalPullRequests": "Total PullRequests",
+        "totalPullRequests": "Total Pull Requests",
         "totalRepositoriesContributedTo": "Total Repositories Contributed To",
         "totalRepositoryDiscussionComments": "Total Repository Discussion Comments",
         "totalRepositoryDiscussions": "Total Repository Discussions",
-        "totalStars": "Total Stars"
+        "totalStars": "Total Stars",
+        "info": "The result is measured by top 100 of your repositories"
     },
     "components": {
         "switch": {
