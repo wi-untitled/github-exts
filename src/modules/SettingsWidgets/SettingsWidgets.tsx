@@ -61,32 +61,35 @@ export function SettingsWidget() {
                     })}
                 </div>
             </div>
-            <div className="space-y-2">
-                <SettingsTitle
-                    title={t("settingsWidgets.globalText")}
-                    info={t("settingsWidgets.globalInfo")}
-                />
-                <div className="h-px w-full bg-gray-700 mb-2" />
-                <SettingsSwitch
-                    id="topLanguagesTooltip"
-                    enabled={flags["enableWidgetTitleTooltip"]}
-                    title={t("settingsWidgets.widgetTitleTooltipText")}
-                    onChange={handleToggleWidgetTitleTooltipCallback}
-                />
-                <SettingsSwitch
-                    id="autoUpdateEnabled"
-                    enabled={settingsStore.isAutoUpdateEnabled}
-                    title={t("settingsWidgets.autoUpdate")}
-                    onChange={handleAutoUpdateEnabled}
-                    info={t("settingsWidgets.autoUpdateInfo")}
-                />
-            </div>
-            <div>
-                <SaveSettingsButton
-                    needSave={settingsStore.needSave}
-                    onClick={handleSaveSettingsCallback}
-                />
-            </div>
+            {import.meta.env.MODE === "development" ? (
+                <>
+                    <div className="space-y-2">
+                        <SettingsTitle
+                            title={t("settingsWidgets.globalText")}
+                        />
+                        <div className="h-px w-full bg-gray-700 mb-2" />
+                        <SettingsSwitch
+                            id="topLanguagesTooltip"
+                            enabled={flags["enableWidgetTitleTooltip"]}
+                            title={t("settingsWidgets.widgetTitleTooltipText")}
+                            onChange={handleToggleWidgetTitleTooltipCallback}
+                        />
+                        <SettingsSwitch
+                            id="autoUpdateEnabled"
+                            enabled={settingsStore.isAutoUpdateEnabled}
+                            title={t("settingsWidgets.autoUpdate")}
+                            onChange={handleAutoUpdateEnabled}
+                            info={t("settingsWidgets.autoUpdateInfo")}
+                        />
+                    </div>
+                    <div>
+                        <SaveSettingsButton
+                            needSave={settingsStore.needSave}
+                            onClick={handleSaveSettingsCallback}
+                        />
+                    </div>
+                </>
+            ) : null}
         </div>
     );
 }

@@ -10,6 +10,7 @@
         "build": "tsc && vite build",
         "build-extentions": "tsc && vite build",
         "build:watch": "vite build --watch --mode=development",
+        "build:prod": "vite build --watch --mode=production",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --config .eslintrc.cjs",
         "preview": "vite preview",
         "commit": "git-cz",

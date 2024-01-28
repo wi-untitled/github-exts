@@ -14,7 +14,6 @@ import { WelcomeLoading } from "./components";
 
 export async function initialize(): Promise<any> {
     const transport = getTransport();
-
     const stores = createGlobalStores(transport);
     const services = createGlobalServices();
 
