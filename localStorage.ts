@@ -12,7 +12,7 @@ const localStorageMock: Storage = (() => {
         clear: (): void => {
             store = {};
         },
-        key: (index: number): string | null => "",
+        key: (_: number): string | null => "",
         length: Object.keys(store).length,
     };
 })();

@@ -3,7 +3,6 @@ import { resolve } from "path";
 import react from "@vitejs/plugin-react";
 import AutoImport from "unplugin-auto-import/vite";
 
-// TODO: makes dedicated enrties for popup and content script
 // https://vitejs.dev/config/
 export default defineConfig({
     build: {
@@ -29,9 +28,9 @@ export default defineConfig({
         },
     },
     test: {
-        globals: true, // required
+        globals: true,
         environment: "jsdom",
-        setupFiles: ["./octokit.ts", "./localStorage.ts"],
+        setupFiles: ["./octokit.ts", "./localStorage.ts", "./console.ts"],
         mockReset: false,
         coverage: {
             // you can include other reporters, but 'json-summary' is required, json is recommended
