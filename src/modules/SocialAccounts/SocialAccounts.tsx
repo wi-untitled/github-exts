@@ -17,7 +17,6 @@ export function SocialAccounts() {
         <Widget
             title={t("socialAccounts.title")}
             isLoading={socialAccountsStore.isLoading}
-            className="mb-6"
         >
             {socialAccountsStore.socialAccounts.length === 0 ? (
                 <NoResult message={t("socialAccounts.noResult")} />

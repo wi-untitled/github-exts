@@ -39,11 +39,23 @@ export const definedWidgets: IWidget[] = [
 
 export const DEFAULT_AUTOUPDATE_ENABLED = false;
 
+export const DEFAULT_PREDICTABLE = [
+    WidgetsId.TopLanguages,
+    WidgetsId.Stats,
+    WidgetsId.Notifications,
+    WidgetsId.SocialAccount,
+    WidgetsId.UserFollowers,
+    WidgetsId.UserFollowings,
+    WidgetsId.NotificationsApprovedTop10,
+    WidgetsId.NotificationsRequestedChanges,
+];
+
 export class SettingsStore extends BaseStore {
     protected initWidgets: IWidget[];
     public widgets: IWidget[];
     protected initIsAutoUpdateEnabled: boolean;
     public isAutoUpdateEnabled: boolean;
+    public predictable: WidgetsId[];
 
     public constructor(
         transport: Transport,
@@ -57,15 +69,18 @@ export class SettingsStore extends BaseStore {
         >(this, {
             isAutoUpdateEnabled: observable,
             widgets: observable,
+            predictable: observable,
             updateWidgetById: action,
             updateWidgets: action,
             updateAutoUpdateEnabled: action,
             writeSettingsInLocalStorage: action,
+            updatePredictable: action,
             needSave: computed,
         });
 
         this.widgets = definedWidgets;
         this.isAutoUpdateEnabled = DEFAULT_AUTOUPDATE_ENABLED;
+        this.predictable = DEFAULT_PREDICTABLE;
 
         // TODO: removes when local storage sync is implemented
         this.isLoading = false;
@@ -102,15 +117,18 @@ export class SettingsStore extends BaseStore {
                 return;
             }
 
-            const { widgets, isAutoUpdateEnabled } = JSON.parse(data);
+            const { widgets, isAutoUpdateEnabled, predictable } =
+                JSON.parse(data);
 
             this.updateWidgets(widgets);
             this.updateAutoUpdateEnabled(isAutoUpdateEnabled ?? false);
+            this.updatePredictable(predictable ?? DEFAULT_PREDICTABLE);
         } catch (error) {
             console.trace(error);
         }
     };
 
+    // TODO: makes dedicated fn to update by field name in LS
     protected writeSettingsInLocalStorage = (): void => {
         try {
             localStorage.setItem(
@@ -118,6 +136,7 @@ export class SettingsStore extends BaseStore {
                 JSON.stringify({
                     widgets: this.widgets,
                     isAutoUpdateEnabled: this.isAutoUpdateEnabled,
+                    predictable: this.predictable,
                 }),
             );
 
@@ -188,6 +207,12 @@ export class SettingsStore extends BaseStore {
         newIsAutoUpdateEnabled: boolean,
     ): void => {
         this.isAutoUpdateEnabled = newIsAutoUpdateEnabled;
+    };
+
+    public updatePredictable = (newPredictable: WidgetsId[]): void => {
+        this.predictable = newPredictable;
+
+        this.writeSettingsInLocalStorage();
     };
 
     public get needSave(): boolean {

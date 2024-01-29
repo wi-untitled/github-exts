@@ -8,3 +8,5 @@ export { SecurityMan } from "./SecurityMan";
 export { Link } from "./Link";
 export { Widget } from "./Widget";
 export { NoResult } from "./NoResult";
+export { SortableItem } from "./SortableItem";
+export { SortableList } from "./SortableList";

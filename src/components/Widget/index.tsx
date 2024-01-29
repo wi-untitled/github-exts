@@ -37,7 +37,9 @@ export const Widget: FC<PropsWithChildren<IWidgetProps>> = ({
                 <strong className="text-sm">{title}</strong>
                 {headerRight}
             </header>
-            <div className="relative">{isLoading ? <Spinner /> : children}</div>
+            <div className="relative bg-[#0d1117]">
+                {isLoading ? <Spinner /> : children}
+            </div>
             <FeatureFlag name="enableWidgetTitleTooltip">
                 <>
                     {info && (
