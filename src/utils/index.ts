@@ -8,3 +8,5 @@ export { makeLinkeinUrl } from "./makeLinkeinUrl";
 export { makeInstagramUrl } from "./makeInstagramUrl";
 export { makeFacebookUrl } from "./makeFacebookUrl";
 export { formatNumber } from "./formatNumber";
+export { arrayMoveImmutable, arrayMoveMutable } from "./arrayMoveImmutable";
+export { getIndex } from "./getIndex";

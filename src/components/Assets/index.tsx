@@ -242,6 +242,19 @@ export function IconRepository() {
     );
 }
 
+export function IconDrag() {
+    return (
+        <svg>
+            <g id="drag">
+                <circle cx="4" cy="4" r="3" fill="currentColor" />
+                <circle cx="12" cy="4" r="3" fill="currentColor" />
+                <circle cx="4" cy="12" r="3" fill="currentColor" />
+                <circle cx="12" cy="12" r="3" fill="currentColor" />
+            </g>
+        </svg>
+    );
+}
+
 export function Assets() {
     return (
         <div className="hidden">
@@ -259,6 +272,7 @@ export function Assets() {
             <IconCommits />
             <IconStar />
             <IconRepository />
+            <IconDrag />
         </div>
     );
 }

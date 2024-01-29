@@ -9,6 +9,9 @@
 
   color-scheme: light dark;
   color: #fff;
+  /* INFO: It used as background while element is draggable.
+           Wheather you want to change it do not miss change in src/components/Widget.tsx
+  */
   background-color: #0d1117;
 
   font-synthesis: none;
