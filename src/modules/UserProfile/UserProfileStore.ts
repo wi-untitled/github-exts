@@ -3,11 +3,13 @@ import { AppStore } from "src/stores";
 import { LoadableStore } from "src/stores/LoadableStore";
 import { UserProfileService } from "src/services";
 import { IUserData } from "src/types";
+import { BadCredentinals } from "src/errors";
 
 export class UserProfileStore extends LoadableStore {
     public appStore: AppStore;
     public userProfileService: UserProfileService;
     public user: IUserData;
+    public error?: Error;
 
     public constructor(
         appStore: AppStore,
@@ -15,13 +17,17 @@ export class UserProfileStore extends LoadableStore {
     ) {
         super();
 
-        makeObservable<UserProfileStore, "updateUser">(this, {
+        makeObservable<UserProfileStore, "updateUser" | "updateError">(this, {
             user: observable,
+            error: observable,
             updateUser: action,
+            updateError: action,
         });
 
         this.appStore = appStore;
         this.userProfileService = userProfileService;
+
+        this.error = undefined;
 
         autorun(async () => {
             if (this.appStore.readyInitAsync) {
@@ -38,9 +44,14 @@ export class UserProfileStore extends LoadableStore {
 
             this.updateLoading(true);
 
-            const user = await this.userProfileService.getUserData();
+            const userOrError = await this.userProfileService.getUserData();
 
-            this.updateUser(user);
+            if (this.user instanceof BadCredentinals) {
+                this.updateError(userOrError);
+            } else {
+                this.updateUser(userOrError);
+            }
+
             this.updateLoading(false);
         } catch (error) {
             console.error(error);
@@ -51,6 +62,10 @@ export class UserProfileStore extends LoadableStore {
 
     protected updateUser = (user: IUserData): void => {
         this.user = user;
+    };
+
+    protected updateError = (error: Error): void => {
+        this.error = error;
     };
 
     public handleLogout = (): void => {

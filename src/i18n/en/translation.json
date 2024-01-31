@@ -102,5 +102,8 @@
             "on": "on",
             "off": "off"
         }
+    },
+    "errors": {
+        "badCredentinals": "Bad Credentinals"
     }
 }

@@ -1,6 +1,7 @@
 import { STORAGE_KEYS } from "src/constants";
 import { AppService } from "../AppService";
 import { Octokit } from "octokit";
+import { BadCredentinals } from "src/errors";
 
 describe("AppService", () => {
     test("should set accessToken if local storage has access token", () => {
@@ -49,11 +50,14 @@ describe("AppService", () => {
             .mockImplementation(() => {});
 
         const appService = new AppService();
+
+        vi.spyOn(appService, "getBadCredentinalsError").mockImplementation(
+            () => {
+                return new BadCredentinals(401, "message");
+            },
+        );
         const data = await appService.getUserData();
 
-        expect(data).toEqual({});
-        expect(consoleSpy).toHaveBeenCalled();
-
-        consoleSpy.mockRestore();
+        expect(data instanceof BadCredentinals).toBe(true);
     });
 });
