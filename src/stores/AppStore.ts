@@ -235,4 +235,8 @@ export class AppStore extends BaseStore implements IState {
     public get isAuthorized(): boolean {
         return Boolean(this.accessToken);
     }
+
+    public get readyInitAsync(): boolean {
+        return this.isAuthorized && this.isOpen && !this.isLoading;
+    }
 }

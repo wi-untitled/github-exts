@@ -35,11 +35,7 @@ export class NotificationsRequstedChangesStore extends LoadableStore {
         );
 
         autorun(async () => {
-            if (
-                this.appStore.isAuthorized &&
-                this.appStore.isOpen &&
-                !this.appStore.isLoading
-            ) {
+            if (this.appStore.readyInitAsync) {
                 await this.initAsync();
             }
         });
