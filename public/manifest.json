@@ -1,38 +1,52 @@
 {
-  "manifest_version": 3,
-  "name": "github-exts",
-  "version": "1.0.1",
-  "key": "fieeefkagleofippeagmkffbbbjgokgo",
-  "background": {
-    "service_worker": "background.js"
-  },
-  "content_scripts": [{
-    "matches": ["https://github.com/*"],
-    "js": ["contentScript.js"],
-    "css": ["contentStyle.css"],
-    "run_at": "document_end",
-    "all_frames": true
-  }],
-  "host_permissions": ["<all_urls>"],
-  "permissions": [
-    "scripting",
-    "tabs",
-    "identity",
-    "webNavigation",
-    "storage",
-    "activeTab"
-  ],
-  "content_security_policy": {
-    "extension_pages": "script-src 'self'; object-src 'self'",
-    "frame-ancestors": ["'self'", "https://github.com/*"]
-  },
-  "web_accessible_resources": [
-    {
-      "resources": ["*"],
-      "matches": ["<all_urls>"]
+    "manifest_version": 3,
+    "name": "GitHub Helpers",
+    "version": "1.0.1",
+    "description": "Enhance your GitHub code review experience with Pull Request Navigator. This Chrome extension helps reviewers easily locate assigned pull requests, stay informed about the top 10 approved ones, and provides insightful user statistics and programming language usage charts.",
+    "icons": {
+        "16": "icon16.png",
+        "32": "icon32.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://github.com/*"],
+            "js": ["contentScript.js"],
+            "css": ["contentStyle.css"],
+            "run_at": "document_end",
+            "all_frames": true
+        }
+    ],
+    "host_permissions": ["<all_urls>"],
+    "permissions": [
+        "scripting",
+        "tabs",
+        "identity",
+        "webNavigation",
+        "storage",
+        "activeTab"
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'",
+        "frame-ancestors": ["'self'", "https://github.com/*"]
+    },
+    "web_accessible_resources": [
+        {
+            "resources": ["*"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "action": {
+        "default_icon": {
+            "16": "icon16.png",
+            "32": "icon32.png",
+            "48": "icon48.png"
+        },
+        "default_title": "Open GitHub extension",
+        "default_popup": "popup.html"
     }
-  ],
-  "action": {
-    "default_popup": "popup.html"
-  }
 }
