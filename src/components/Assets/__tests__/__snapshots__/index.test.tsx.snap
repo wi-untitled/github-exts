@@ -218,6 +218,36 @@ exports[`<Assets /> > should make snapshot 1`] = `
             id="repository"
           />
         </svg>
+        <svg>
+          <g
+            id="drag"
+          >
+            <circle
+              cx="4"
+              cy="4"
+              fill="currentColor"
+              r="3"
+            />
+            <circle
+              cx="12"
+              cy="4"
+              fill="currentColor"
+              r="3"
+            />
+            <circle
+              cx="4"
+              cy="12"
+              fill="currentColor"
+              r="3"
+            />
+            <circle
+              cx="12"
+              cy="12"
+              fill="currentColor"
+              r="3"
+            />
+          </g>
+        </svg>
       </div>
     </div>
   </body>,
@@ -434,6 +464,36 @@ exports[`<Assets /> > should make snapshot 1`] = `
           fill="currentColor"
           id="repository"
         />
+      </svg>
+      <svg>
+        <g
+          id="drag"
+        >
+          <circle
+            cx="4"
+            cy="4"
+            fill="currentColor"
+            r="3"
+          />
+          <circle
+            cx="12"
+            cy="4"
+            fill="currentColor"
+            r="3"
+          />
+          <circle
+            cx="4"
+            cy="12"
+            fill="currentColor"
+            r="3"
+          />
+          <circle
+            cx="12"
+            cy="12"
+            fill="currentColor"
+            r="3"
+          />
+        </g>
       </svg>
     </div>
   </div>,
