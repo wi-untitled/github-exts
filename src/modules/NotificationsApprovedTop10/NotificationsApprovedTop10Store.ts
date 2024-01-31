@@ -91,9 +91,6 @@ export class NotificationsApprovedTop10Store extends LoadableStore {
         );
 
         this.uniqueUrls = new Set(newUniqueUrls);
-
-        // TODO: just for test
-        //this.uniqueUrls.add("qwe");
     };
 
     public get isEmpty(): boolean {
