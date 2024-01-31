@@ -46,9 +46,10 @@ export class TopLanguagesStore extends LoadableStore {
             );
 
             this.setTopLanguages(topLanguages);
-            this.updateLoading(false);
         } catch (error) {
             console.error(error);
+        } finally {
+            this.updateLoading(false);
         }
     };
 

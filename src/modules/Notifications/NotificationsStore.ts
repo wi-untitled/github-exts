@@ -73,10 +73,10 @@ export class NotificationsStore extends LoadableStore {
                     hasDiff: hasDiff,
                 },
             });
-
-            this.updateLoading(false);
         } catch (error) {
             console.error(error);
+        } finally {
+            this.updateLoading(false);
         }
     };
 
