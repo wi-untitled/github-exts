@@ -17,7 +17,7 @@ function AppComponent() {
 
     useEffect(() => {
         appStore.updateIsOpen(true);
-    }, []);
+    }, [appStore]);
 
     useEffect(() => {
         chrome.runtime.connect();
@@ -28,7 +28,7 @@ function AppComponent() {
             <Assets />
             {appStore.isAuthorized ? (
                 <>
-                    <div className="flex flex-col w-full p-4 space-y-2">
+                    <div className="flex flex-col w-full p-4">
                         {settingsStore.visibleWidgets[
                             WidgetsId.Notifications
                         ] && <NotificationsModule />}

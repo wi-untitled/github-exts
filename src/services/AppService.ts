@@ -1,5 +1,6 @@
 import { STORAGE_KEYS } from "src/constants";
-import { Octokit } from "octokit";
+import { Octokit, RequestError } from "octokit";
+import { BadCredentinals } from "src/errors";
 
 export class AppService {
     public accessToken?: string;
@@ -28,9 +29,15 @@ export class AppService {
 
             return data;
         } catch (error) {
-            console.trace(error);
-
-            return {};
+            return this.getBadCredentinalsError(error);
         }
+    };
+
+    public getBadCredentinalsError = (error: RequestError): BadCredentinals => {
+        const message = (error as RequestError).response.data.message;
+        const status = (error as RequestError).status;
+        const badCredentinals = new BadCredentinals(status, message);
+
+        return badCredentinals;
     };
 }

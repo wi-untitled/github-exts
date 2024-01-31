@@ -201,6 +201,7 @@ export class AppStore extends BaseStore implements IState {
 
             this.isAutoUpdateEnabled = Boolean(isAutoUpdateEnabled);
         } catch (error) {
+            console.log("error");
             console.trace(error);
             this.isAutoUpdateEnabled = false;
         }

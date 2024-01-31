@@ -1,4 +1,5 @@
 import { observer, useLocalStore } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import { Icon } from "src/components";
 import Spinner from "src/components/Spinner";
 import { useService, useStore } from "src/hooks";
@@ -19,12 +20,17 @@ function UserProfile() {
     const userProfileStore = useLocalStore(
         () => new UserProfileStore(appStore, userProfileService),
     );
+    const { t } = useTranslation();
+
     const navigate = useNavigate();
 
     const handleRedirectToSettingPageCallback = () => {
         navigate(SettingsScreen.routeName);
     };
-
+    console.log({
+        user: userProfileStore.user,
+        error: userProfileStore.error,
+    });
     return (
         <div
             className="w-full flex items-center bg px-4 py-2 bg-gray-100 dark:bg-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 relative"
@@ -32,7 +38,7 @@ function UserProfile() {
         >
             {userProfileStore.isLoading ? (
                 <Spinner absoluteFill />
-            ) : (
+            ) : userProfileStore.error ? (
                 <div className="flex flex-row space-x-3 items-center w-full">
                     {userProfileStore.user.avatar_url ? (
                         <UserProfileAvatar
@@ -72,6 +78,8 @@ function UserProfile() {
                         </span>
                     </div>
                 </div>
+            ) : (
+                <div>{t("errors.badCredentinals")}</div>
             )}
         </div>
     );
