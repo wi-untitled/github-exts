@@ -20,10 +20,9 @@ export function Notifications() {
             isLoading={notificationsStore.isLoading}
         >
             <div className="max-h-32 overflow-y-scroll no-scrollbar">
-                {notificationsStore.isEmpty && !notificationsStore.isLoading ? (
+                {notificationsStore.isEmpty ? (
                     <NoResult message={t("notifications.empty")} />
                 ) : (
-                    !notificationsStore.isLoading &&
                     notificationsStore.notifications.map(
                         ({ created_at, title, pull_request: { html_url } }) => {
                             return (
