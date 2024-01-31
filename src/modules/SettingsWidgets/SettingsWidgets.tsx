@@ -8,6 +8,7 @@ import {
     SettingsTitle,
 } from "./components";
 import { WidgetsId } from "src/enums";
+import { GlobalDeveloper } from "src/components";
 
 export function SettingsWidget() {
     const settingsStore = useStore("SettingsStore");
@@ -61,35 +62,31 @@ export function SettingsWidget() {
                     })}
                 </div>
             </div>
-            {import.meta.env.MODE === "development" ? (
-                <>
-                    <div className="space-y-2">
-                        <SettingsTitle
-                            title={t("settingsWidgets.globalText")}
-                        />
-                        <div className="h-px w-full bg-gray-700 mb-2" />
-                        <SettingsSwitch
-                            id="topLanguagesTooltip"
-                            enabled={flags["enableWidgetTitleTooltip"]}
-                            title={t("settingsWidgets.widgetTitleTooltipText")}
-                            onChange={handleToggleWidgetTitleTooltipCallback}
-                        />
-                        <SettingsSwitch
-                            id="autoUpdateEnabled"
-                            enabled={settingsStore.isAutoUpdateEnabled}
-                            title={t("settingsWidgets.autoUpdate")}
-                            onChange={handleAutoUpdateEnabled}
-                            info={t("settingsWidgets.autoUpdateInfo")}
-                        />
-                    </div>
-                    <div>
-                        <SaveSettingsButton
-                            needSave={settingsStore.needSave}
-                            onClick={handleSaveSettingsCallback}
-                        />
-                    </div>
-                </>
-            ) : null}
+            <GlobalDeveloper>
+                <div className="space-y-2">
+                    <SettingsTitle title={t("settingsWidgets.globalText")} />
+                    <div className="h-px w-full bg-gray-700 mb-2" />
+                    <SettingsSwitch
+                        id="topLanguagesTooltip"
+                        enabled={flags["enableWidgetTitleTooltip"]}
+                        title={t("settingsWidgets.widgetTitleTooltipText")}
+                        onChange={handleToggleWidgetTitleTooltipCallback}
+                    />
+                    <SettingsSwitch
+                        id="autoUpdateEnabled"
+                        enabled={settingsStore.isAutoUpdateEnabled}
+                        title={t("settingsWidgets.autoUpdate")}
+                        onChange={handleAutoUpdateEnabled}
+                        info={t("settingsWidgets.autoUpdateInfo")}
+                    />
+                </div>
+                <div>
+                    <SaveSettingsButton
+                        needSave={settingsStore.needSave}
+                        onClick={handleSaveSettingsCallback}
+                    />
+                </div>
+            </GlobalDeveloper>
         </div>
     );
 }
