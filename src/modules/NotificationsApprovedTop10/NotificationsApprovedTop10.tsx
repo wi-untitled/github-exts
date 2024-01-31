@@ -22,8 +22,7 @@ export function NotificationsApprovedTop10() {
             isLoading={notificationsApprovedTop10Store.isLoading}
         >
             <div className="max-h-32 overflow-y-scroll no-scrollbar">
-                {notificationsApprovedTop10Store.isEmpty &&
-                !notificationsApprovedTop10Store.isLoading ? (
+                {notificationsApprovedTop10Store.isEmpty ? (
                     <NoResult message={t("notificationsApprovedTop10.empty")} />
                 ) : (
                     !notificationsApprovedTop10Store.isLoading &&
