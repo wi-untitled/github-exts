@@ -36,11 +36,7 @@ export class NotificationsApprovedTop10Store extends LoadableStore {
         this.transport = getTransport();
 
         autorun(async () => {
-            if (
-                this.appStore.isAuthorized &&
-                this.appStore.isOpen &&
-                !this.appStore.isLoading
-            ) {
+            if (this.appStore.readyInitAsync) {
                 await this.initAsync();
             }
         });

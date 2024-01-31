@@ -1,4 +1,4 @@
-import { observable, makeObservable, action, when } from "mobx";
+import { observable, makeObservable, action, autorun } from "mobx";
 import { AppStore } from "src/stores";
 import { LoadableStore } from "src/stores/LoadableStore";
 import { IFollower, IPageInfo } from "src/types";
@@ -43,12 +43,11 @@ export class UserFollowersStore extends LoadableStore {
         this.totalCount = 0;
         this.isMoreUserFollowingsLoading = false;
 
-        when(
-            () => this.appStore.isAuthorized && !this.appStore.isLoading,
-            async () => {
+        autorun(async () => {
+            if (this.appStore.readyInitAsync) {
                 await this.initAsyncAuth();
-            },
-        );
+            }
+        });
     }
 
     protected initAsyncAuth = async (): Promise<void> => {

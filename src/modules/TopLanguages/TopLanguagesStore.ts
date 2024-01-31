@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable, when } from "mobx";
+import { action, autorun, computed, makeObservable, observable } from "mobx";
 import { TopLanguagesService } from "src/services";
 import { AppStore } from "src/stores";
 import { LoadableStore } from "src/stores/LoadableStore";
@@ -25,12 +25,11 @@ export class TopLanguagesStore extends LoadableStore {
         this.topLanguagesService = topLanguagesService;
         this.topLanguages = [];
 
-        when(
-            () => this.appStore.isAuthorized && !this.appStore.isLoading,
-            async () => {
+        autorun(async () => {
+            if (this.appStore.readyInitAsync) {
                 await this.initAsync();
-            },
-        );
+            }
+        });
     }
 
     protected initAsync = async (): Promise<void> => {

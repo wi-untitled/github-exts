@@ -1,4 +1,4 @@
-import { action, makeObservable, observable, when } from "mobx";
+import { action, autorun, makeObservable, observable } from "mobx";
 import { AppStore } from "src/stores";
 import { LoadableStore } from "src/stores/LoadableStore";
 import { UserProfileService } from "src/services";
@@ -23,12 +23,11 @@ export class UserProfileStore extends LoadableStore {
         this.appStore = appStore;
         this.userProfileService = userProfileService;
 
-        when(
-            () => this.appStore.isAuthorized,
-            async () => {
+        autorun(async () => {
+            if (this.appStore.readyInitAsync) {
                 await this.initAsync();
-            },
-        );
+            }
+        });
     }
 
     protected initAsync = async (): Promise<void> => {

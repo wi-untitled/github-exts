@@ -1,4 +1,4 @@
-import { makeObservable, observable, when, action } from "mobx";
+import { makeObservable, observable, action, autorun } from "mobx";
 import { StatsService } from "src/services";
 import { AppStore } from "src/stores";
 import { LoadableStore } from "src/stores/LoadableStore";
@@ -42,12 +42,11 @@ export class StatsStore extends LoadableStore {
         this.totalRepositoryDiscussions = DEFAULT_ZERO_VALUE;
         this.totalStars = DEFAULT_ZERO_VALUE;
 
-        when(
-            () => this.appStore.isAuthorized && !this.appStore.isLoading,
-            async () => {
+        autorun(async () => {
+            if (this.appStore.readyInitAsync) {
                 await this.initAsync();
-            },
-        );
+            }
+        });
     }
 
     public initAsync = async (): Promise<void> => {
