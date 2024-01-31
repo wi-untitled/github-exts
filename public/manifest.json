@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "GitHub Helpers",
     "version": "1.0.1",
-    "description": "Enhance your GitHub code review experience with Pull Request Navigator. This Chrome extension helps reviewers easily locate assigned pull requests, stay informed about the top 10 approved ones, and provides insightful user statistics and programming language usage charts.",
+    "description": "Enhance GitHub code reviews with Pull Request Navigator. Streamline review assignments, track top approvals, and get insightful analytics. Supercharge your GitHub experience!",
     "icons": {
         "16": "icon16.png",
         "32": "icon32.png",
