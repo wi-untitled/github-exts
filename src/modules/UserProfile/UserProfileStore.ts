@@ -45,6 +45,7 @@ export class UserProfileStore extends LoadableStore {
             this.updateLoading(false);
         } catch (error) {
             console.error(error);
+        } finally {
             this.updateLoading(false);
         }
     };
