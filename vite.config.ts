@@ -14,6 +14,7 @@ export default defineConfig({
                 mainPopup: "src/popup/mainPopup.tsx",
             },
         },
+        chunkSizeWarningLimit: 1600,
     },
     plugins: [
         react(),
