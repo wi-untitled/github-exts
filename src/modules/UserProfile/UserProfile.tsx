@@ -27,7 +27,7 @@ function UserProfile() {
     const handleRedirectToSettingPageCallback = () => {
         navigate(SettingsScreen.routeName);
     };
-    console.log({ error: userProfileStore.error });
+
     return (
         <div
             className="w-full flex items-center bg px-4 py-2 bg-gray-100 dark:bg-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 relative"
@@ -35,22 +35,26 @@ function UserProfile() {
         >
             {userProfileStore.isLoading ? (
                 <Spinner absoluteFill />
-            ) : !userProfileStore.error ? (
+            ) : (
                 <div className="flex flex-row space-x-3 items-center w-full">
-                    {userProfileStore.user.avatar_url ? (
+                    {userProfileStore.user?.avatar_url ? (
                         <UserProfileAvatar
                             url={userProfileStore.user.avatar_url}
                         />
                     ) : null}
                     <div className="flex flex-col justify-center text-left flex-1">
-                        <div className="flex flex-col space-y-0.5">
-                            <UserProfileName
-                                name={userProfileStore.user.name}
-                            />
-                            <UserProfileLogin
-                                login={userProfileStore.user.login}
-                            />
-                        </div>
+                        {userProfileStore.error ? (
+                            <div>{t("errors.badCredentinals")}</div>
+                        ) : (
+                            <div className="flex flex-col space-y-0.5">
+                                <UserProfileName
+                                    name={userProfileStore.user.name}
+                                />
+                                <UserProfileLogin
+                                    login={userProfileStore.user.login}
+                                />
+                            </div>
+                        )}
                     </div>
                     <div className="flex flex-row space-x-2">
                         <FeatureFlag name="enableSettingsPage">
@@ -75,8 +79,6 @@ function UserProfile() {
                         </span>
                     </div>
                 </div>
-            ) : (
-                <div>{t("errors.badCredentinals")}</div>
             )}
         </div>
     );

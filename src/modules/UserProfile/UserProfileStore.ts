@@ -46,7 +46,7 @@ export class UserProfileStore extends LoadableStore {
 
             const userOrError = await this.userProfileService.getUserData();
 
-            if (this.user instanceof BadCredentinals) {
+            if (userOrError instanceof BadCredentinals) {
                 this.updateError(userOrError);
             } else {
                 this.updateUser(userOrError);
