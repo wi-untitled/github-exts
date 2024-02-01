@@ -36,11 +36,15 @@ export function SortableItem({ id, activeId, render }: ISortableItemProps) {
             })}
         >
             <div
-                className="absolute flex justify-center shadow-sm shadow-gray-100/25 items-center right-2 -top-2 w-4 h-4 rounded-sm border dark:bg-gray-900 bg-gray-100 dark:border-gray-800 border-gray-200"
+                className="absolute flex justify-center shadow-sm shadow-gray-100/5 items-center right-2 -top-2 w-4 h-[12px] rounded-sm border dark:bg-gray-900 bg-gray-100 dark:border-gray-800 border-gray-200"
                 ref={setActivatorNodeRef}
                 {...listeners}
             >
-                <Icon icon="drag" className="w-3 h-3 text-gray-400" />
+                <Icon
+                    icon="drag"
+                    className="w-3 h-[10px] text-gray-400"
+                    viewBox="0 0 15 12"
+                />
             </div>
             <Component />
         </div>
