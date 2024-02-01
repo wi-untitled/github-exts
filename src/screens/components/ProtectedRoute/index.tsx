@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import { Navigate } from "react-router-dom";
 import { useStore } from "src/hooks";
-import { LoginScreen } from "src/screens";
+import { LoginScreen } from "src/screens/Login";
 
 export interface IProtectedRouteProps {
     element: React.ReactElement;

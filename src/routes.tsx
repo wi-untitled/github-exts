@@ -1,7 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
-import { LoginScreen, MainScreen, SettingsScreen } from "src/screens";
-import { ProtectedRoute } from "./screens/components";
-import { InstructionScreen } from "./screens/Instruction";
+import { LoginScreen } from "src/screens/Login";
+import { InstructionScreen } from "src/screens/Instruction";
+import { MainScreen } from "src/screens/Main";
+import { SettingsScreen } from "src/screens/Settings";
+import { ProtectedRoute } from "src/screens/components";
 
 export const router = createBrowserRouter(
     [

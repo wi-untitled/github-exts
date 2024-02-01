@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-
 import { SettingsWidgetModule } from "src/modules";
 import { Icon } from "src/components";
 

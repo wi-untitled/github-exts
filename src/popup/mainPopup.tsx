@@ -8,6 +8,7 @@ import { getTransport } from "src/transport/Transport.ts";
 import { WelcomeLoading } from "src/components/index.ts";
 
 import "src/i18n/config";
+
 import "./indexPopup.css";
 
 export async function initialize(): Promise<any> {

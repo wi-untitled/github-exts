@@ -1,7 +1,7 @@
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { LoginModule } from "src/modules";
-import { InstructionScreen } from "src/screens";
+import { InstructionScreen } from "src/screens/Instruction";
 import { Link } from "react-router-dom";
 
 function Login() {
