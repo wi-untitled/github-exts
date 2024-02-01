@@ -23,7 +23,7 @@ export async function initialize(): Promise<any> {
                 stores: stores,
                 services: services,
             });
-        }, 3000);
+        }, 1500);
     });
 
     return promise;
