@@ -13,6 +13,7 @@ import { BaseStore } from "src/stores/BaseStore";
 import { IState } from "src/stores/interfaces";
 import { Transport, IFRAME_TOGGLE_EVENT } from "src/transport";
 import { LinkedList } from "src/core/LinkedList";
+import * as Sentry from "@sentry/react";
 
 export const AUTO_UPDATES_INTERVAL = 120000;
 
@@ -181,6 +182,8 @@ export class AppStore extends BaseStore implements IState {
             this.updateLoading(true);
 
             const userData = await this.appService.getUserData();
+
+            Sentry.setUser({ login: userData.login });
 
             this.setUserData(userData);
             this.updateLoading(false);

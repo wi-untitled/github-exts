@@ -3,6 +3,8 @@ import { RouterProvider } from "react-router-dom";
 import { Assets } from "src/components";
 import { router } from "src/routes";
 
+import * as Sentry from "@sentry/react";
+
 import "./App.css";
 import { useEscape } from "./hooks";
 
@@ -17,6 +19,6 @@ function AppComponent() {
     );
 }
 
-const App = observer(AppComponent);
+const App = Sentry.withProfiler(observer(AppComponent));
 
 export default App;

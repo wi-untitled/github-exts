@@ -25,3 +25,6 @@ dist-ssr
 
 # Ignore coverage report
 coverage
+
+# Sentry Config File
+.env.sentry-build-plugin
