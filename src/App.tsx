@@ -4,8 +4,11 @@ import { Assets } from "src/components";
 import { router } from "src/routes";
 
 import "./App.css";
+import { useEscape } from "./hooks";
 
 function AppComponent() {
+    useEscape();
+
     return (
         <>
             <Assets />

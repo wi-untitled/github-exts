@@ -7,7 +7,8 @@ export type ISendAction =
     | "BROADCAST"
     | "NOTIFY_BROADCAST"
     | "IFRAME_TOGGLE"
-    | "AutoUpdateChange";
+    | "AutoUpdateChange"
+    | "IFRAME_CLOSE_BY_ESCAPE";
 
 export interface ICallbackFnArguments<T> {
     action: ISendAction;
