@@ -19,3 +19,6 @@ jobs:
 
             - name: "Install Deps"
               run: npm ci
+
+            - name: Run unit test
+              uses: ./.github/actions/unit-tests-chunks
