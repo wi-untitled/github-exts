@@ -1,0 +1,21 @@
+name: Main branch health check
+
+on:
+    push:
+        branches:
+            - "main"
+
+jobs:
+    unit-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: "Install Node"
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "20.x"
+
+            - name: "Install Deps"
+              run: npm ci
