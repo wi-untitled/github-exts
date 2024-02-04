@@ -1,4 +1,4 @@
-Name: Run unit test
+Name: Run unit test with coverage
 Description: "Just run unit tests. (TODO: parallels them)"
 runs:
     using: "composite"
@@ -15,7 +15,7 @@ runs:
           shell: bash
 
         - name: "Run unit test with coverage"
-          run: npm run test:unit
+          run: npm run test:coverage
           shell: bash
 
         - name: "Report Coverage"

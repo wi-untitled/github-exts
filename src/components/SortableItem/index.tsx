@@ -1,12 +1,13 @@
 import { useSortable } from "@dnd-kit/sortable";
 import clsx from "clsx";
 import { CSS } from "@dnd-kit/utilities";
+import type { UniqueIdentifier } from "@dnd-kit/core";
 
 import { Icon } from "src/components";
 
 export interface ISortableItemProps {
     id: number;
-    activeId: number;
+    activeId: UniqueIdentifier | null;
     render: () => React.ReactNode;
 }
 
