@@ -3,41 +3,34 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light dark;
-  color: #fff;
-  /* INFO: It used as background while element is draggable.
-           Wheather you want to change it do not miss change in src/components/Widget.tsx
-  */
-  background-color: #0d1117;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    background-color: #0d1117;
+    color: #ffffff;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  max-width: 320px;
-  width: 100%;
-  min-height: 100%;
+    margin: 0;
+    display: flex;
+    place-items: center;
+    max-width: 320px;
+    width: 100%;
+    min-height: 100%;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: none;
-  }
+    :root {
+        background-color: #ffffff;
+        color: #000000;
+    }
+    a:hover {
+        color: #747bff;
+    }
 }

@@ -76,16 +76,23 @@ export function RenderApp() {
         initializeAsync();
     }, []);
 
-    return initialized ? (
-        <Provider stores={ref.current.stores} services={ref.current.services}>
-            <React.StrictMode>
-                <FeatureFlagProvider initialFeatureFlags={defaultState}>
-                    <App />
-                </FeatureFlagProvider>
-            </React.StrictMode>
-        </Provider>
-    ) : (
-        <WelcomeLoading />
+    return (
+        <div className="h-full">
+            {initialized ? (
+                <Provider
+                    stores={ref.current.stores}
+                    services={ref.current.services}
+                >
+                    <React.StrictMode>
+                        <FeatureFlagProvider initialFeatureFlags={defaultState}>
+                            <App />
+                        </FeatureFlagProvider>
+                    </React.StrictMode>
+                </Provider>
+            ) : (
+                <WelcomeLoading />
+            )}
+        </div>
     );
 }
 

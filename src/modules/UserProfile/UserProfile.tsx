@@ -30,7 +30,7 @@ function UserProfile() {
 
     return (
         <div
-            className="w-full flex items-center bg px-4 py-2 bg-gray-100 dark:bg-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 relative"
+            className="w-full flex items-center bg px-4 py-2 bg-light dark:bg-dark text-light dark:text-dark border-b border-light dark:border-dark relative"
             style={{ minHeight: "57px" }}
         >
             {userProfileStore.isLoading ? (

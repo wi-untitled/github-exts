@@ -11,3 +11,5 @@ export { NoResult } from "./NoResult";
 export { SortableItem } from "./SortableItem";
 export { SortableList } from "./SortableList";
 export { GlobalDeveloper } from "./GlobalDeveloper";
+export { Button } from "./Button";
+export { Input } from "./Input";
