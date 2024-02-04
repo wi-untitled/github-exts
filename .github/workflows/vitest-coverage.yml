@@ -20,4 +20,4 @@ jobs:
                   fetch-depth: 0
 
             - name: Run unit test
-              uses: ./.github/actions/unit-tests-chunks
+              uses: ./.github/actions/unit-tests-coverage-chunks
