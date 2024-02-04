@@ -32,6 +32,7 @@ export default defineConfig({
         sentryVitePlugin({
             org: "home-yxt",
             project: "github-helper",
+            telemetry: process.env.NODE_ENV === "production",
         }),
     ],
     resolve: {
