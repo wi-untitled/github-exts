@@ -14,7 +14,7 @@ export function Input({
     return (
         <input
             onChange={onChange}
-            className="p-1 border rounded-md border-gray-700 outline-gray-600 text-white bg-slate-800 placeholder-white"
+            className="p-1 border rounded-md outline-none text-light dark:text-dark bg-light dark:bg-dark border-light/[0.15] dark:border-dark/[0.15] placeholder-light dark:placeholder-dark"
             placeholder={placeholder}
             defaultValue={defaultValue}
             value={value}

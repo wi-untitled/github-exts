@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import { Button, Input } from "src/modules/Login/components";
+import { Button, Input } from "src/components";
 import { useLogin, useStore } from "src/hooks";
 import { useTranslation } from "react-i18next";
 
@@ -23,7 +23,11 @@ export function Login() {
                 value={accessToken}
                 placeholder={t("login.placeholder")}
             />
-            <Button isDisabled={isActionDisabled} onClick={handleButtonClick} />
+            <Button
+                isDisabled={isActionDisabled}
+                onClick={handleButtonClick}
+                text={t("login.btnLogin")}
+            />
         </div>
     );
 }

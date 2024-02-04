@@ -25,19 +25,19 @@ export const Widget: FC<PropsWithChildren<IWidgetProps>> = ({
     return (
         <div
             className={clsx(
-                "mb-3 border rounded-md border-gray-200 dark:border-gray-800 overflow-hidden",
+                "mb-3 border rounded-md border-light dark:border-dark overflow-hidden",
                 className,
             )}
         >
             <header
                 data-tooltip-id={id}
                 data-tooltip-content={info}
-                className="dark:bg-gray-900 bg-gray-100 px-3 py-2 flex space-x-0 justify-between border-b border-gray-200 dark:border-gray-800"
+                className="bg-light dark:bg-dark px-3 py-2 flex space-x-0 justify-between border-b border-light dark:border-dark"
             >
                 <strong className="text-sm">{title}</strong>
                 {headerRight}
             </header>
-            <div className="relative bg-[#0d1117]">
+            <div className="relative bg-white dark:bg-[#0d1117]">
                 {isLoading ? <Spinner /> : children}
             </div>
             <FeatureFlag name="enableWidgetTitleTooltip">

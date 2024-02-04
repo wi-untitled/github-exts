@@ -5,6 +5,18 @@ module.exports = {
     darkMode: "media", // or 'media' or 'class'
     theme: {
         extend: {
+            textColor: {
+                light: "#010409",
+                dark: "#ffffff",
+            },
+            borderColor: {
+                light: "#dde2e7",
+                dark: "#262b32",
+            },
+            backgroundColor: {
+                light: "#F6F8FA",
+                dark: "#21262d",
+            },
             fontSize: {
                 "2xs": ".65rem",
             },

@@ -1,6 +1,16 @@
+:root {
+    --border-right-color: rgb(55 65 81);
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --border-right-color: rgb(209 213 219);
+    }
+}
+
 .github-exts-frame {
     border: 0;
-    border-right: 1px solid #30363d;
+    border-right: 1px solid var(--border-right-color);
     height: 100%;
     left: 0;
     position: fixed;

@@ -16,7 +16,7 @@ export function Instruction() {
                         <p className="text-xs">
                             {t("popup.permissionTitleUserRead")}
                         </p>
-                        <div className="h-px w-full bg-gray-700 my-2" />
+                        <div className="h-px w-full bg-gray-300 dark:bg-gray-700 my-2" />
                     </div>
                     <ul>
                         <li>
@@ -78,7 +78,7 @@ export function Instruction() {
                 </div>
                 <div>
                     <p className="text-xl">{t("popup.whatYouNeedToDoHere")}</p>
-                    <div className="h-px w-full bg-gray-700 my-2" />
+                    <div className="h-px w-full bg-gray-300 dark:bg-gray-700 my-2" />
                     <div>{t("popup.whatYouNeedToDoHereDescription")}</div>
                 </div>
             </div>

@@ -14,9 +14,9 @@ export function SaveSettingsButton({
 
     return (
         <button
-            className={clsx("w-full rounded-md py-1 text-white", {
+            className={clsx("w-full rounded-md py-1", {
                 "bg-green-500": needSave,
-                "bg-zinc-700": !needSave,
+                "bg-light dark:bg-dark": !needSave,
             })}
             onClick={onClick}
         >
