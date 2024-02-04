@@ -4,6 +4,7 @@ on:
 
 jobs:
     unit-tests:
+        name: Run unit test
         runs-on: ubuntu-latest
 
         permissions:
