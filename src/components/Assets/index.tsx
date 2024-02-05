@@ -1,3 +1,5 @@
+import { Icon } from "..";
+
 export function IconPullRequest() {
     return (
         <svg aria-hidden="true">

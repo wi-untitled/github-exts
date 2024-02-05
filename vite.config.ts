@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 import react from "@vitejs/plugin-react";
 import AutoImport from "unplugin-auto-import/vite";
+import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -34,6 +35,7 @@ export default defineConfig({
             project: "github-helper",
             telemetry: process.env.NODE_ENV === "production",
         }),
+        svgr(),
     ],
     resolve: {
         alias: {

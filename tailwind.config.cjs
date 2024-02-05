@@ -8,14 +8,19 @@ module.exports = {
             textColor: {
                 light: "#010409",
                 dark: "#ffffff",
+                accent: "#9CA3AF",
             },
             borderColor: {
                 light: "#dde2e7",
                 dark: "#262b32",
+                accent: "#9CA3AF",
             },
             backgroundColor: {
                 light: "#F6F8FA",
                 dark: "#21262d",
+                primary: "#46954A",
+                "dark-primary": "#008000",
+                "light-primary": "#C8E6C9",
             },
             fontSize: {
                 "2xs": ".65rem",
