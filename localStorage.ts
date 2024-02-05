@@ -27,6 +27,6 @@ beforeEach(() => {
     localStorage.clear();
 });
 
-afterAll(() => {
+afterEach(() => {
     (window as any).localStorage = originalLocalStorage;
 });

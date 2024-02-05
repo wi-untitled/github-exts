@@ -18,10 +18,10 @@
         "preview": "vite preview",
         "commit": "git-cz",
         "format": "prettier --write src/**/*.{ts,tsx}",
-        "test": "vitest watch",
-        "test:unit": "vitest",
-        "test:no-watch": "vitest run",
-        "test:coverage": "vitest run --coverage"
+        "test": "vitest watch --sequence.concurrent=true",
+        "test:unit": "vitest --sequence.concurrent=true",
+        "test:no-watch": "vitest run --sequence.concurrent=true",
+        "test:coverage": "vitest run --coverage --sequence.concurrent=true"
     },
     "config": {
         "commitizen": {

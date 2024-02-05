@@ -45,10 +45,6 @@ describe("AppService", () => {
     });
 
     test("should return an empty object and log the error when not authorized", async () => {
-        const consoleSpy = vi
-            .spyOn(console, "trace")
-            .mockImplementation(() => {});
-
         const appService = new AppService();
 
         vi.spyOn(appService, "getBadCredentinalsError").mockImplementation(
