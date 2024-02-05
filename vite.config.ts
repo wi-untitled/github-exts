@@ -51,7 +51,7 @@ export default defineConfig({
         },
         poolOptions: {
             threads: {
-                maxWorkers: 1,
+                maxWorkers: 2,
             },
         },
     },
