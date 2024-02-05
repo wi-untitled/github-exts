@@ -51,6 +51,15 @@
         "autoUpdate": "Enable autoupdate notifications",
         "autoUpdateInfo": "Enable autoupdate for extentions button. Possibility to recieve marker on button to notify the user that you have got updates every 120 seconds."
     },
+    "settingsTileWidgets": {
+        "UserFollowers": "Followers",
+        "UserFollowings": "Followings",
+        "Notifications": "Notifications",
+        "NotificationsRequestedChanges": "Changes",
+        "NotificationsApprovedTop10": "Top 10 PRs",
+        "TopLanguages": "Languages",
+        "Stats": "Stats"
+    },
     "socialAccounts": {
         "title": "Social Accounts",
         "instagram": "Instagram",
