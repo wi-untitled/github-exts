@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import { SettingsWidgetModule } from "src/modules";
-import { Icon } from "src/components";
+import BackIcon from "src/assets/back.svg?react";
 
 export function Settings() {
     const navigate = useNavigate();
@@ -14,10 +14,7 @@ export function Settings() {
     return (
         <div>
             <div className="p-2" onClick={handleNavigateBackCallback}>
-                <Icon
-                    icon="back"
-                    className="w-6 h-6 text-gray-400 dark:text-gray-500"
-                />
+                <BackIcon className="w-6 h-6 cursor-pointer fill-current dark:text-dark text-accent" />
             </div>
             <SettingsWidgetModule />
         </div>
