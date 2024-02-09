@@ -1,7 +1,6 @@
 export const icons = [
     "pull-request",
     "changes-request",
-    "settings",
     "linkedin",
     "instagram",
     "facebook",
