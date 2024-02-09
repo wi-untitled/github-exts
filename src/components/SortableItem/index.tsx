@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { CSS } from "@dnd-kit/utilities";
 import type { UniqueIdentifier } from "@dnd-kit/core";
 
-import { Icon } from "src/components";
+import DragIcon from "./assets/drag.svg?react";
 
 export interface ISortableItemProps {
     id: number;
@@ -37,15 +37,11 @@ export function SortableItem({ id, activeId, render }: ISortableItemProps) {
             })}
         >
             <div
-                className="absolute flex justify-center shadow-sm shadow-gray-400/25 items-center right-2 -top-1 w-5 h-2 rounded-sm border bg-light dark:bg-dark border-light dark:border-dark"
+                className="absolute flex justify-center items-center right-1 top-3 w-6 h-3"
                 ref={setActivatorNodeRef}
                 {...listeners}
             >
-                <Icon
-                    icon="drag"
-                    className="w-3 h-2 text-gray-400"
-                    viewBox="0 0 15 12"
-                />
+                <DragIcon className="dark:text-dark text-accent fill-current w-3 h-3 cursor-grab" />
             </div>
             <Component />
         </div>
