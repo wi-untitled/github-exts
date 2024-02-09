@@ -1,16 +1,16 @@
 import clsx from "clsx";
 import { Tooltip } from "react-tooltip";
 import { FeatureFlag } from "src/core";
-import RequestIcon from "./assets/request.svg?react";
-import FollowingIcon from "./assets/following.svg?react";
-import StatsIcon from "./assets/stats.svg?react";
-import ApprovedIcon from "./assets/approved.svg?react";
-import GearsIcon from "./assets/gears.svg?react";
-import NotificationIcon from "./assets/notification.svg?react";
-import TopIcon from "./assets/top.svg?react";
-import FollowersIcon from "./assets/followers.svg?react";
-import TooltipIcon from "./assets/tooltip.svg?react";
-import RefreshIcon from "./assets/refresh.svg?react";
+import RequestIcon from "src/assets/request.svg?react";
+import FollowingIcon from "src/assets/following.svg?react";
+import StatsIcon from "src/assets/stats.svg?react";
+import ApprovedIcon from "src/assets/approved.svg?react";
+import GearsIcon from "src/assets/gears.svg?react";
+import NotificationIcon from "src/assets/notification.svg?react";
+import TopIcon from "src/assets/top.svg?react";
+import FollowersIcon from "src/assets/followers.svg?react";
+import TooltipIcon from "src/assets/tooltip.svg?react";
+import RefreshIcon from "src/assets/refresh.svg?react";
 
 export interface ISettingsTileProps {
     title?: string;

@@ -1,6 +1,6 @@
-import { Icon } from "src/components";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import PullRequestIcon from "src/assets/request.svg?react";
 
 dayjs.extend(relativeTime);
 
@@ -20,10 +20,7 @@ export function PullRequest({
     return (
         <div className="flex flex-row p-2 items-center border-2 border-transparent rounded-lg hover:border-green-400">
             <div className="mr-2">
-                <Icon
-                    icon="pull-request"
-                    className="w-4 h-4 fill-current text-green-400"
-                />
+                <PullRequestIcon className="w-4 h-4 fill-current dark:text-dark text-accent" />
             </div>
             <div className="flex flex-col flex-1 text-left overflow-hidden whitespace-nowrap">
                 <a
