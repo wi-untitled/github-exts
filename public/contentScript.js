@@ -11,6 +11,7 @@ function init() {
      */
     const div = document.createElement("div");
     const notifyier = document.createElement("div");
+    notifyier.setAttribute("id", "notifyier");
     const button = document.createElement("button");
 
     div.classList.add("github-exts-button-container");
@@ -25,7 +26,9 @@ function init() {
 
         document.body.addEventListener("click", handleClickOutside);
 
-        div.removeChild(notifyier);
+        if (document.querySelector("#notifyier")) {
+            div.removeChild(notifyier);
+        }
     }
 
     function handleClickOutside(event) {
