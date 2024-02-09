@@ -1,5 +1,3 @@
-import { Icon } from "..";
-
 export function IconPullRequest() {
     return (
         <svg aria-hidden="true">
@@ -244,39 +242,6 @@ export function IconRepository() {
     );
 }
 
-export function IconDrag() {
-    return (
-        <svg>
-            <g id="drag">
-                <path
-                    d="M2.5 10C3.32843 10 4 9.32843 4 8.5C4 7.67157 3.32843 7 2.5 7C1.67157 7 1 7.67157 1 8.5C1 9.32843 1.67157 10 2.5 10Z"
-                    fill="currentColor"
-                />
-                <path
-                    d="M12.5 5C13.3284 5 14 4.32843 14 3.5C14 2.67157 13.3284 2 12.5 2C11.6716 2 11 2.67157 11 3.5C11 4.32843 11.6716 5 12.5 5Z"
-                    fill="currentColor"
-                />
-                <path
-                    d="M7.5 5C8.32843 5 9 4.32843 9 3.5C9 2.67157 8.32843 2 7.5 2C6.67157 2 6 2.67157 6 3.5C6 4.32843 6.67157 5 7.5 5Z"
-                    fill="currentColor"
-                />
-                <path
-                    d="M2.5 5C3.32843 5 4 4.32843 4 3.5C4 2.67157 3.32843 2 2.5 2C1.67157 2 1 2.67157 1 3.5C1 4.32843 1.67157 5 2.5 5Z"
-                    fill="currentColor"
-                />
-                <path
-                    d="M12.5 10C13.3284 10 14 9.32843 14 8.5C14 7.67157 13.3284 7 12.5 7C11.6716 7 11 7.67157 11 8.5C11 9.32843 11.6716 10 12.5 10Z"
-                    fill="currentColor"
-                />
-                <path
-                    d="M7.5 10C8.32843 10 9 9.32843 9 8.5C9 7.67157 8.32843 7 7.5 7C6.67157 7 6 7.67157 6 8.5C6 9.32843 6.67157 10 7.5 10Z"
-                    fill="currentColor"
-                />
-            </g>
-        </svg>
-    );
-}
-
 export function Assets() {
     return (
         <div className="hidden">
@@ -294,7 +259,6 @@ export function Assets() {
             <IconCommits />
             <IconStar />
             <IconRepository />
-            <IconDrag />
         </div>
     );
 }
