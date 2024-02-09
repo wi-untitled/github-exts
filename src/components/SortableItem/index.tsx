@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { CSS } from "@dnd-kit/utilities";
 import type { UniqueIdentifier } from "@dnd-kit/core";
 
-import DragIcon from "./assets/drag.svg?react";
+import DragIcon from "src/assets/drag.svg?react";
 
 export interface ISortableItemProps {
     id: number;
