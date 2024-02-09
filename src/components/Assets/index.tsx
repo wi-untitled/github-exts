@@ -74,18 +74,6 @@ export function IconTwitter() {
     );
 }
 
-export function IconBack() {
-    return (
-        <svg>
-            <path
-                id="back"
-                d="M11.6932 0.0879211L12.192 0.58494L4.78589 7.99105L12.192 15.3972L11.6932 15.8942L3.7901 7.99105L11.6932 0.0879211Z"
-                fill="currentColor"
-            />
-        </svg>
-    );
-}
-
 export function Assets() {
     return (
         <div className="hidden">
@@ -94,7 +82,6 @@ export function Assets() {
             <IconFacebook />
             <IconYoutube />
             <IconTwitter />
-            <IconBack />
         </div>
     );
 }

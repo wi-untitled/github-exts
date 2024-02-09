@@ -1,16 +1,9 @@
 export const icons = [
-    "changes-request",
     "linkedin",
     "instagram",
     "facebook",
     "twitter",
     "youtube",
-    "back",
-    "issues",
-    "commits",
-    "star",
-    "repository",
-    "drag",
 ] as const;
 
 export interface IIconProps {
