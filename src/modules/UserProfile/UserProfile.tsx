@@ -12,7 +12,7 @@ import {
 import { FeatureFlag } from "src/core";
 import { useNavigate } from "react-router-dom";
 import { SettingsScreen } from "src/screens";
-
+import LogoutIcon from "./assets/logout.svg?react";
 function UserProfile() {
     const appStore = useStore("AppStore");
     const userProfileService = useService("UserProfileService");
@@ -72,10 +72,7 @@ function UserProfile() {
                             className="cursor-pointer"
                             onClick={userProfileStore.handleLogout}
                         >
-                            <Icon
-                                icon="logout"
-                                className="w-6 h-6 text-gray-400 dark:text-gray-500"
-                            />
+                            <LogoutIcon className="w-6 h-6 dark:text-dark text-accent fill-current" />
                         </span>
                     </div>
                 </div>
