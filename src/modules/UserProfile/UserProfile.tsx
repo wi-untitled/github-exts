@@ -13,6 +13,8 @@ import { FeatureFlag } from "src/core";
 import { useNavigate } from "react-router-dom";
 import { SettingsScreen } from "src/screens";
 import LogoutIcon from "./assets/logout.svg?react";
+import SettingsIcon from "./assets/settings.svg?react";
+
 function UserProfile() {
     const appStore = useStore("AppStore");
     const userProfileService = useService("UserProfileService");
@@ -62,10 +64,7 @@ function UserProfile() {
                                 className="cursor-pointer"
                                 onClick={handleRedirectToSettingPageCallback}
                             >
-                                <Icon
-                                    icon="settings"
-                                    className="w-6 h-6 text-gray-400 dark:text-gray-500"
-                                />
+                                <SettingsIcon className="w-6 h-6 dark:text-dark text-accent fill-current" />
                             </span>
                         </FeatureFlag>
                         <span
