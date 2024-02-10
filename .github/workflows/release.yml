@@ -16,7 +16,6 @@ jobs:
             # Required to put a comment into the pull-request
             pull-requests: write
             packages: write
-            contents: read
 
         steps:
             - uses: actions/checkout@v2
