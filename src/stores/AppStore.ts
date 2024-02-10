@@ -34,7 +34,7 @@ export class AppStore extends BaseStore implements IState {
         notificationsService: NotificationsService,
     ) {
         super(transport, notificationsService);
-
+        console.log(42);
         makeAutoObservable<
             AppStore,
             "updateIsOpen" | "updateLoading" | "isLoading"
