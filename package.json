@@ -6,6 +6,9 @@
     "engines": {
         "node": "^20"
     },
+    "files": [
+        "/dist"
+      ],
     "scripts": {
         "prepare": "./node_modules/.bin/husky install",
         "dev": "vite",
@@ -14,6 +17,7 @@
         "build-extentions": "tsc && vite build",
         "build:watch": "vite build --watch --mode=development",
         "build:prod": "vite build --watch --mode=production",
+        "build:prod:release": "vite build --mode=production",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --config .eslintrc.cjs",
         "preview": "vite preview",
         "commit": "git-cz",
@@ -92,6 +96,7 @@
         "postcss": "^8.4.0",
         "postcss-nesting": "^12.0.2",
         "prettier": "^3.1.0",
+        "semantic-release": "^23.0.2",
         "tailwindcss": "^3.3.6",
         "typescript": "^5.2.2",
         "unplugin-auto-import": "^0.17.3",
