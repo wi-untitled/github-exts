@@ -23,7 +23,6 @@ function AppComponent() {
 
     return (
         <>
-            <Assets />
             {appStore.isAuthorized ? (
                 <>
                     <div className="flex flex-col w-full p-4">

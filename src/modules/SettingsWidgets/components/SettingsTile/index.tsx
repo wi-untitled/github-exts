@@ -26,7 +26,7 @@ export function SettingsTile({
     onClick,
     info,
 }: ISettingsTileProps) {
-    const Icon =
+    const SettingIcon =
         {
             ["NotificationsRequestedChanges"]: RequestIcon,
             ["NotificationsApprovedTop10"]: ApprovedIcon,
@@ -42,7 +42,7 @@ export function SettingsTile({
     return (
         <div
             className={clsx(
-                "flex justify-center items-center border rounded-md cursor-pointer w-12 h-12",
+                "flex justify-center items-center border border-primary rounded-md cursor-pointer w-12 h-12",
                 {
                     "bg-dark-primary hover:bg-primary": enabled,
                     "bg-light hover:bg-light-primary": !enabled,
@@ -52,7 +52,7 @@ export function SettingsTile({
             data-tooltip-id={id}
             data-tooltip-content={info}
         >
-            <Icon
+            <SettingIcon
                 className={clsx({
                     "text-dark fill-current": enabled,
                     "text-accent fill-current": !enabled,
