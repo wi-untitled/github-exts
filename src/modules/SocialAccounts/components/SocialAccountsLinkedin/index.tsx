@@ -1,5 +1,5 @@
 import { makeLinkeinUrl } from "src/utils";
-import { Icon } from "src/components";
+import LinkedinIcon from "src/assets/linkedin.svg?react";
 
 export interface ISocialAccountsLinkedinProps {
     name: string;
@@ -7,11 +7,8 @@ export interface ISocialAccountsLinkedinProps {
 
 export function SocialAccountsLinkedin({ name }: ISocialAccountsLinkedinProps) {
     return (
-        <a
-            href={makeLinkeinUrl(name)}
-            className="block w-6 h-6 text-zinc-600 hover:rotate-90 transition duration-500 ease-in-out"
-        >
-            <Icon icon="instagram" />
+        <a href={makeLinkeinUrl(name)}>
+            <LinkedinIcon />
         </a>
     );
 }
