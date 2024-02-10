@@ -1,0 +1,55 @@
+name: "Semantic Release"
+
+on:
+    push:
+        branches:
+            - "main"
+
+jobs:
+    release:
+        name: Run release
+        runs-on: ubuntu-latest
+
+        permissions:
+            # Required to checkout the code
+            contents: read
+            # Required to put a comment into the pull-request
+            pull-requests: write
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: "Install Node"
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "20.x"
+
+            - name: "Install Deps"
+              run: npm ci
+              shell: bash
+
+            - name: list
+              run: |
+                ls -la
+
+            - name: Release
+              run: |
+                npm run build:prod:release
+                cp package.json dist/package.json
+
+            - name: list
+              run: |
+                ls -la
+            
+            - name: Run semantic release
+              run: |
+                cd dist
+                ls -la
+                zip -r dist.zip .
+                npx semantic-release --debug
+
+              env:
+                NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+            
+
+            
