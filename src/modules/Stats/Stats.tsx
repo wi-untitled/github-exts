@@ -5,6 +5,7 @@ import { Widget } from "src/components";
 import { formatNumber } from "src/utils";
 import { StatsStore } from "./StatsStore";
 import { StatsIconsRenderConfig, IStatsIconKey } from "./config";
+import { Tooltip } from "src/components/Tooltip";
 
 export function Stats() {
     const appStore = useStore("AppStore");
@@ -15,13 +16,14 @@ export function Stats() {
         () => new StatsStore(appStore, statsService),
     );
 
+    const title = (
+        <Tooltip id={Stats.TooltipId} info={t("stats.info")}>
+            <strong className="text-sm">{t("stats.title")}</strong>
+        </Tooltip>
+    );
+
     return (
-        <Widget
-            title={`${t("stats.title")}`}
-            info={t("stats.info")}
-            id={Stats.TooltipId}
-            isLoading={statsStore.isLoading}
-        >
+        <Widget title={title} isLoading={statsStore.isLoading}>
             <div className="space-y-2 p-3">
                 {Object.keys(StatsIconsRenderConfig).map((key) => {
                     const StatsIcon =
