@@ -36,6 +36,7 @@ jobs:
               run: |
                 npm run build:prod:release
                 cp package.json dist/package.json
+                cp .releaserc.json dist/.releaserc.json
 
             - name: list
               run: |
@@ -46,7 +47,7 @@ jobs:
                 cd dist
                 ls -la
                 zip -r dist.zip .
-                npx semantic-release --debug
+                npx semantic-release --debug 
 
               env:
                 NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
