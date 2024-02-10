@@ -2,8 +2,8 @@ name: "Semantic Release"
 
 on:
     push:
-        branches:
-            - "main"
+      tags:
+        - '*'
 
 jobs:
     release:
@@ -11,10 +11,7 @@ jobs:
         runs-on: ubuntu-latest
 
         permissions:
-            # Required to checkout the code
             contents: write
-            # Required to put a comment into the pull-request
-            pull-requests: write
             packages: write
 
         steps:
@@ -29,18 +26,16 @@ jobs:
               run: npm ci
               shell: bash
 
-            - name: list
-              run: |
-                ls -la
-
-            - name: Release
+            - name: Build release
               run: |
                 npm run build:prod:release
             
+            - name: Zip dist directory
+              run: |
+                zip -r dist.zip dist
+            
             - name: Run semantic release
               run: |
-                ls -la
-                zip -r dist.zip dist
                 npx semantic-release --debug 
 
               env:
