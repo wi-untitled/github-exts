@@ -36,19 +36,11 @@ jobs:
             - name: Release
               run: |
                 npm run build:prod:release
-                cp package.json dist/package.json
-                cp .releaserc.json dist/.releaserc.json
-
-            - name: list
-              run: |
-                ls -la
-                echo ${{secrets.SEMANTIC_RELEASE}}
             
             - name: Run semantic release
               run: |
-                cd dist
                 ls -la
-                zip -r dist.zip .
+                rm .gitignore
                 npx semantic-release --debug 
 
               env:
