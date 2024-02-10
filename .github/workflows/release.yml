@@ -2,8 +2,8 @@ name: "Semantic Release"
 
 on:
     push:
-      tags:
-        - '*'
+        branches:
+            - "main"
 
 jobs:
     release:
@@ -15,26 +15,18 @@ jobs:
             packages: write
 
         steps:
-            - uses: actions/checkout@v2
+            - name: Run npm install
+              uses: ./.github/actions/install-deps
 
-            - name: "Install Node"
-              uses: actions/setup-node@v2
-              with:
-                  node-version: "20.x"
-
-            - name: "Install Deps"
-              run: npm ci
-              shell: bash
-
-            - name: Build release
+            - name: "Build release"
               run: |
                 npm run build:prod:release
             
-            - name: Zip dist directory
+            - name: "Zip dist directory"
               run: |
                 zip -r dist.zip dist
             
-            - name: Run semantic release
+            - name: "Run semantic release"
               run: |
                 npx semantic-release --debug 
 
