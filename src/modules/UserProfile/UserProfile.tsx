@@ -1,6 +1,5 @@
 import { observer, useLocalStore } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Icon } from "src/components";
 import Spinner from "src/components/Spinner";
 import { useService, useStore } from "src/hooks";
 import { UserProfileStore } from "src/modules/UserProfile/UserProfileStore";

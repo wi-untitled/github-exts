@@ -11,9 +11,9 @@ import TopIcon from "src/assets/top.svg?react";
 import FollowersIcon from "src/assets/followers.svg?react";
 import TooltipIcon from "src/assets/tooltip.svg?react";
 import RefreshIcon from "src/assets/refresh.svg?react";
+import SettingsIcon from "src/assets/settings.svg?react";
 
 export interface ISettingsTileProps {
-    title?: string;
     onClick?: () => void;
     enabled?: boolean;
     id: string;
@@ -37,6 +37,7 @@ export function SettingsTile({
             ["Stats"]: StatsIcon,
             ["topLanguagesTooltip"]: TooltipIcon,
             ["autoUpdateEnabled"]: RefreshIcon,
+            ["tileSettingsEnabled"]: SettingsIcon,
         }[id] || GearsIcon;
 
     return (

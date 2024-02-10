@@ -4,13 +4,7 @@ import { useService, useStore } from "src/hooks";
 import { Widget } from "src/components";
 import { formatNumber } from "src/utils";
 import { StatsStore } from "./StatsStore";
-import PullRequestIcon from "src/assets/request.svg?react";
-import IssuesIcon from "src/assets/bug.svg?react";
-import MergedIcon from "src/assets/merged.svg?react";
-import TotalRepoIcon from "src/assets/total.svg?react";
-import TotalCommentsIcon from "src/assets/tooltip.svg?react";
-import TotalDiscussionIcon from "src/assets/messages.svg?react";
-import TotalStarsIcon from "src/assets/star.svg?react";
+import { StatsIconsRenderConfig, IStatsIconKey } from "./config";
 
 export function Stats() {
     const appStore = useStore("AppStore");
@@ -21,16 +15,6 @@ export function Stats() {
         () => new StatsStore(appStore, statsService),
     );
 
-    const StatsIcons = {
-        ["totalIssues"]: IssuesIcon,
-        ["totalMergedPullRequests"]: MergedIcon,
-        ["totalPullRequests"]: PullRequestIcon,
-        ["totalRepositoriesContributedTo"]: TotalRepoIcon,
-        ["totalRepositoryDiscussionComments"]: TotalCommentsIcon,
-        ["totalRepositoryDiscussions"]: TotalDiscussionIcon,
-        ["totalStars"]: TotalStarsIcon,
-    };
-
     return (
         <Widget
             title={`${t("stats.title")}`}
@@ -39,21 +23,21 @@ export function Stats() {
             isLoading={statsStore.isLoading}
         >
             <div className="space-y-2 p-3">
-                {Object.keys(StatsIcons).map((key) => {
+                {Object.keys(StatsIconsRenderConfig).map((key) => {
                     const StatsIcon =
-                        StatsIcons[key as keyof typeof StatsIcons];
-
-                    const statsValue =
-                        statsStore[key as keyof typeof statsStore];
+                        StatsIconsRenderConfig[key as IStatsIconKey];
+                    const statsValue = statsStore[key as IStatsIconKey];
                     const formattedValue =
                         typeof statsValue === "number"
                             ? formatNumber(statsValue)
                             : "";
+                    const typedKey = key as IStatsIconKey;
+                    const i18nKey = `stats.${typedKey}` as const;
 
                     return (
                         <div className="flex row space-x-3">
                             <StatsIcon className="w-4 h-4 fill-current dark:text-dark text-accent" />
-                            <p>{t(`stats.${key}`)}</p>
+                            <p>{t(i18nKey)}</p>
                             <span className="grow flex justify-end">
                                 {formattedValue}
                             </span>

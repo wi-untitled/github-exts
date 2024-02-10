@@ -37,7 +37,7 @@ export function SortableItem({ id, activeId, render }: ISortableItemProps) {
             })}
         >
             <div
-                className="absolute flex justify-center items-center right-1 top-3 w-6 h-3"
+                className="absolute flex bg-light dark:bg-dark justify-center items-center right-1 -top-2 w-5 h-4.5 border border-light dark:border-dark rounded-sm"
                 ref={setActivatorNodeRef}
                 {...listeners}
             >
