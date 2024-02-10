@@ -6,6 +6,7 @@ export { NotificationsModule } from "src/modules/Notifications/Notifications";
 export { NotificationsApprovedTop10Module } from "src/modules/NotificationsApprovedTop10/NotificationsApprovedTop10";
 export { NotificationsRequstedChangesModule } from "src/modules/NotificationsRequstedChanges/NotificationsRequstedChanges";
 export { TopLanguagesModule } from "src/modules/TopLanguages/TopLanguages";
-export { SettingsWidgetModule } from "src/modules/SettingsWidgets/SettingsWidgets";
+export { SettingsWidgetClassicModule } from "src/modules/SettingsWidgetsClassic/SettingsWidgetsClassic";
+export { SettingsWidgetTileModule } from "src/modules/SettingsWidgetsTile/SettingsWidgetsTile";
 export { SocialAccountsModule } from "src/modules/SocialAccounts/SocialAccounts";
 export { StatsModule } from "src/modules/Stats/Stats";

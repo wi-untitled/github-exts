@@ -49,6 +49,7 @@
         "Stats": "Enable Github's Stats",
         "saveButton": "Save Settings",
         "autoUpdate": "Enable autoupdate notifications",
+        "settingsTile": "Enable settings tile view",
         "autoUpdateInfo": "Enable autoupdate for extentions button. Possibility to recieve marker on button to notify the user that you have got updates every 120 seconds."
     },
     "settingsTileWidgets": {

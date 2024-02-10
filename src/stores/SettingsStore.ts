@@ -38,6 +38,7 @@ export const definedWidgets: IWidget[] = [
 ];
 
 export const DEFAULT_AUTOUPDATE_ENABLED = false;
+export const DEFAULT_SETTINGS_TILE_ENABLED = false;
 
 export const DEFAULT_PREDICTABLE = [
     WidgetsId.TopLanguages,
@@ -54,7 +55,9 @@ export class SettingsStore extends BaseStore {
     protected initWidgets: IWidget[];
     public widgets: IWidget[];
     protected initIsAutoUpdateEnabled: boolean;
+    protected initIsSettingsTileEnabled: boolean;
     public isAutoUpdateEnabled: boolean;
+    public isSettingsTileEnabled: boolean;
     public predictable: WidgetsId[];
 
     public constructor(
@@ -68,11 +71,13 @@ export class SettingsStore extends BaseStore {
             "updateWidgets" | "writeSettingsInLocalStorage"
         >(this, {
             isAutoUpdateEnabled: observable,
+            isSettingsTileEnabled: observable,
             widgets: observable,
             predictable: observable,
             updateWidgetById: action,
             updateWidgets: action,
             updateAutoUpdateEnabled: action,
+            updateSettingsTileEnabled: action,
             writeSettingsInLocalStorage: action,
             updatePredictable: action,
             needSave: computed,
@@ -81,6 +86,7 @@ export class SettingsStore extends BaseStore {
         this.widgets = definedWidgets;
         this.isAutoUpdateEnabled = DEFAULT_AUTOUPDATE_ENABLED;
         this.predictable = DEFAULT_PREDICTABLE;
+        this.isSettingsTileEnabled = DEFAULT_SETTINGS_TILE_ENABLED;
 
         // TODO: removes when local storage sync is implemented
         this.isLoading = false;
@@ -91,6 +97,7 @@ export class SettingsStore extends BaseStore {
 
         this.initWidgets = this.widgets;
         this.initIsAutoUpdateEnabled = this.isAutoUpdateEnabled;
+        this.initIsSettingsTileEnabled = this.isSettingsTileEnabled;
     }
 
     protected checkSettingsInLocalStorage = (): boolean => {
@@ -117,11 +124,16 @@ export class SettingsStore extends BaseStore {
                 return;
             }
 
-            const { widgets, isAutoUpdateEnabled, predictable } =
-                JSON.parse(data);
+            const {
+                widgets,
+                isAutoUpdateEnabled,
+                isSettingsTileEnabled,
+                predictable,
+            } = JSON.parse(data);
 
             this.updateWidgets(widgets);
             this.updateAutoUpdateEnabled(isAutoUpdateEnabled ?? false);
+            this.updateSettingsTileEnabled(isSettingsTileEnabled ?? false);
             this.updatePredictable(predictable ?? DEFAULT_PREDICTABLE);
         } catch (error) {
             console.trace(error);
@@ -136,6 +148,7 @@ export class SettingsStore extends BaseStore {
                 JSON.stringify({
                     widgets: this.widgets,
                     isAutoUpdateEnabled: this.isAutoUpdateEnabled,
+                    isSettingsTileEnabled: this.isSettingsTileEnabled,
                     predictable: this.predictable,
                 }),
             );
@@ -145,6 +158,7 @@ export class SettingsStore extends BaseStore {
             this.widgets = this.initWidgets.map((x) => x);
 
             this.initIsAutoUpdateEnabled = this.isAutoUpdateEnabled;
+            this.initIsSettingsTileEnabled = this.isSettingsTileEnabled;
         } catch (error) {
             console.trace(error);
         }
@@ -207,6 +221,16 @@ export class SettingsStore extends BaseStore {
         newIsAutoUpdateEnabled: boolean,
     ): void => {
         this.isAutoUpdateEnabled = newIsAutoUpdateEnabled;
+    };
+
+    public updateSettingsTileEnabled = (
+        newIsSettingsTileEnabled: boolean,
+    ): void => {
+        this.isSettingsTileEnabled = newIsSettingsTileEnabled;
+
+        setTimeout(() => {
+            this.writeSettingsInLocalStorage();
+        }, 3000);
     };
 
     public updatePredictable = (newPredictable: WidgetsId[]): void => {

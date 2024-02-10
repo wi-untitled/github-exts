@@ -1,5 +1,6 @@
-import { makeInstagramUrl } from "src/utils";
+import { makeYoutubeUrl } from "src/utils";
 import YoutubeIcon from "src/assets/youtube.svg?react";
+import { SocialAccountsHref } from "../SocialAccountsHref";
 
 export interface ISocialAccountsYoutubeProps {
     name: string;
@@ -7,8 +8,8 @@ export interface ISocialAccountsYoutubeProps {
 
 export function SocialAccountsYoutube({ name }: ISocialAccountsYoutubeProps) {
     return (
-        <a href={makeInstagramUrl(name)}>
+        <SocialAccountsHref href={makeYoutubeUrl(name)}>
             <YoutubeIcon />
-        </a>
+        </SocialAccountsHref>
     );
 }
