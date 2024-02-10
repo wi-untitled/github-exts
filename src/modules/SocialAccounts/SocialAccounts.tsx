@@ -30,7 +30,11 @@ export function SocialAccounts() {
                              */
                             const Render = iconRender[provider];
 
-                            return <Render name={name} />;
+                            return (
+                                <div className="block w-6 h-6 fill-current dark:text-dark text-accent">
+                                    <Render name={name} />
+                                </div>
+                            );
                         },
                     )}
                 </div>
