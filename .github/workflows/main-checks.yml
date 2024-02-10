@@ -11,8 +11,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Run npm install
-              uses: ./.github/actions/install-deps
+            - uses: actions/checkout@v2
 
             - name: Run unit test
               uses: ./.github/actions/unit-tests-chunks

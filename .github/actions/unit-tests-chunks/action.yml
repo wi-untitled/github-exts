@@ -3,6 +3,8 @@ Description: "Just run unit tests. (TODO: parallels them)"
 runs:
     using: "composite"
     steps:
+        - uses: actions/checkout@v2
+        
         - name: "Run unit test with coverage"
           run: npm run test:unit
           shell: bash
