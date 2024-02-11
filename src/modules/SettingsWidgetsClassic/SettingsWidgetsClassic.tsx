@@ -93,13 +93,13 @@ function SettingsWidgetClassicComponent() {
                             title={t("settingsWidgets.settingsTile")}
                             onChange={handleToggleSettingsTileCallback}
                         />
-                        <SettingsSwitch
-                            id="autoUpdateEnabled"
-                            enabled={settingsStore.isAutoUpdateEnabled}
-                            title={t("settingsWidgets.autoUpdate")}
-                            onChange={handleAutoUpdateEnabled}
-                        />
                     </Tooltip>
+                    <SettingsSwitch
+                        id="autoUpdateEnabled"
+                        enabled={settingsStore.isAutoUpdateEnabled}
+                        title={t("settingsWidgets.autoUpdate")}
+                        onChange={handleAutoUpdateEnabled}
+                    />
                 </div>
                 <div>
                     <SaveSettingsButton
