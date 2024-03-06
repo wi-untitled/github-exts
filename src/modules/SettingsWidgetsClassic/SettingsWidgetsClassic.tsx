@@ -9,7 +9,6 @@ import {
 } from "./components";
 import { WidgetsId } from "src/enums";
 import { GlobalDeveloper } from "src/components";
-import { Tooltip } from "src/components/Tooltip";
 
 function SettingsWidgetClassicComponent() {
     const settingsStore = useStore("SettingsStore");
@@ -35,16 +34,6 @@ function SettingsWidgetClassicComponent() {
 
         updateFeatureFlag("enableWidgetTitleTooltip", !current);
     }, [flags, updateFeatureFlag]);
-
-    const handleToggleSettingsTileCallback = useCallback(() => {
-        const prev = settingsStore.isSettingsTileEnabled;
-
-        settingsStore.updateSettingsTileEnabled(!prev);
-
-        setTimeout(() => {
-            updateFeatureFlag("enableSettingsTile", !prev);
-        }, 3000);
-    }, [updateFeatureFlag, settingsStore]);
 
     const handleAutoUpdateEnabled = useCallback(() => {
         const prevAutoUpdateEnabled = settingsStore.isAutoUpdateEnabled;
@@ -83,17 +72,6 @@ function SettingsWidgetClassicComponent() {
                         title={t("settingsWidgets.widgetTitleTooltipText")}
                         onChange={handleToggleWidgetTitleTooltipCallback}
                     />
-                    <Tooltip
-                        id="autoUpdateEnabled"
-                        info={t("settingsWidgets.autoUpdateInfo")}
-                    >
-                        <SettingsSwitch
-                            id="enableSettingsTile"
-                            enabled={settingsStore.isSettingsTileEnabled}
-                            title={t("settingsWidgets.settingsTile")}
-                            onChange={handleToggleSettingsTileCallback}
-                        />
-                    </Tooltip>
                     <SettingsSwitch
                         id="autoUpdateEnabled"
                         enabled={settingsStore.isAutoUpdateEnabled}

@@ -7,6 +7,5 @@ export { NotificationsApprovedTop10Module } from "src/modules/NotificationsAppro
 export { NotificationsRequstedChangesModule } from "src/modules/NotificationsRequstedChanges/NotificationsRequstedChanges";
 export { TopLanguagesModule } from "src/modules/TopLanguages/TopLanguages";
 export { SettingsWidgetClassicModule } from "src/modules/SettingsWidgetsClassic/SettingsWidgetsClassic";
-export { SettingsWidgetTileModule } from "src/modules/SettingsWidgetsTile/SettingsWidgetsTile";
 export { SocialAccountsModule } from "src/modules/SocialAccounts/SocialAccounts";
 export { StatsModule } from "src/modules/Stats/Stats";

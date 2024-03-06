@@ -1,1 +1,0 @@
-export { SettingsTile } from "./SettingsTile";
