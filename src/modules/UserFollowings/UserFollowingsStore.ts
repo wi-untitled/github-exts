@@ -44,7 +44,7 @@ export class UserFollowingsStore extends LoadableStore {
         this.isMoreUserFollowingsLoading = false;
 
         when(
-            () => this.appStore.isOpen,
+            () => this.appStore.isOpen && !this.appStore.isLoading,
             async () => {
                 if (this.appStore.readyInitAsync) {
                     await this.initAsyncAuth();
