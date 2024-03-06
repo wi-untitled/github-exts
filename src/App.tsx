@@ -11,7 +11,12 @@ import { useEscape } from "./hooks";
 function AppComponent() {
     useEscape();
 
-    return <RouterProvider router={router} />;
+    return (
+        <>
+            <Assets />
+            <RouterProvider router={router} />
+        </>
+    );
 }
 
 const App = Sentry.withProfiler(observer(AppComponent));

@@ -11,3 +11,5 @@ export { SortableList } from "./SortableList";
 export { GlobalDeveloper } from "./GlobalDeveloper";
 export { Button } from "./Button";
 export { Input } from "./Input";
+export { Icon } from "./Icon";
+export { Assets } from "./Assets";
