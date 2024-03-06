@@ -1,6 +1,6 @@
 import { makeFacebookUrl } from "src/utils";
-import FacebookIcon from "src/assets/facebook.svg?react";
 import { SocialAccountsHref } from "../SocialAccountsHref";
+import { Icon } from "src/components";
 
 export interface ISocialAccountsFacebookProps {
     name: string;
@@ -9,7 +9,7 @@ export interface ISocialAccountsFacebookProps {
 export function SocialAccountsFacebook({ name }: ISocialAccountsFacebookProps) {
     return (
         <SocialAccountsHref href={makeFacebookUrl(name)}>
-            <FacebookIcon />
+            <Icon icon="facebook" />
         </SocialAccountsHref>
     );
 }

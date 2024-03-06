@@ -1,7 +1,7 @@
 // TODO: make for twitter util fn
 import { makeInstagramUrl } from "src/utils";
-import TwitterIcon from "src/assets/twitter.svg?react";
 import { SocialAccountsHref } from "../SocialAccountsHref";
+import { Icon } from "src/components";
 
 export interface ISocialAccountsTwitterProps {
     name: string;
@@ -10,7 +10,7 @@ export interface ISocialAccountsTwitterProps {
 export function SocialAccountsTwitter({ name }: ISocialAccountsTwitterProps) {
     return (
         <SocialAccountsHref href={makeInstagramUrl(name)}>
-            <TwitterIcon />
+            <Icon icon="twitter" />
         </SocialAccountsHref>
     );
 }

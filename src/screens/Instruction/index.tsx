@@ -1,8 +1,7 @@
 import { observer } from "mobx-react";
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Instruction } from "src/components";
-import BackIcon from "src/assets/back.svg?react";
+import { Icon, Instruction } from "src/components";
 
 export function InstructionComponent() {
     const navigate = useNavigate();
@@ -14,7 +13,10 @@ export function InstructionComponent() {
     return (
         <div className="w-full h-full">
             <div className="p-2" onClick={handleNavigateBackCallback}>
-                <BackIcon className="w-6 h-6 cursor-pointer fill-current dark:text-dark text-accent" />
+                <Icon
+                    icon="back"
+                    className="w-6 h-6 cursor-pointer dark:text-dark text-accent"
+                />
             </div>
             <Instruction />
         </div>

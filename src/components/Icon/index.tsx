@@ -22,6 +22,7 @@ export const icons = [
     // "repository",
     "total",
     "tooltip",
+    "request",
     "drag",
 ] as const;
 

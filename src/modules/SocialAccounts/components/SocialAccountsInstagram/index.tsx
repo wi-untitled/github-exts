@@ -1,6 +1,6 @@
 import { makeInstagramUrl } from "src/utils";
-import InstagramIcon from "src/assets/instagram.svg?react";
 import { SocialAccountsHref } from "../SocialAccountsHref";
+import { Icon } from "src/components";
 
 export interface ISocialAccountsInstagramProps {
     name: string;
@@ -11,7 +11,7 @@ export function SocialAccountsInstagram({
 }: ISocialAccountsInstagramProps) {
     return (
         <SocialAccountsHref href={makeInstagramUrl(name)}>
-            <InstagramIcon />
+            <Icon icon="instagram" />
         </SocialAccountsHref>
     );
 }

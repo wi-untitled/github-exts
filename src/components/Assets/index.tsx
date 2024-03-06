@@ -19,6 +19,7 @@ import { YoutubeIcon } from "./Youtube";
 import { StarIcon } from "./Star";
 import { TotalIcon } from "./Total";
 import { TooltipIcon } from "./Tooltip";
+import { RequestIcon } from "./Request";
 
 export function Assets() {
     return (
@@ -44,6 +45,7 @@ export function Assets() {
             <StarIcon />
             <TotalIcon />
             <TooltipIcon />
+            <RequestIcon />
         </div>
     );
 }

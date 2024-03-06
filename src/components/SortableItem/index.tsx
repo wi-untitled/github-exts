@@ -2,8 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import clsx from "clsx";
 import { CSS } from "@dnd-kit/utilities";
 import type { UniqueIdentifier } from "@dnd-kit/core";
-
-import DragIcon from "src/assets/drag.svg?react";
+import { Icon } from "..";
 
 export interface ISortableItemProps {
     id: number;
@@ -41,7 +40,10 @@ export function SortableItem({ id, activeId, render }: ISortableItemProps) {
                 ref={setActivatorNodeRef}
                 {...listeners}
             >
-                <DragIcon className="dark:text-dark text-accent fill-current w-3 h-3 cursor-grab" />
+                <Icon
+                    icon="drag"
+                    className="dark:text-dark text-accent w-3 h-3 cursor-grab"
+                />
             </div>
             <Component />
         </div>
