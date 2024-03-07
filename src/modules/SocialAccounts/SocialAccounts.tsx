@@ -12,6 +12,7 @@ export function SocialAccounts() {
         () => new SocialAccountsStore(appStore, socialAccountsService),
     );
     const { t } = useTranslation();
+    console.log({ accounts: socialAccountsStore.socialAccounts });
 
     return (
         <Widget
@@ -29,6 +30,10 @@ export function SocialAccounts() {
                              * Uncomment when icons are ready.
                              */
                             const Render = iconRender[provider];
+
+                            if (!Render) {
+                                return null;
+                            }
 
                             return (
                                 <div className="block rounded-full overflow-hidden w-6 h-6 fill-current text-accent dark:text-zinc-600 hover:rotate-90 transition duration-500 ease-in-out">
