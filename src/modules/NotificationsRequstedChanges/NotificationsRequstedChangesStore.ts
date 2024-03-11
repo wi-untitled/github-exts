@@ -13,6 +13,7 @@ export class NotificationsRequstedChangesStore extends LoadableStore {
 
     protected uniqueUrls: Set<string>;
     protected transport: Transport;
+    protected isListenerRegistered: boolean;
 
     public constructor(
         appStore: AppStore,
@@ -28,6 +29,7 @@ export class NotificationsRequstedChangesStore extends LoadableStore {
         this.transport = getTransport();
         this.appStore = appStore;
         this.notificationsService = notificationsService;
+        this.isListenerRegistered = false;
 
         this.notifications = [];
         this.uniqueUrls = new Set(
@@ -44,7 +46,11 @@ export class NotificationsRequstedChangesStore extends LoadableStore {
     protected initAsync = async (): Promise<void> => {
         await this.fetch();
 
-        this.appStore.listeners.add(this.fetch);
+        if (this.isListenerRegistered === false) {
+            this.appStore.listeners.add(this.fetch);
+
+            this.isListenerRegistered = true;
+        }
     };
 
     protected fetch = async (): Promise<void> => {
@@ -54,20 +60,21 @@ export class NotificationsRequstedChangesStore extends LoadableStore {
             const { items } =
                 await this.notificationsService.getNotificationsRequestedChangesCreatedLastWeek();
 
-            this.setNotifications(items);
-
             const newUrls = items.map(
                 ({ pull_request }) => pull_request.html_url,
             );
             const hasDiff =
-                difference([...this.uniqueUrls], newUrls).length > 0;
+                difference(newUrls, [...this.uniqueUrls]).length > 0;
 
             this.transport.sendMessageRuntime({
                 action: "NOTIFY_BROADCAST",
                 data: {
                     hasDiff: hasDiff,
+                    name: "requested changes",
                 },
             });
+
+            this.setNotifications(items);
         } catch (error) {
             console.error(error);
         } finally {
@@ -77,6 +84,12 @@ export class NotificationsRequstedChangesStore extends LoadableStore {
 
     public setNotifications = (notifications: INotification[]): void => {
         this.notifications = [...notifications];
+
+        const newUniqueUrls = this.notifications.map(
+            ({ pull_request }) => pull_request.html_url,
+        );
+
+        this.uniqueUrls = new Set(newUniqueUrls);
     };
 
     public get isEmpty(): boolean {

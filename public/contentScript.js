@@ -28,6 +28,8 @@ function init() {
 
         if (document.querySelector("#notifyier")) {
             div.removeChild(notifyier);
+
+            hasDiff = false;
         }
     }
 
@@ -75,14 +77,8 @@ function init() {
                 case "NOTIFY_BROADCAST": {
                     hasDiff = hasDiff || data.data.hasDiff;
 
-                    if (hasDiff) {
-                        /**
-                         * TODO: There is setTimeout to make fake delay.
-                         * In future it can be removed.
-                         */
-                        setTimeout(() => {
-                            div.appendChild(notifyier);
-                        }, 3000);
+                    if (hasDiff && !document.querySelector("#notifyier")) {
+                        div.appendChild(notifyier);
                     }
 
                     return;

@@ -99,13 +99,13 @@ export class AppStore extends BaseStore implements IState {
         if (action === "IFRAME_TOGGLE") {
             this.updateIsOpen(isOpen);
         }
-        // TODO: test message
-        this.transport.sendMessageRuntime({
-            action: "BROADCAST",
-            data: {
-                test: 42,
-            },
-        });
+        // TODO: example how to make broadcast message
+        // this.transport.sendMessageRuntime({
+        //     action: "BROADCAST",
+        //     data: {
+        //         test: 42,
+        //     },
+        // });
     };
 
     protected handleAutoUpdateChange = ({
