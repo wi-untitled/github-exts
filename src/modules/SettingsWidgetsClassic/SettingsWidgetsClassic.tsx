@@ -9,6 +9,7 @@ import {
 } from "./components";
 import { WidgetsId } from "src/enums";
 import { GlobalDeveloper } from "src/components";
+import { Tooltip } from "src/components/Tooltip";
 
 function SettingsWidgetClassicComponent() {
     const settingsStore = useStore("SettingsStore");
@@ -72,12 +73,17 @@ function SettingsWidgetClassicComponent() {
                         title={t("settingsWidgets.widgetTitleTooltipText")}
                         onChange={handleToggleWidgetTitleTooltipCallback}
                     />
-                    <SettingsSwitch
+                    <Tooltip
                         id="autoUpdateEnabled"
-                        enabled={settingsStore.isAutoUpdateEnabled}
-                        title={t("settingsWidgets.autoUpdate")}
-                        onChange={handleAutoUpdateEnabled}
-                    />
+                        info={t("settingsWidgets.autoUpdateInfo")}
+                    >
+                        <SettingsSwitch
+                            id="autoUpdateEnabled"
+                            enabled={settingsStore.isAutoUpdateEnabled}
+                            title={t("settingsWidgets.autoUpdate")}
+                            onChange={handleAutoUpdateEnabled}
+                        />
+                    </Tooltip>
                 </div>
                 <div>
                     <SaveSettingsButton

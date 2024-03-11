@@ -13,6 +13,7 @@ export class NotificationsApprovedTop10Store extends LoadableStore {
 
     protected uniqueUrls: Set<string>;
     protected transport: Transport;
+    protected isListenerRegistered: boolean;
 
     public constructor(
         appStore: AppStore,
@@ -27,6 +28,7 @@ export class NotificationsApprovedTop10Store extends LoadableStore {
 
         this.appStore = appStore;
         this.notificationsService = notificationsService;
+        this.isListenerRegistered = false;
 
         this.notifications = [];
         this.uniqueUrls = new Set(
@@ -45,7 +47,11 @@ export class NotificationsApprovedTop10Store extends LoadableStore {
     protected initAsync = async (): Promise<void> => {
         await this.fetch();
 
-        this.appStore.listeners.add(this.fetch);
+        if (this.isListenerRegistered === false) {
+            this.appStore.listeners.add(this.fetch);
+
+            this.isListenerRegistered = true;
+        }
     };
 
     protected fetch = async (): Promise<void> => {
@@ -58,20 +64,25 @@ export class NotificationsApprovedTop10Store extends LoadableStore {
                     login: login,
                 });
 
-            this.setNotifications(items);
-
             const newUrls = items.map(
                 ({ pull_request }) => pull_request.html_url,
             );
             const hasDiff =
-                difference([...this.uniqueUrls], newUrls).length > 0;
-
+                difference(newUrls, [...this.uniqueUrls]).length > 0;
+            console.log({
+                hasDiff,
+                newUrls,
+                uniqueUrls: this.uniqueUrls,
+            });
             this.transport.sendMessageRuntime({
                 action: "NOTIFY_BROADCAST",
                 data: {
                     hasDiff: hasDiff,
+                    name: "notification top 10",
                 },
             });
+
+            this.setNotifications(items);
         } catch (error) {
             console.error(error);
         } finally {

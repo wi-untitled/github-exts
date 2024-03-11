@@ -53,7 +53,7 @@ export class NotificationsService extends AppService {
             });
 
             const response = await octokit.rest.search.issuesAndPullRequests({
-                q: `reviewed-by:@me+is:pull-request+created:>${NotificationsService.createdLastWeek()}+state:open+review:changes_requested`,
+                q: `author:@me+is:pull-request+created:>${NotificationsService.createdLastWeek()}+state:open+review:changes_requested`,
             });
 
             return {
