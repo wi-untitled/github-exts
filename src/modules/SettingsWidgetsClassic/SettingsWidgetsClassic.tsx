@@ -51,9 +51,11 @@ function SettingsWidgetClassicComponent() {
                     {settingsStore.widgets.map(({ id, enabled }) => {
                         const widgetId = id as keyof typeof WidgetsId;
                         const i18nKey = `settingsWidgets.${widgetId}` as const;
+                        const i18nKeyInfo = i18nKey + "Info";
 
                         return (
                             <SettingsSwitch
+                                info={t(i18nKeyInfo)}
                                 id={id}
                                 enabled={enabled}
                                 title={t(i18nKey)}

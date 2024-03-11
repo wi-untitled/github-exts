@@ -15,15 +15,14 @@
     },
     "topLanguages": {
         "title": "Top 5 Languages",
-        "info": "The result is measured by top 100 of your repositories and first 10 languages are sorted by size",
         "noResult": "No data"
     },
     "notificationsRequestedChanges": {
-        "title": "Requested Changes for the last week",
+        "title": "Pull requests changes is requested",
         "empty": "No pull requests"
     },
     "notifications": {
-        "title": "Requested PRs for the last week",
+        "title": "Pull requests need review",
         "empty": "No pull requests"
     },
     "login": {
@@ -31,7 +30,7 @@
         "placeholder": "Insert your access token"
     },
     "notificationsApprovedTop10": {
-        "title": "Top 10 Approved Pull Requests",
+        "title": "First 10 approved Pull requests",
         "empty": "No pull requests"
     },
     "welcomeLoading": "Loading...",
@@ -40,13 +39,20 @@
         "widgetTitleTooltipText": "Enable tooltip in title on widget",
         "globalText": "Global configuration(dev mode only)",
         "globalInfo": "No need to save in local storage",
-        "UserFollowers": "Enable User Followers",
-        "UserFollowings": "Enable User Followings",
-        "Notifications": "Enable Notifications",
-        "NotificationsRequestedChanges": "Enable Notifications Requested Changes",
-        "NotificationsApprovedTop10": "Enable Notifications Top 10 Approved Pull Requests",
-        "TopLanguages": "Enable Top Languages",
+        "UserFollowers": "Enable user followers",
+        "UserFollowersInfo": "Display users which you follow",
+        "UserFollowings": "Enable user followings",
+        "UserFollowingsInfo": "Display users which are following you",
+        "Notifications": "Enable notifications pull requests need review",
+        "NotificationsInfo": "Display list of pull requests which need to be reviewed by you",
+        "NotificationsRequestedChanges": "Enable notifications requested changes",
+        "NotificationsRequestedChangesInfo": "Display list of pull requests where changes are requested by reviewers",
+        "NotificationsApprovedTop10": "Enable notifications top 10 approved pull requests",
+        "NotificationsApprovedTop10Info": "Display list of pull requests which are approved by reviewers",
+        "TopLanguages": "Enable top languages",
+        "TopLanguagesInfo": "The result is measured by top 100 of your repositories and first 10 languages are sorted by size",
         "Stats": "Enable Github's Stats",
+        "StatsInfo": "Github's statistics basec on data from github",
         "saveButton": "Save Settings",
         "autoUpdate": "Enable autoupdate notifications",
         "settingsTile": "Enable settings tile view",
