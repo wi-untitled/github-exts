@@ -1,6 +1,5 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import PullRequestIcon from "src/assets/request.svg?react";
 import { Icon } from "src/components";
 
 dayjs.extend(relativeTime);
