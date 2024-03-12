@@ -7,7 +7,7 @@ import { NotificationsApprovedTop10Module } from "src/modules/NotificationsAppro
 import { NotificationsRequstedChangesModule } from "src/modules/NotificationsRequstedChanges/NotificationsRequstedChanges";
 import { observer } from "mobx-react";
 import { useEffect } from "react";
-import { Assets, PopupNoAuth } from "src/components";
+import { PopupNoAuth } from "src/components";
 
 function AppComponent() {
     const appStore = useStore("AppStore");

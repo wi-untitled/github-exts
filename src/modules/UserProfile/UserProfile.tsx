@@ -11,7 +11,6 @@ import {
 import { FeatureFlag } from "src/core";
 import { useNavigate } from "react-router-dom";
 import { SettingsScreen } from "src/screens";
-import LogoutIcon from "./assets/logout.svg?react";
 import { Icon } from "src/components";
 
 function UserProfile() {

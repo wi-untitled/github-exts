@@ -1,8 +1,6 @@
 import React, { FC, PropsWithChildren } from "react";
-import { Tooltip } from "react-tooltip";
 import clsx from "clsx";
 import Spinner from "src/components/Spinner";
-import { FeatureFlag } from "src/core";
 
 interface IWidgetProps {
     isLoading?: boolean;

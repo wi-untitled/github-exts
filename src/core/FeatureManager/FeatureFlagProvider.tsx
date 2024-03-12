@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { FeatureFlagContext } from "./FeatureFlagContext";
 import { IFeatureFlagManagerProviderProps } from "./types";
-import { useStore } from "src/hooks";
 
 export function FeatureFlagProvider({
     children,
@@ -9,20 +8,11 @@ export function FeatureFlagProvider({
 }: IFeatureFlagManagerProviderProps) {
     const [flags, setFlags] = useState(initialFeatureFlags);
 
-    /**
-     *
-     * Need to sync FF with value from Locale Storage
-     * to enforce tile view
-     *
-     */
-    const settingsStore = useStore("SettingsStore");
-
     useEffect(() => {
         setFlags({
             ...flags,
-            enableSettingsTile: settingsStore.isSettingsTileEnabled,
         });
-    }, []);
+    }, [flags]);
 
     const handleUpdateFeatureFlag = useCallback(
         (featureFlagName: string, value: boolean) => {
