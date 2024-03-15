@@ -28,6 +28,13 @@ function UserProfile() {
         navigate(SettingsScreen.routeName);
     };
 
+    const handleSpaceKeyUpCallback = useCallback(
+        (_: React.KeyboardEvent<HTMLDivElement>) => {
+            return undefined;
+        },
+        [],
+    );
+
     return (
         <div
             className="w-full flex items-center bg px-4 py-2 bg-light dark:bg-dark text-light dark:text-dark border-b border-light dark:border-dark relative"
@@ -71,6 +78,8 @@ function UserProfile() {
                         <span
                             className="cursor-pointer"
                             onClick={userProfileStore.handleLogout}
+                            onKeyUp={handleSpaceKeyUpCallback}
+                            role="logout"
                         >
                             <Icon
                                 icon="logout"

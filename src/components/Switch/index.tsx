@@ -32,6 +32,13 @@ export function SwitchLabel({
     onClick,
     className,
 }: ISwitchLabelProps) {
+    const handleSpaceKeyUpCallback = useCallback(
+        (_: React.KeyboardEvent<HTMLLabelElement>) => {
+            return undefined;
+        },
+        [],
+    );
+
     return (
         <label
             className={clsx(
@@ -40,6 +47,8 @@ export function SwitchLabel({
             )}
             htmlFor={htmlFor}
             onClick={onClick}
+            onKeyUp={handleSpaceKeyUpCallback}
+            role="switch"
         >
             {text}
         </label>
@@ -66,6 +75,12 @@ export function Switch({ initValue = false, onChange, id }: ISwitchProps) {
             return newCheckedValue;
         });
     }, [id, onChange]);
+    const handleSpaceKeyUpCallback = useCallback(
+        (_: React.KeyboardEvent<HTMLDivElement>) => {
+            return undefined;
+        },
+        [],
+    );
 
     return (
         <div className="flex items-center relative h-5 space-x-1">
@@ -82,6 +97,8 @@ export function Switch({ initValue = false, onChange, id }: ISwitchProps) {
             <div
                 className="dark:bg-white bg-gray-300 rounded-[32px] h-5 relative block w-9"
                 onClick={handleToggleCheckedCallback}
+                role="radio"
+                onKeyUp={handleSpaceKeyUpCallback}
             >
                 <span
                     className={clsx(

@@ -11,9 +11,21 @@ export function Settings() {
         navigate(-1);
     }, [navigate]);
 
+    const handleSpaceKeyUpCallback = useCallback(
+        (_: React.KeyboardEvent<HTMLDivElement>) => {
+            return undefined;
+        },
+        [],
+    );
+
     return (
         <div>
-            <div className="p-2" onClick={handleNavigateBackCallback}>
+            <div
+                className="p-2"
+                onClick={handleNavigateBackCallback}
+                role="back"
+                onKeyUp={handleSpaceKeyUpCallback}
+            >
                 <Icon
                     icon="back"
                     className="w-6 h-6 cursor-pointer dark:text-dark text-accent"
