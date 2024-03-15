@@ -5,8 +5,6 @@ import { BadCredentinals } from "src/errors";
 export class AppService {
     public accessToken?: string;
 
-    public constructor() {}
-
     public isAuthorized = () => {
         const accessToken = localStorage.getItem(STORAGE_KEYS.ACCESS_TOKEN);
 

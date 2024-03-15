@@ -1,8 +1,6 @@
 import { Octokit } from "octokit";
 
 export class LoginService {
-    public constructor() {}
-
     public getUserData = async (token: string) => {
         if (!token) {
             return;
