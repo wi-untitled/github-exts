@@ -10,12 +10,14 @@
         "type": "git",
         "url": "git+https://github.com/wi-untitled/github-exts.git"
     },
-    "files": ["/dist"],
+    "files": [
+        "/dist"
+    ],
     "scripts": {
         "prepare": "./node_modules/.bin/husky install",
         "dev": "vite",
         "build-server": "node --loader ts-node/esm ./src/server.ts",
-        "build": "tsc && vite build",
+        "build": "vite build --mode=production",
         "build-extentions": "tsc && vite build",
         "build:watch": "vite build --watch --mode=development",
         "build:prod": "vite build --watch --mode=production",
@@ -36,7 +38,10 @@
         }
     },
     "lint-staged": {
-        "*.{ts,tsx}": ["npm run lint", "npm run format"]
+        "*.{ts,tsx}": [
+            "npm run lint",
+            "npm run format"
+        ]
     },
     "dependencies": {
         "@dnd-kit/core": "^6.1.0",
