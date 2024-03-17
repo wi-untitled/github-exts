@@ -1,4 +1,4 @@
-import { getTotalSizesByLanguages } from "..";
+import { getTotalSizesByLanguages } from "../getTotalSizesByLanguages";
 
 describe("[flattenLanguagesEdges.ts]", () => {
     test("getTotalSizesByLanguages should return the correct result", () => {

@@ -1,4 +1,4 @@
-import { formatNumber } from "..";
+import { formatNumber } from "../formatNumber";
 
 describe("formatNumber", () => {
     test("should format number with maximum two significant digits and compact notation", () => {

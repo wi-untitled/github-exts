@@ -8,7 +8,7 @@ import {
     UserFollowersList,
 } from "src/modules/UserFollowers/components";
 import { CHUNK_LIMIT } from "src/modules/UserFollowers/constants";
-import { makeGithubProfileUrl } from "src/utils";
+import { Url } from "src/utils";
 import { Widget, Link, NoResult } from "src/components";
 import { useTranslation } from "react-i18next";
 
@@ -62,7 +62,7 @@ function UserFollowers() {
             }`}
             headerRight={
                 <Link
-                    href={`${makeGithubProfileUrl(
+                    href={`${Url.makeGithubProfileUrl(
                         userFollowersStore.totalCount.toString(),
                     )}?tab=followers`}
                 >

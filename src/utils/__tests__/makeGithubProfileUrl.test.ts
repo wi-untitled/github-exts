@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { makeGithubProfileUrl } from "..";
+import { makeGithubProfileUrl } from "../makeGithubProfileUrl";
 
 describe("[makeGithubProfileUrl]", () => {
     test("should return the correct github profile URL", () => {

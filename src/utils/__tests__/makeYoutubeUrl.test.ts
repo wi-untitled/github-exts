@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { makeYoutubeUrl } from "..";
+import { makeYoutubeUrl } from "../makeYoutubeUrl";
 
 describe("[makeYoutubeUrl.ts]", () => {
     test("should return the correct youtube", () => {

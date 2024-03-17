@@ -2,7 +2,7 @@ import { useResizeObserver } from "src/hooks";
 import { useEffect, useRef, useMemo, useState } from "react";
 import { scaleBand, select, scaleLinear, max } from "d3";
 import { ITopLanguageWithMaxSize } from "src/types";
-import { getRandomIndex } from "src/utils";
+import { Random } from "src/utils";
 
 import styles from "./styles.module.css";
 
@@ -45,7 +45,8 @@ export function RacingBarChart({ initData, medium }: IRacingBarChartProps) {
         }
 
         id.current = setInterval(() => {
-            const rndIndx = getRandomIndex<ITopLanguageWithMaxSize>(data);
+            const rndIndx =
+                Random.getRandomIndex<ITopLanguageWithMaxSize>(data);
 
             setData((prevData) =>
                 prevData.map((entry, idx) => {

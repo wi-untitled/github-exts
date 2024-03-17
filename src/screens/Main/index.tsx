@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import { useCallback, useState } from "react";
 import { WidgetsId } from "src/enums";
 import { useStore } from "src/hooks";
-import { arrayMoveImmutable, arrayMoveMutable } from "src/utils";
+import { Array } from "src/utils";
 import { SortableList } from "src/components";
 import {
     UserProfileModule,
@@ -94,7 +94,11 @@ export function Main() {
         settingsStore.predictable.forEach((widgetKey, newIndex) => {
             const oldIndex = config.findIndex(({ key }) => widgetKey === key);
 
-            arrayMoveMutable(config, oldIndex, newIndex);
+            Array.arrayMoveMutable<(typeof config)[number]>(
+                config,
+                oldIndex,
+                newIndex,
+            );
         });
 
         return config;
@@ -102,7 +106,11 @@ export function Main() {
 
     const handleSortEndCallback = useCallback(
         ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-            const newItems = arrayMoveImmutable(items, oldIndex, newIndex);
+            const newItems = Array.arrayMoveImmutable(
+                items,
+                oldIndex,
+                newIndex,
+            );
             setItems(newItems);
 
             const newPredictable = newItems.map(({ key }) => {

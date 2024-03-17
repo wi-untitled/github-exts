@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { getRandomIndex } from "..";
+import { getRandomIndex } from "../getRandomIndex";
 
 describe("getRandomIndex", () => {
     test("should return a valid index within the array bounds", () => {

@@ -2,7 +2,7 @@ import { observer, useLocalStore } from "mobx-react";
 import { NotificationsApprovedTop10Store } from "./NotificationsApprovedTop10Store";
 import { useService, useStore } from "src/hooks";
 import { PullRequest } from "./components";
-import { makeGithubPullRequestUrl } from "src/utils";
+import { Url } from "src/utils";
 import { Widget, NoResult } from "src/components";
 import { useTranslation } from "react-i18next";
 
@@ -33,7 +33,7 @@ export function NotificationsApprovedTop10() {
                                     created_at={created_at}
                                     html_url={html_url}
                                     title={title}
-                                    full_name={makeGithubPullRequestUrl(
+                                    full_name={Url.makeGithubPullRequestUrl(
                                         html_url,
                                     )}
                                 />

@@ -6,8 +6,7 @@ import {
     ITopLanguage,
     ITopLanguageResponse,
 } from "src/types";
-import { flattenLanguagesEdges } from "src/utils";
-import { getTotalSizesByLanguages } from "src/utils/getTotalSizesByLanguages";
+import { Languages } from "src/utils";
 import { TopLanguagesQuery } from "src/services/graphql";
 import { flow } from "lodash";
 
@@ -31,8 +30,8 @@ export class TopLanguagesService extends AppService {
             const topLanguages = flow(
                 (xs) =>
                     xs.filter((node: ILanguage) => node.languages.edges.length),
-                flattenLanguagesEdges,
-                getTotalSizesByLanguages,
+                Languages.flattenLanguagesEdges,
+                Languages.getTotalSizesByLanguages,
                 (total: Record<string, ITopLanguage>) =>
                     Object.entries(total).sort((x, y) =>
                         Math.sign(y[1].size - x[1].size),

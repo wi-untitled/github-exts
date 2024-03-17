@@ -2,9 +2,11 @@ import "./AppPopup.css";
 
 import { useStore } from "src/hooks";
 import { WidgetsId } from "src/enums";
-import { NotificationsModule } from "src/modules/Notifications/Notifications";
-import { NotificationsApprovedTop10Module } from "src/modules/NotificationsApprovedTop10/NotificationsApprovedTop10";
-import { NotificationsRequstedChangesModule } from "src/modules/NotificationsRequstedChanges/NotificationsRequstedChanges";
+import {
+    NotificationsModule,
+    NotificationsApprovedTop10Module,
+    NotificationsRequstedChangesModule,
+} from "src/modules";
 import { observer } from "mobx-react";
 import { useEffect } from "react";
 import { PopupNoAuth } from "src/components";

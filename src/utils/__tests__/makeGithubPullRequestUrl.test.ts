@@ -1,4 +1,4 @@
-import { makeGithubPullRequestUrl } from "..";
+import { makeGithubPullRequestUrl } from "../makeGithubPullRequestUrl";
 
 describe("[makeGithubPullRequestUrl.ts]", () => {
     test("should return the owner and repo from the input url", () => {

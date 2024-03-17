@@ -1,5 +1,5 @@
 import { IFollower } from "src/types";
-import { makeGithubProfileUrl } from "src/utils";
+import { Url } from "src/utils";
 import { CHUNK_LIMIT } from "src/modules/UserFollowings/constants";
 
 export interface IUserFollowingsListProps {
@@ -42,7 +42,7 @@ export function UserFollowingsList({
 
                             return (
                                 <a
-                                    href={makeGithubProfileUrl(login)}
+                                    href={Url.makeGithubProfileUrl(login)}
                                     className="w-8 h-8"
                                     target="_blank"
                                 >

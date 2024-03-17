@@ -1,18 +1,23 @@
+import React from "react";
 import { Icon } from "src/components";
 
+export interface Props extends React.HTMLAttributes<HTMLDivElement> {}
+
 export const StatsIconsRenderConfig = {
-    ["totalIssues"]: (props) => <Icon {...props} icon="bug" />,
-    ["totalRepositoriesContributedTo"]: (props) => (
+    ["totalIssues"]: (props: Props) => <Icon {...props} icon="bug" />,
+    ["totalRepositoriesContributedTo"]: (props: Props) => (
         <Icon {...props} icon="total" />
     ),
-    ["totalRepositoryDiscussionComments"]: (props) => (
+    ["totalRepositoryDiscussionComments"]: (props: Props) => (
         <Icon {...props} icon="tooltip" />
     ),
-    ["totalRepositoryDiscussions"]: (props) => (
+    ["totalRepositoryDiscussions"]: (props: Props) => (
         <Icon {...props} icon="messages" />
     ),
-    ["totalStars"]: (props) => <Icon {...props} icon="star" />,
-    ["totalMergedPullRequests"]: (props) => <Icon {...props} icon="merged" />,
+    ["totalStars"]: (props: Props) => <Icon {...props} icon="star" />,
+    ["totalMergedPullRequests"]: (props: Props) => (
+        <Icon {...props} icon="merged" />
+    ),
 };
 
 export type IStatsIconKey = keyof typeof StatsIconsRenderConfig;
