@@ -10,7 +10,7 @@ import { useEscape } from "./hooks";
 
 function AppComponent() {
     useEscape();
-
+    console.log(312);
     return (
         <>
             <Assets />
