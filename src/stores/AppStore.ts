@@ -1,5 +1,6 @@
 import {
     action,
+    computed,
     makeAutoObservable,
     observable,
     override,
@@ -47,6 +48,7 @@ export class AppStore extends BaseStore implements IState {
             setAccessToken: action,
             updateIsOpen: action,
             updateLoading: override,
+            readyInitAsync: computed,
         });
 
         this.accessToken = "";
@@ -96,6 +98,7 @@ export class AppStore extends BaseStore implements IState {
         action: string;
         data: { isOpen: boolean };
     }): void => {
+        debugger;
         if (action === "IFRAME_TOGGLE") {
             this.updateIsOpen(isOpen);
         }

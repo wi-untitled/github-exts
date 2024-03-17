@@ -16,6 +16,9 @@ export class Transport {
     };
 
     public onValueRuntime = <P>(callback: (payload: P) => void) => {
+        chrome.runtime.onMessage.addListener((data) => {
+            console.log({ data });
+        });
         chrome.runtime.onMessage.addListener(callback);
     };
 

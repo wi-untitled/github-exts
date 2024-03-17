@@ -19,7 +19,7 @@ import {
 export function Main() {
     const appStore = useStore("AppStore");
     const settingsStore = useStore("SettingsStore");
-
+    console.log({ appStore, settingsStore });
     /**
      *
      * The SortableContext unique identifiers
