@@ -31,7 +31,6 @@ export class UserProfileStore extends LoadableStore {
 
         autorun(async () => {
             if (this.appStore.readyInitAsync) {
-                console.log("initAsync");
                 await this.initAsync();
             }
         });

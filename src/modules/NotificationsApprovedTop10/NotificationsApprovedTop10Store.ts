@@ -69,11 +69,6 @@ export class NotificationsApprovedTop10Store extends LoadableStore {
             );
             const hasDiff =
                 difference(newUrls, [...this.uniqueUrls]).length > 0;
-            console.log({
-                hasDiff,
-                newUrls,
-                uniqueUrls: this.uniqueUrls,
-            });
             this.transport.sendMessageRuntime({
                 action: "NOTIFY_BROADCAST",
                 data: {

@@ -65,7 +65,6 @@ export class NotificationsStore extends LoadableStore {
             );
             const hasDiff =
                 difference(newUrls, [...this.uniqueUrls]).length > 0;
-            console.log({ hasDiff, name: "from notifications module" });
             this.transport.sendMessageRuntime({
                 action: "NOTIFY_BROADCAST",
                 data: {

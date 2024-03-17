@@ -12,7 +12,6 @@ export function SocialAccounts() {
         () => new SocialAccountsStore(appStore, socialAccountsService),
     );
     const { t } = useTranslation();
-    console.log({ accounts: socialAccountsStore.socialAccounts });
 
     return (
         <Widget
