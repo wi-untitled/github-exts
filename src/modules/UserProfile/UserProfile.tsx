@@ -12,6 +12,7 @@ import { FeatureFlag } from "src/core";
 import { useNavigate } from "react-router-dom";
 import { SettingsScreen } from "src/screens";
 import { Icon } from "src/components";
+import { useCallback } from "react";
 
 function UserProfile() {
     const appStore = useStore("AppStore");
