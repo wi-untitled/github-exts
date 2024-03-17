@@ -18,9 +18,17 @@ export default defineConfig({
                 main: "src/main.tsx",
                 mainPopup: "src/popup/mainPopup.tsx",
             },
+            ...(process.env.NODE_ENV === "production"
+                ? {
+                      output: {
+                          entryFileNames: `assets/[name].js`,
+                          chunkFileNames: `assets/[name].js`,
+                          assetFileNames: `assets/[name].[ext]`,
+                      },
+                  }
+                : {}),
             // external: ["@sentry/integrations"],
         },
-
         chunkSizeWarningLimit: 1600,
         sourcemap: true,
     },
