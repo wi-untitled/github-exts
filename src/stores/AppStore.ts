@@ -98,7 +98,6 @@ export class AppStore extends BaseStore implements IState {
         action: string;
         data: { isOpen: boolean };
     }): void => {
-        debugger;
         if (action === "IFRAME_TOGGLE") {
             this.updateIsOpen(isOpen);
         }

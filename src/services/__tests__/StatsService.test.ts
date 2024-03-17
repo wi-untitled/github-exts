@@ -75,7 +75,6 @@ describe("StatsService", () => {
                 includeMergedPullRequests: true,
                 includeDiscussions: true,
             });
-            console.log(result);
             expect(result).toEqual({
                 totalRepositoriesContributedTo: 6,
                 totalPullRequests: 194,

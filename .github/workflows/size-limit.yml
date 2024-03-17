@@ -1,6 +1,8 @@
-name: "size"
+name: "Size limit inspector"
 on:
     pull_request:
+        branches:
+            - main
 
 permissions:
     pull-requests: write
@@ -11,7 +13,18 @@ jobs:
         env:
             CI_JOB_NUMBER: 1
         steps:
-            - uses: actions/checkout@v2
+            - name: Checkout the commit
+              uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
+
+            - name: Run npm install
+              uses: ./.github/actions/install-deps
+
+            - name: "Build release"
+              run: |
+                  npm run build:prod:release
+
             - uses: andresz1/size-limit-action@v1
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}

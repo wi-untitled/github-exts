@@ -63,7 +63,6 @@ function init() {
      * Register message from application
      */
     window.addEventListener("message", (event) => {
-        console.log({ event });
         if (
             event.source &&
             event.origin === `chrome-extension://${chrome.runtime.id}`
