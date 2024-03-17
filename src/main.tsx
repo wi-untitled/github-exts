@@ -14,6 +14,8 @@ import { Dedupe, Debug, HttpClient } from "@sentry/integrations";
 import "src/i18n/config";
 import "./index.css";
 
+console.log(42);
+
 Sentry.init({
     release: import.meta.env.APP_VERSION,
     environment: import.meta.env.MODE,
