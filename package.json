@@ -17,7 +17,7 @@
         "prepare": "./node_modules/.bin/husky install",
         "dev": "vite",
         "build-server": "node --loader ts-node/esm ./src/server.ts",
-        "build": "NODE_ENV=production vite build",
+        "build": "NODE_ENV=production tsc && vite build",
         "build-extentions": "tsc && vite build",
         "build:watch": "NODE_ENV=development vite build --watch --mode=development",
         "build:prod": "NODE_ENV=production vite build --watch --mode=production",
@@ -29,8 +29,7 @@
         "test": "vitest watch --sequence.concurrent=true",
         "test:unit": "vitest --sequence.concurrent=true",
         "test:no-watch": "vitest run --sequence.concurrent=true",
-        "test:coverage": "vitest run --coverage --sequence.concurrent=true",
-        "size": "size-limit"
+        "test:coverage": "vitest run --coverage --sequence.concurrent=true"
     },
     "config": {
         "commitizen": {
@@ -103,7 +102,6 @@
         "postcss-nesting": "^12.0.2",
         "prettier": "^3.1.0",
         "semantic-release": "^23.0.2",
-        "size-limit": "^11.1.1",
         "tailwindcss": "^3.3.6",
         "typescript": "^5.2.2",
         "unplugin-auto-import": "^0.17.3",
@@ -113,11 +111,5 @@
     },
     "optionalDependencies": {
         "@rollup/rollup-linux-x64-gnu": "^4.9.6"
-    },
-    "size-limit": [
-        {
-            "limit": "9 kB",
-            "path": "dist/**/*.js"
-        }
-    ]
+    }
 }
