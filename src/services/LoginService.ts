@@ -15,8 +15,6 @@ export class LoginService {
 
             return data;
         } catch (error) {
-            console.trace(error);
-
             return {};
         }
     };
