@@ -21,7 +21,7 @@ import {
 } from "@dnd-kit/modifiers";
 import { SortableItem } from "src/components";
 import { WidgetsId } from "src/enums";
-import { getIndex } from "src/utils";
+import { Array } from "src/utils";
 
 export interface ISortableListProps {
     items: { render: () => React.ReactNode; id: number; key: WidgetsId }[];
@@ -71,8 +71,8 @@ export function SortableList({ items, onSortEnd }: ISortableListProps) {
         ({ over, active }: DragEndEvent) => {
             if (over && active.id !== over.id) {
                 onSortEnd({
-                    oldIndex: getIndex(items, active.id),
-                    newIndex: getIndex(items, over.id),
+                    oldIndex: Array.getIndex(items, active.id),
+                    newIndex: Array.getIndex(items, over.id),
                 });
             }
             setActiveId(null);

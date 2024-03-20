@@ -1,4 +1,4 @@
-import { makeFacebookUrl } from "..";
+import { makeFacebookUrl } from "../makeFacebookUrl";
 
 describe("[makeFacebookUrl.ts]", () => {
     test("should return the correct facebook", () => {

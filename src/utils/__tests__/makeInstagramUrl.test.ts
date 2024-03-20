@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { makeInstagramUrl } from "..";
+import { makeInstagramUrl } from "../makeInstagramUrl";
 
 describe("[makeInstagramUrl.ts]", () => {
     test("should return the correct instagram", () => {

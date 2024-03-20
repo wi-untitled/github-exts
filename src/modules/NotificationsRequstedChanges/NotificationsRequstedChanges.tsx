@@ -2,7 +2,7 @@ import { observer, useLocalStore } from "mobx-react";
 import { NotificationsRequstedChangesStore } from "./NotificationsRequstedChangesStore";
 import { useService, useStore } from "src/hooks";
 import { RequestedChangesPullRequest } from "./components";
-import { makeGithubPullRequestUrl } from "src/utils";
+import { Url } from "src/utils";
 import { Widget, NoResult } from "src/components";
 import { useTranslation } from "react-i18next";
 
@@ -36,7 +36,7 @@ export function NotificationsRequstedChanges() {
                                     created_at={created_at}
                                     html_url={html_url}
                                     title={title}
-                                    full_name={makeGithubPullRequestUrl(
+                                    full_name={Url.makeGithubPullRequestUrl(
                                         html_url,
                                     )}
                                 />

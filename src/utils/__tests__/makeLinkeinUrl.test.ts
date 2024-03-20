@@ -1,4 +1,4 @@
-import { makeLinkeinUrl } from "..";
+import { makeLinkeinUrl } from "../makeLinkeinUrl";
 
 describe("[makeLinkeinUrl.ts]", () => {
     test("should return the correct linkedin", () => {

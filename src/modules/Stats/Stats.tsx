@@ -2,7 +2,7 @@ import { observer, useLocalStore } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useService, useStore } from "src/hooks";
 import { Widget } from "src/components";
-import { formatNumber } from "src/utils";
+import { Locale } from "src/utils";
 import { StatsStore } from "./StatsStore";
 import { StatsIconsRenderConfig, IStatsIconKey } from "./config";
 import { Tooltip } from "src/components/Tooltip";
@@ -29,16 +29,18 @@ export function Stats() {
                     const statsValue = statsStore[key as IStatsIconKey];
                     const formattedValue =
                         typeof statsValue === "number"
-                            ? formatNumber(statsValue)
+                            ? Locale.formatNumber(statsValue)
                             : "";
                     const typedKey = key as IStatsIconKey;
                     const i18nKey = `stats.${typedKey}` as const;
-                    const Render = StatsIconsRenderConfig[key];
+                    const Render =
+                        StatsIconsRenderConfig[
+                            key as keyof typeof StatsIconsRenderConfig
+                        ];
 
                     return (
                         <div className="flex row space-x-3">
                             <Render className="w-4 h-4 dark:text-dark text-accent" />
-                            {/* <StatsIcon className="w-4 h-4 fill-current dark:text-dark text-accent" /> */}
                             <p>{t(i18nKey)}</p>
                             <span className="grow flex justify-end">
                                 {formattedValue}

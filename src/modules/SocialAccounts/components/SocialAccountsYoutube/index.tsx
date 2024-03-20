@@ -1,4 +1,4 @@
-import { makeYoutubeUrl } from "src/utils";
+import { Url } from "src/utils";
 import { SocialAccountsHref } from "../SocialAccountsHref";
 import { Icon } from "src/components";
 
@@ -8,7 +8,7 @@ export interface ISocialAccountsYoutubeProps {
 
 export function SocialAccountsYoutube({ name }: ISocialAccountsYoutubeProps) {
     return (
-        <SocialAccountsHref href={makeYoutubeUrl(name)}>
+        <SocialAccountsHref href={Url.makeYoutubeUrl(name)}>
             <Icon icon="youtube" />
         </SocialAccountsHref>
     );

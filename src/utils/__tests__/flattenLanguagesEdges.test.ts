@@ -1,4 +1,4 @@
-import { flattenLanguagesEdges } from "..";
+import { flattenLanguagesEdges } from "../flattenLanguagesEdges";
 
 describe("[flattenLanguagesEdges.ts]", () => {
     const nodes = [
