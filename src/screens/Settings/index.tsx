@@ -23,7 +23,7 @@ export function Settings() {
             <div
                 className="p-2"
                 onClick={handleNavigateBackCallback}
-                role="back"
+                role="button"
                 onKeyUp={handleSpaceKeyUpCallback}
             >
                 <Icon
