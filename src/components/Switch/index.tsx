@@ -48,7 +48,7 @@ export function SwitchLabel({
             htmlFor={htmlFor}
             onClick={onClick}
             onKeyUp={handleSpaceKeyUpCallback}
-            role="switch"
+            role="checkbox"
         >
             {text}
         </label>
