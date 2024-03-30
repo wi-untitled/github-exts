@@ -1,6 +1,7 @@
 import { Octokit } from "octokit";
 import { SocialAccountsService } from "..";
 import { STORAGE_KEYS } from "src/constants";
+import { Mock } from "vitest";
 
 describe("SocialAccountsService", () => {
     let socialAccountsService: SocialAccountsService;
@@ -44,7 +45,9 @@ describe("SocialAccountsService", () => {
             () => true,
         );
 
-        Octokit.prototype.graphql.mockResolvedValueOnce(graphqlResponse);
+        (Octokit.prototype.graphql as Mock).mockResolvedValueOnce(
+            graphqlResponse,
+        );
 
         const mappedSocialAccounts =
             await socialAccountsService.getSocialAccounts({ login });

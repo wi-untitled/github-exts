@@ -4,7 +4,8 @@
     "version": "0.0.0",
     "type": "module",
     "engines": {
-        "node": "^20"
+        "node": "^20",
+        "npm": "^10"
     },
     "repository": {
         "type": "git",
@@ -57,6 +58,7 @@
         "d3": "^7.8.5",
         "dayjs": "^1.11.10",
         "express": "^4.18.2",
+        "i18next": "^23.10.1",
         "lodash": "^4.17.21",
         "mobx": "^6.7.0",
         "mobx-react": "^7.6.0",
@@ -68,15 +70,18 @@
         "react-i18next": "^13.5.0",
         "react-router-dom": "^6.20.1",
         "react-tooltip": "^5.25.0",
-        "ts-node": "^10.9.1"
+        "ts-node": "^10.9.1",
+        "tsc": "^2.0.4"
     },
     "devDependencies": {
+        "@octokit/types": "^12.6.0",
         "@size-limit/preset-small-lib": "^11.1.1",
         "@testing-library/react": "^14.1.2",
         "@types/chrome": "^0.0.253",
         "@types/cors": "^2.8.17",
         "@types/d3": "^7.4.3",
         "@types/express": "^4.17.21",
+        "@types/i18next": "^13.0.0",
         "@types/jest": "^29.5.11",
         "@types/morgan": "^1.9.9",
         "@types/react": "^18.2.37",
@@ -103,7 +108,7 @@
         "prettier": "^3.1.0",
         "semantic-release": "^23.0.2",
         "tailwindcss": "^3.3.6",
-        "typescript": "^5.2.2",
+        "typescript": "^5.4.3",
         "unplugin-auto-import": "^0.17.3",
         "vite": "^5.0.0",
         "vite-plugin-svgr": "^4.2.0",

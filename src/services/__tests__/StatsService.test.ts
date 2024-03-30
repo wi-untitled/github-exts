@@ -1,6 +1,7 @@
 import { Octokit } from "octokit";
 import { StatsService } from "../StatsService";
 import { STORAGE_KEYS } from "src/constants";
+import { Mock } from "vitest";
 
 const mock = {
     user: {
@@ -68,7 +69,7 @@ describe("StatsService", () => {
                 () => true,
             );
 
-            Octokit.prototype.graphql.mockResolvedValueOnce(mock);
+            (Octokit.prototype.graphql as Mock).mockResolvedValueOnce(mock);
 
             const result = await statsService.getStats({
                 login: "login",

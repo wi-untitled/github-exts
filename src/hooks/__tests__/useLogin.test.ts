@@ -28,7 +28,7 @@ describe("useLogin", () => {
                 target: {
                     value: "newAccessToken",
                 },
-            });
+            } as React.ChangeEvent<HTMLInputElement>);
         });
 
         expect(result.current.accessToken).toBe("newAccessToken");

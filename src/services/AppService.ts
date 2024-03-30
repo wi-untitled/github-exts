@@ -27,7 +27,7 @@ export class AppService {
 
             return data;
         } catch (error) {
-            return this.getBadCredentinalsError(error);
+            return this.getBadCredentinalsError(error as RequestError);
         }
     };
 
