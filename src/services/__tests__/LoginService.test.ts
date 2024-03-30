@@ -1,5 +1,6 @@
 import { Octokit } from "octokit";
 import { LoginService } from "../LoginService";
+import { Mock } from "vitest";
 
 describe("LoginService", () => {
     let loginService: LoginService;
@@ -16,7 +17,9 @@ describe("LoginService", () => {
         const token = "abc123";
         const expectedData = { name: "John Doe", email: "johndoe@example.com" };
 
-        Octokit.prototype.rest.users.getAuthenticated.mockResolvedValue({
+        (
+            Octokit.prototype.rest.users.getAuthenticated as Mock
+        ).mockResolvedValue({
             data: expectedData,
         });
 
@@ -36,9 +39,9 @@ describe("LoginService", () => {
     test("getUserData should return empty object on API call failure", async () => {
         const token = "abc123";
 
-        Octokit.prototype.rest.users.getAuthenticated.mockRejectedValueOnce(
-            new Error("API call failed"),
-        );
+        (
+            Octokit.prototype.rest.users.getAuthenticated as Mock
+        ).mockRejectedValueOnce(new Error("API call failed"));
 
         const result = await loginService.getUserData(token);
 

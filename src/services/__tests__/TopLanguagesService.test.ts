@@ -1,6 +1,7 @@
 import { Octokit } from "octokit";
 import { TopLanguagesService } from "../TopLanguagesService";
 import { STORAGE_KEYS } from "src/constants";
+import { Mock } from "vitest";
 
 const mock = {
     user: {
@@ -72,7 +73,7 @@ describe("TopLanguagesService", () => {
                 () => true,
             );
 
-            Octokit.prototype.graphql.mockResolvedValueOnce(mock);
+            (Octokit.prototype.graphql as Mock).mockResolvedValueOnce(mock);
 
             const result = await topLanguagesService.getTopLanguages("login");
 

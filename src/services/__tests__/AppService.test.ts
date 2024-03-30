@@ -2,6 +2,7 @@ import { STORAGE_KEYS } from "src/constants";
 import { AppService } from "../AppService";
 import { Octokit } from "octokit";
 import { BadCredentinals } from "src/errors";
+import { Mock } from "vitest";
 
 describe("AppService", () => {
     test("should set accessToken if local storage has access token", () => {
@@ -30,7 +31,9 @@ describe("AppService", () => {
 
         const userData = { name: "John Doe", username: "johndoe" };
 
-        Octokit.prototype.rest.users.getAuthenticated.mockResolvedValue({
+        (
+            Octokit.prototype.rest.users.getAuthenticated as Mock
+        ).mockResolvedValue({
             data: userData,
         });
 

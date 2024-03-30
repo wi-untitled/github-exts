@@ -1,5 +1,6 @@
 import { Octokit } from "octokit";
 import { UserFollowingsService } from "../UserFollowingsService";
+import { Mock } from "vitest";
 
 describe("UserFollowingsService", () => {
     test("should get user followings", async () => {
@@ -31,7 +32,7 @@ describe("UserFollowingsService", () => {
             totalCount: 2,
         };
 
-        Octokit.prototype.graphql.mockResolvedValueOnce({
+        (Octokit.prototype.graphql as Mock).mockResolvedValueOnce({
             user: {
                 following: {
                     totalCount: expectedResponse.totalCount,
@@ -57,7 +58,7 @@ describe("UserFollowingsService", () => {
         const first = 10;
         const after = null;
 
-        Octokit.prototype.graphql.mockRejectedValueOnce(
+        (Octokit.prototype.graphql as Mock).mockRejectedValueOnce(
             new Error("Something went wrong"),
         );
 
