@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { FeatureFlagContext } from "./FeatureFlagContext";
 import { IFeatureFlagManagerProviderProps } from "./types";
 
@@ -7,12 +7,6 @@ export function FeatureFlagProvider({
     initialFeatureFlags,
 }: IFeatureFlagManagerProviderProps) {
     const [flags, setFlags] = useState(initialFeatureFlags);
-
-    useEffect(() => {
-        setFlags({
-            ...flags,
-        });
-    }, [flags]);
 
     const handleUpdateFeatureFlag = useCallback(
         (featureFlagName: string, value: boolean) => {

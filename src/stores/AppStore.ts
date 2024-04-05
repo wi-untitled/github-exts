@@ -1,7 +1,7 @@
 import {
     action,
     computed,
-    makeAutoObservable,
+    makeObservable,
     observable,
     override,
     reaction,
@@ -36,7 +36,7 @@ export class AppStore extends BaseStore implements IState {
     ) {
         super(transport, notificationsService);
 
-        makeAutoObservable<
+        makeObservable<
             AppStore,
             "updateIsOpen" | "updateLoading" | "isLoading"
         >(this, {
