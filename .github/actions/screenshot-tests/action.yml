@@ -1,0 +1,8 @@
+Name: Run unit test
+Description: "Just run screenshots tests. (TODO: parallels them)"
+runs:
+  using: "composite"
+  steps:
+    - name: "Run screenshots tests"
+      run: npm run cypress:screenshots
+      shell: bash

@@ -39,7 +39,7 @@ export function Stats() {
                         ];
 
                     return (
-                        <div className="flex row space-x-3">
+                        <div className="flex row space-x-3" key={key}>
                             <Render className="w-4 h-4 dark:text-dark text-accent" />
                             <p>{t(i18nKey)}</p>
                             <span className="grow flex justify-end">

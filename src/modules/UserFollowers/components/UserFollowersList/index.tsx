@@ -32,10 +32,15 @@ export function UserFollowersList({
                 }
 
                 return (
-                    <div className="flex flex-row w-full space-x-1">
+                    <div
+                        className="flex flex-row w-full space-x-1"
+                        key="userFollowers"
+                    >
                         {chunk.map((follower) => {
                             if (follower === undefined) {
-                                return <div className="w-8 h-8"></div>;
+                                return (
+                                    <div key={`empty`} className="w-8 h-8" />
+                                );
                             }
 
                             const { login, avatarUrl } = follower;
@@ -45,6 +50,7 @@ export function UserFollowersList({
                                     href={Url.makeGithubProfileUrl(login)}
                                     className="w-8 h-8"
                                     target="_blank"
+                                    key={login}
                                 >
                                     <img
                                         className="rounded-full"

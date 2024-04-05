@@ -35,7 +35,7 @@ export default defineConfig({
     plugins: [
         react(),
         AutoImport({
-            imports: ["vitest"],
+            // imports: ["vitest"],
             dts: true, // generate TypeScript declaration
         }),
         sentryVitePlugin({

@@ -12,6 +12,9 @@ export function Button({ onClick, isDisabled, text }: IButtonProps) {
             disabled={isDisabled}
             className={clsx(
                 "w-full rounded-md py-1 border bg-light dark:bg-dark border-light/[0.15] dark:border-dark/[0.15]",
+                {
+                    isDisabled: "text-gray-600",
+                },
             )}
             onClick={onClick}
         >

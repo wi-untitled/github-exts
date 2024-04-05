@@ -6,8 +6,11 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         "plugin:react-hooks/recommended",
         "plugin:prettier/recommended",
+        "plugin:cypress/recommended"
     ],
-    ignorePatterns: ["dist", ".eslintrc.cjs"],
+    ignorePatterns: ["dist", ".eslintrc.cjs", "cypress",
+        "cypress.config.ts",
+        "cypress.d.ts"],
     parser: "@typescript-eslint/parser",
     plugins: ["react-refresh"],
     rules: {

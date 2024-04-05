@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, KeyboardEvent } from "react";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 
@@ -33,7 +33,7 @@ export function SwitchLabel({
     className,
 }: ISwitchLabelProps) {
     const handleSpaceKeyUpCallback = useCallback(
-        (_: React.KeyboardEvent<HTMLLabelElement>) => {
+        (_: KeyboardEvent<HTMLLabelElement>) => {
             return undefined;
         },
         [],

@@ -1,6 +1,4 @@
 export const icons = [
-    // "pull-request",
-    // "changes-request",
     "logout",
     "settings",
     "approved",
@@ -16,10 +14,7 @@ export const icons = [
     "approved",
     "exclamation",
     "merged",
-    // "issues",
-    // "commits",
     "star",
-    // "repository",
     "total",
     "tooltip",
     "request",

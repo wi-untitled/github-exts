@@ -4,7 +4,7 @@ on:
 
 jobs:
     unit-tests:
-        name: Run unit test
+        name: Run test
         runs-on: ubuntu-latest
 
         permissions:
@@ -24,3 +24,6 @@ jobs:
 
             - name: Run unit test
               uses: ./.github/actions/unit-tests-coverage-chunks
+
+            - name: Run screenshots test
+              uses: ./.github/actions/screenshot-tests

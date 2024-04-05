@@ -34,8 +34,7 @@
   "include": [
     "src",
     "./global.d.ts",
-    "./auto-imports.d.ts",
-
+    "./auto-imports.d.ts"
   ],
   "references": [
     {
@@ -47,5 +46,10 @@
   ],
   "types": [
     "./src/@types/i18next.d.ts"
+  ],
+  "exclude": [
+    "cypress",
+    "cypress.config.ts",
+    "cypress.d.ts"
   ]
 }

@@ -35,7 +35,10 @@ export function SocialAccounts() {
                             }
 
                             return (
-                                <div className="block rounded-full overflow-hidden w-6 h-6 fill-current text-accent dark:text-zinc-600 hover:rotate-90 transition duration-500 ease-in-out">
+                                <div
+                                    key={name}
+                                    className="block rounded-full overflow-hidden w-6 h-6 fill-current text-accent dark:text-zinc-600 hover:rotate-90 transition duration-500 ease-in-out"
+                                >
                                     <Render name={name} />
                                 </div>
                             );
