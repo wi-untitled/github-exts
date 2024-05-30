@@ -30,7 +30,7 @@ export function RacingBarChart({ initData, medium }: IRacingBarChartProps) {
 
     const isDoneAnimation = useMemo(() => {
         const arr = data.map(({ size, maxSize }) => size === maxSize);
-        const isAllDone = arr.every((x) => x !== false);
+        const isAllDone = arr.every((x) => x);
 
         return isAllDone;
     }, [data]);
@@ -45,12 +45,12 @@ export function RacingBarChart({ initData, medium }: IRacingBarChartProps) {
         }
 
         id.current = setInterval(() => {
-            const rndIndx =
+            const randomIndex =
                 Random.getRandomIndex<ITopLanguageWithMaxSize>(data);
 
             setData((prevData) =>
                 prevData.map((entry, idx) => {
-                    if (idx === rndIndx) {
+                    if (idx === randomIndex) {
                         return {
                             ...entry,
                             size:

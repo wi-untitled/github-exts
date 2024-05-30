@@ -19,6 +19,8 @@ describe("AppService", () => {
     test("should throw an error if no access token in local storage", () => {
         const appService = new AppService();
 
+        localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
+
         expect(() => {
             appService.isAuthorized();
         }).toThrow("No access token provided.");
@@ -49,6 +51,8 @@ describe("AppService", () => {
 
     test("should return an empty object and log the error when not authorized", async () => {
         const appService = new AppService();
+
+        localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN);
 
         vi.spyOn(appService, "getBadCredentinalsError").mockImplementation(
             () => {
