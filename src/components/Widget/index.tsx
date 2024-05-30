@@ -1,6 +1,6 @@
 import React, { FC, PropsWithChildren } from "react";
 import clsx from "clsx";
-import Spinner from "src/components/Spinner";
+import { Spinner } from "src/components";
 
 interface IWidgetProps {
     isLoading?: boolean;

@@ -27,8 +27,10 @@ jobs:
             
             - name: "Zip dist directory"
               run: |
+                ls -la
                 zip -r dist.zip dist
-            
+                ls -la
+
             - name: "Run semantic release"
               run: |
                 npx semantic-release --debug 

@@ -53,6 +53,9 @@ export default defineConfig({
     test: {
         globals: true,
         environment: "jsdom",
+         alias: {
+                        "src/utils": "./src/utils",
+                    },
         setupFiles: ["./octokit.ts", "./localStorage.ts", "./console.ts"],
         mockReset: false,
         coverage: {

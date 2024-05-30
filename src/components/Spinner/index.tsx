@@ -4,7 +4,7 @@ import clsx from "clsx";
 interface ISpinnerProps {
     absoluteFill?: boolean;
 }
-const Spinner: FC<ISpinnerProps> = ({ absoluteFill }) => {
+export const Spinner: FC<ISpinnerProps> = ({ absoluteFill }) => {
     return (
         <div
             className={clsx(
@@ -17,4 +17,3 @@ const Spinner: FC<ISpinnerProps> = ({ absoluteFill }) => {
     );
 };
 
-export default Spinner;
