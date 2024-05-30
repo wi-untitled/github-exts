@@ -1,1 +1,1 @@
-console.log("globnalSetup");
+console.log("globalSetup.ts");

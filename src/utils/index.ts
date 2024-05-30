@@ -38,5 +38,5 @@ const Array = {
 const Locale = {
     formatNumber: formatNumber,
 };
-console.log(4442)
+
 export { Url, Languages, Locale, Random, Array };

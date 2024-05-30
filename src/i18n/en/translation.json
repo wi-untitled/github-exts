@@ -18,11 +18,11 @@
         "noResult": "No data"
     },
     "notificationsRequestedChanges": {
-        "title": "Pull requests changes is requested",
+        "title": "PR's changes are requested",
         "empty": "No pull requests"
     },
     "notifications": {
-        "title": "Pull requests need review",
+        "title": "PR's need your review",
         "empty": "No pull requests"
     },
     "login": {
@@ -30,7 +30,7 @@
         "placeholder": "Insert your access token"
     },
     "notificationsApprovedTop10": {
-        "title": "First 10 approved Pull requests",
+        "title": "First 10 approved PRs",
         "empty": "No pull requests"
     },
     "welcomeLoading": "Loading...",
@@ -43,12 +43,12 @@
         "UserFollowersInfo": "Display users which you follow",
         "UserFollowings": "Enable user followings",
         "UserFollowingsInfo": "Display users which are following you",
-        "Notifications": "Enable notifications pull requests need review",
-        "NotificationsInfo": "Display list of pull requests which need to be reviewed by you",
+        "Notifications": "Enable notifications PR's need review",
+        "NotificationsInfo": "Display list of PR's which need to be reviewed by you",
         "NotificationsRequestedChanges": "Enable notifications requested changes",
-        "NotificationsRequestedChangesInfo": "Display list of pull requests where changes are requested by reviewers",
-        "NotificationsApprovedTop10": "Enable notifications top 10 approved pull requests",
-        "NotificationsApprovedTop10Info": "Display list of pull requests which are approved by reviewers",
+        "NotificationsRequestedChangesInfo": "Display list of PR's where changes are requested by reviewers",
+        "NotificationsApprovedTop10": "Enable notifications top 10 approved PR's",
+        "NotificationsApprovedTop10Info": "Display list of PR's which are approved by reviewers",
         "TopLanguages": "Enable top languages",
         "TopLanguagesInfo": "The result is measured by top 100 of your repositories and first 10 languages are sorted by size",
         "Stats": "Enable Github's Stats",
@@ -105,7 +105,7 @@
     "stats": {
         "title": "Github's Stats",
         "totalIssues": "Total Issues",
-        "totalMergedPullRequests": "Total Merged Pull Requests",
+        "totalMergedPullRequests": "Total Merged PR's",
         "totalPullRequests": "Total Pull Requests",
         "totalRepositoriesContributedTo": "Total Repositories Contributed To",
         "totalRepositoryDiscussionComments": "Total Repository Discussion Comments",

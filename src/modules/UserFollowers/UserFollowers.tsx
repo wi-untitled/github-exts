@@ -57,9 +57,7 @@ function UserFollowers() {
 
     return (
         <Widget
-            title={`${t("userFollowers.title")} • ${
-                userFollowersStore.totalCount
-            }`}
+            title={`${t("userFollowers.title")}`}
             headerRight={
                 <Link
                     href={`${Url.makeGithubProfileUrl(

@@ -7,7 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         name: Label the PR size
         steps:
-            - uses: codelytv/pr-size-labeler@v1
+            - uses: codelytv/pr-size-labeler@v1.10.0
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   xs_max_size: "100"
@@ -17,3 +17,4 @@ jobs:
                   fail_if_xl: "false"
                   message_if_xl: "This PR is so big! Please, split it 😊"
                   files_to_ignore: "package-lock.json *.lock"
+                  github_api_url: "https://api.github.com"
