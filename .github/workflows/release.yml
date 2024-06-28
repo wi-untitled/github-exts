@@ -25,11 +25,9 @@ jobs:
               run: |
                 npm run build:prod:release
             
-            - name: "Zip dist directory (test)"
+            - name: "Zip dist directory"
               run: |
-                ls -la
                 zip -r dist.zip dist
-                ls -la
 
             - name: "Run semantic release"
               run: |
