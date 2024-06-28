@@ -25,7 +25,7 @@ jobs:
               run: |
                 npm run build:prod:release
             
-            - name: "Zip dist directory"
+            - name: "Zip dist directory (test)"
               run: |
                 ls -la
                 zip -r dist.zip dist
