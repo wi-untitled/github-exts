@@ -1,13 +1,19 @@
-Name: Run install deps
 runs:
     using: "composite"
-    steps:        
-        - name: "Install Node"
+    steps:
+        - name: "Turn the correct node version"
           uses: actions/setup-node@v2
           with:
               node-version: "20.x"
 
-        - name: "Install Deps"
-          run: npm ci
-          shell: bash
+        - name: "Cache node_modules"
+          id: modules-cache
+          uses: actions/cache@v3
+          with:
+              path: ./node_modules
+              key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
 
+        - name: "Install node_modules(optional)"
+          if: steps.modules-cache.outputs.cache-hit != 'true'
+          shell: bash
+          run: npm ci
